@@ -51,6 +51,7 @@ export interface TenaBallQuestion {
   sourceUrl: string;
   asOf: string;
   verified: boolean;
+  hidden?: boolean;
 }
 
 export interface GameStats {

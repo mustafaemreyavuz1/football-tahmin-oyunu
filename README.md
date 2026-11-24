@@ -174,8 +174,23 @@ football-tahmin-oyunu/
 ```bash
 npm run verify:tenaball
 ```
-3. Kaynağı kontrol ettikten sonra ilgili kaydın `verified` alanını `true` yapın.
-4. Uzaktan güncelleme için `src/data/remoteSync.ts` dosyasındaki `REMOTE_TENABALL_URL` sabitini kendi GitHub deponuzun raw URL'sine yönlendirin.
+3. Kaynağı kontrol ettikten sonra ilgili kaydın `verified` alanını `true` yapın. Uygulama yalnızca `verified: true` ve gizli olmayan (`!hidden`) TenaBall listelerini gösterir.
+4. Tüm aktif listelerin kolay kontrol edilebilir doğrulama sırasını üretmek için:
+```bash
+npm run generate:queue
+```
+Bu komut `docs/tenaball-verification-queue.md` ve `docs/tenaball-verification-queue.csv` dosyalarını oluşturur.
+
+### Uzak Soru Güncelleme URL'si Nasıl Değiştirilir?
+Uygulama açılışında güncel `tenaball.json` dosyasını uzaktan çekmeyi dener (çevrimdışıysa veya şema geçersizse yerel kopyaya düşer). Varsayılan URL şu anda placeholder olarak bırakılmıştır:
+
+- **Dosya**: `src/data/remoteSync.ts`
+- **Sabit**: `REMOTE_TENABALL_URL`
+```ts
+export const REMOTE_TENABALL_URL =
+  'https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/football-tahmin-oyunu/main/src/data/tenaball.json';
+```
+GitHub deponuzu oluşturduktan sonra `YOUR_GITHUB_USERNAME` kısmını kendi GitHub kullanıcı adınızla (ve gerekirse repo/dal adıyla) değiştirmeniz yeterlidir.
 
 ---
 

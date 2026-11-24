@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { AppContainer } from '../../components/AppContainer';
 import { Header } from '../../components/Header';
 import { ModeToggle } from '../../components/ModeToggle';
@@ -39,10 +40,11 @@ const DIFFICULTY_LABEL: Record<TenaBallQuestion['difficulty'], string> = {
 
 export function TenaBallGame() {
   const { tokens } = useTheme();
+  const router = useRouter();
   const dateKey = getLocalDateKey();
 
   const [mode, setMode] = useState<GameMode>('daily');
-  const [question, setQuestion] = useState<TenaBallQuestion>(() => getDailyTenaBallQuestion());
+  const [question, setQuestion] = useState<TenaBallQuestion | null>(() => getDailyTenaBallQuestion());
   const [gameState, setGameState] = useState<TenaBallState>(createInitialTenaBallState);
   const [inputValue, setInputValue] = useState('');
   const [feedback, setFeedback] = useState<{ text: string; tone: 'success' | 'warn' | 'error' } | null>(null);
@@ -82,21 +84,22 @@ export function TenaBallGame() {
       setQuestion(getDailyTenaBallQuestion());
       setGameState(createInitialTenaBallState());
     } else {
-      setQuestion(getRandomTenaBallQuestion(question.id));
+      setQuestion(getRandomTenaBallQuestion(question?.id));
       setGameState(createInitialTenaBallState());
     }
   };
 
   const isDailyLocked = mode === 'daily' && Boolean(dailyRecord);
-  const isFinished = gameState.status !== 'playing' || isDailyLocked;
+  const isFinished = !question || gameState.status !== 'playing' || isDailyLocked;
 
   const solvedFlags = useMemo(
-    () => question.answers.map((_, idx) => gameState.solvedIndices.includes(idx)),
-    [question.answers, gameState.solvedIndices]
+    () => (question ? question.answers.map((_, idx) => gameState.solvedIndices.includes(idx)) : []),
+    [question, gameState.solvedIndices]
   );
 
   const shareText = useMemo(() => {
     if (isDailyLocked && dailyRecord) return dailyRecord.shareText;
+    if (!question) return '';
     return buildTenaBallShareText(
       mode,
       dateKey,
@@ -105,7 +108,7 @@ export function TenaBallGame() {
       gameState.livesLeft,
       TENABALL_MAX_LIVES
     );
-  }, [isDailyLocked, dailyRecord, mode, dateKey, question.title, solvedFlags, gameState.livesLeft]);
+  }, [isDailyLocked, dailyRecord, mode, dateKey, question, solvedFlags, gameState.livesLeft]);
 
   const suggestions: SearchSuggestion[] = useMemo(() => {
     if (!inputValue.trim() || isFinished) return [];
@@ -117,7 +120,7 @@ export function TenaBallGame() {
   }, [inputValue, isFinished]);
 
   const handleGuessSubmit = async (overrideGuess?: string) => {
-    if (isFinished) return;
+    if (isFinished || !question) return;
     const rawGuess = overrideGuess ?? inputValue;
     const outcome = submitTenaBallGuess(gameState, rawGuess, question.answers);
     setInputValue('');
@@ -180,6 +183,78 @@ export function TenaBallGame() {
       setTimeout(() => setShowResult(true), 450);
     }
   };
+
+  if (!question) {
+    return (
+      <AppContainer>
+        <Header
+          title="TenaBall"
+          subtitle="Top 10 Futbol Listesi"
+          rightActions={
+            <Pressable
+              onPress={() => setShowStats(true)}
+              style={[styles.headerBtn, { backgroundColor: tokens.surfaceElevated }]}
+              accessibilityLabel="İstatistikler"
+            >
+              <Ionicons name="bar-chart-outline" size={20} color={tokens.text} />
+            </Pressable>
+          }
+        />
+        <View style={styles.emptyWrap}>
+          <View
+            style={[
+              styles.emptyCard,
+              { backgroundColor: tokens.surface, borderColor: tokens.border },
+            ]}
+          >
+            <View style={[styles.emptyIcon, { backgroundColor: tokens.accentSoft }]}>
+              <Ionicons name="shield-checkmark-outline" size={32} color={tokens.accent} />
+            </View>
+            <Text style={[styles.emptyTitle, { color: tokens.text }]}>
+              Henüz Doğrulanmış Liste Yok
+            </Text>
+            <Text style={[styles.emptyDesc, { color: tokens.textMuted }]}>
+              TenaBall yalnızca kaynak bağlantısı üzerinden doğrulanmış (verified: true) Top 10
+              listelerini gösterir. Listeler doğrulandığında burada otomatik olarak görünür. Bu
+              sırada diğer oyunları oynayabilirsin!
+            </Text>
+            <View style={styles.emptyButtons}>
+              <Pressable
+                onPress={() => router.replace('/games/who-are-ya')}
+                style={[styles.emptyBtn, { backgroundColor: tokens.accent }]}
+              >
+                <Text style={[styles.emptyBtnText, { color: tokens.accentText }]}>
+                  Who Are Ya Oyna
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => router.replace('/games/wordle')}
+                style={[styles.emptyBtn, { backgroundColor: tokens.footballGreen }]}
+              >
+                <Text style={[styles.emptyBtnText, { color: tokens.footballGreenText }]}>
+                  Football Wordle Oyna
+                </Text>
+              </Pressable>
+              <Pressable onPress={() => router.replace('/')} style={styles.emptyBackBtn}>
+                <Text style={[styles.emptyBackText, { color: tokens.textMuted }]}>
+                  Ana Sayfaya Dön
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+
+        <StatsModal
+          visible={showStats}
+          onClose={() => setShowStats(false)}
+          gameTitle="TenaBall"
+          stats={stats}
+          distributionLabels={['10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0']}
+          distributionHeading="Bulunan Oyuncu Dağılımı"
+        />
+      </AppContainer>
+    );
+  }
 
   return (
     <AppContainer>
@@ -450,5 +525,57 @@ const styles = StyleSheet.create({
   nextBtnText: {
     fontSize: 15,
     fontWeight: '800',
+  },
+  emptyWrap: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  emptyCard: {
+    borderRadius: 18,
+    borderWidth: 1,
+    padding: 22,
+    alignItems: 'center',
+  },
+  emptyIcon: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 14,
+  },
+  emptyTitle: {
+    fontSize: 19,
+    fontWeight: '800',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  emptyDesc: {
+    fontSize: 13.5,
+    lineHeight: 20,
+    textAlign: 'center',
+    marginBottom: 18,
+  },
+  emptyButtons: {
+    width: '100%',
+    gap: 10,
+  },
+  emptyBtn: {
+    paddingVertical: 13,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  emptyBtnText: {
+    fontSize: 14.5,
+    fontWeight: '800',
+  },
+  emptyBackBtn: {
+    paddingVertical: 8,
+    alignItems: 'center',
+  },
+  emptyBackText: {
+    fontSize: 13.5,
+    fontWeight: '600',
   },
 });

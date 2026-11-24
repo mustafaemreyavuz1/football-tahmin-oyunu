@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Checks whether every answer name in src/data/tenaball.json exists in src/data/guessPool.json.
- * Reports exact coverage count and lists any missing names.
+ * Checks whether every answer name in active (non-hidden) src/data/tenaball.json lists
+ * exists in src/data/guessPool.json.
+ * Exits with code 0 when 0 missing names remain in active lists, or code 1 otherwise.
  */
 
 import fs from 'node:fs';
@@ -35,40 +36,37 @@ function normalizeText(input) {
 const tenaball = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'tenaball.json'), 'utf8'));
 const guessPool = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'guessPool.json'), 'utf8'));
 
-const guessNameSet = new Set();
-for (const row of guessPool.rows) {
-  guessNameSet.add(normalizeText(row[1])); // full name
-}
+const guessNameSet = new Set(guessPool.rows.map((row) => normalizeText(row[1])));
 
-const uniqueAnswers = new Map();
-for (const q of tenaball) {
+const activeLists = tenaball.filter((q) => !q.hidden);
+const hiddenLists = tenaball.filter((q) => q.hidden === true);
+
+const uniqueActiveAnswers = new Map();
+for (const q of activeLists) {
   for (const ans of q.answers) {
     const key = normalizeText(ans);
-    if (!uniqueAnswers.has(key)) {
-      uniqueAnswers.set(key, ans);
-    }
+    if (!uniqueActiveAnswers.has(key)) uniqueActiveAnswers.set(key, ans);
   }
 }
 
 const missing = [];
-for (const [key, original] of uniqueAnswers.entries()) {
-  if (!guessNameSet.has(key)) {
-    missing.push(original);
-  }
+for (const [key, original] of uniqueActiveAnswers.entries()) {
+  if (!guessNameSet.has(key)) missing.push(original);
 }
 
 console.log('=== TenaBall -> guessPool Coverage Report ===');
-console.log(`Total TenaBall questions : ${tenaball.length}`);
-console.log(`Unique answer players    : ${uniqueAnswers.size}`);
-console.log(`Found in guessPool       : ${uniqueAnswers.size - missing.length}`);
-console.log(`Missing from guessPool   : ${missing.length}`);
+console.log(`Total TenaBall lists      : ${tenaball.length}`);
+console.log(`Active lists (!hidden)    : ${activeLists.length}`);
+console.log(`Hidden lists (hidden:true): ${hiddenLists.length}`);
+console.log(`Unique active answers     : ${uniqueActiveAnswers.size}`);
+console.log(`Found in guessPool        : ${uniqueActiveAnswers.size - missing.length}`);
+console.log(`Missing from active lists : ${missing.length}`);
 
 if (missing.length > 0) {
-  console.log('\nMissing names:');
-  for (const name of missing.sort()) {
-    console.log(`  - ${name}`);
-  }
+  console.log('\nMissing names in active lists:');
+  for (const name of missing.sort()) console.log(`  - ${name}`);
   process.exitCode = 1;
 } else {
-  console.log('\n100% of TenaBall answers are covered in guessPool!');
+  console.log('\n100% of active TenaBall answers are covered in guessPool! (exit code 0)');
+  process.exitCode = 0;
 }

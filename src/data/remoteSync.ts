@@ -31,6 +31,7 @@ export function validateTenaBallSchema(payload: unknown): payload is TenaBallQue
     if (typeof q.sourceUrl !== 'string' || !q.sourceUrl.startsWith('http')) return false;
     if (typeof q.asOf !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(q.asOf)) return false;
     if (typeof q.verified !== 'boolean') return false;
+    if (q.hidden !== undefined && typeof q.hidden !== 'boolean') return false;
 
     if (!Array.isArray(q.answers) || q.answers.length !== 10) return false;
     for (const ans of q.answers) {

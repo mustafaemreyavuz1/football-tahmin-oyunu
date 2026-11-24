@@ -1131,7 +1131,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/UEFA_Champions_League_records_and_statistics",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-055",
@@ -1761,7 +1762,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Golden_Boy_(award)",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-085",
@@ -1845,7 +1847,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Kopa_Trophy",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-089",
@@ -2538,7 +2541,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/List_of_La_Liga_top_scorers",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-122",
@@ -2601,7 +2605,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/List_of_FC_Barcelona_records_and_statistics",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-125",
@@ -2643,7 +2648,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Valencia_CF",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-127",
@@ -2664,7 +2670,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-128",
@@ -2748,7 +2755,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/El_Cl%C3%A1sico",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-132",
@@ -2874,7 +2882,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/List_of_La_Liga_hat-tricks",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-138",
@@ -3462,7 +3471,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-166",
@@ -3483,7 +3493,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/SV_Werder_Bremen",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-167",
@@ -3525,7 +3536,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/List_of_Bundesliga_top_scorers",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-169",
@@ -4113,7 +4125,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Chile_national_football_team_records_and_statistics",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-197",
@@ -4134,7 +4147,8 @@
     ],
     "sourceUrl": "https://en.wikipedia.org/wiki/Egypt_national_football_team",
     "asOf": "2025-05-01",
-    "verified": false
+    "verified": false,
+    "hidden": true
   },
   {
     "id": "tb-198",

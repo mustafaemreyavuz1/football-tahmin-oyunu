@@ -7,7 +7,11 @@ import { SearchInput } from '../src/components/SearchInput';
 import { TeamColorDot } from '../src/components/TeamColorDot';
 import { useTheme } from '../src/theme/ThemeContext';
 import { getTeamsGroupedByLeague } from '../src/data/teamRepository';
-import { getTenaBallSyncStatus, refreshTenaBallQuestions } from '../src/data/tenaballRepository';
+import {
+  getTenaBallCounts,
+  getTenaBallSyncStatus,
+  refreshTenaBallQuestions,
+} from '../src/data/tenaballRepository';
 import { getGuessPoolCount, getPuzzlePool } from '../src/data/playerRepository';
 import { RemoteSyncStatus, ThemePreference } from '../src/types';
 
@@ -27,6 +31,7 @@ export default function SettingsScreen() {
   const groupedTeams = useMemo(() => getTeamsGroupedByLeague(teamQuery), [teamQuery]);
   const puzzlePoolCount = getPuzzlePool().length;
   const guessPoolCount = getGuessPoolCount();
+  const tenaBallCounts = getTenaBallCounts();
 
   const handleSync = async () => {
     setSyncing(true);
@@ -188,8 +193,9 @@ export default function SettingsScreen() {
         <Text style={[styles.sectionTitle, { color: tokens.text }]}>Soru Verisi ve Güncelleme</Text>
         <View style={[styles.card, { backgroundColor: tokens.surface, borderColor: tokens.border }]}>
           <Text style={[styles.metaLine, { color: tokens.text }]}>
-            Aktif TenaBall Soru Sayısı:{' '}
-            <Text style={{ fontWeight: '800' }}>{syncStatus.questionCount}</Text>
+            Doğrulanmış Oynanabilir TenaBall Listesi:{' '}
+            <Text style={{ fontWeight: '800' }}>{tenaBallCounts.verifiedPlayable}</Text> /{' '}
+            {tenaBallCounts.visible} aktif ({tenaBallCounts.hidden} gizli)
           </Text>
           <Text style={[styles.metaLine, { color: tokens.textMuted }]}>
             Kaynak:{' '}

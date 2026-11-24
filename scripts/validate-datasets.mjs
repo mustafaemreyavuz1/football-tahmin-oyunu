@@ -136,13 +136,17 @@ for (const p of puzzlePool) {
   }
 }
 
-// 4. Validate TenaBall & check TenaBall answer coverage in guessPool
+// 4. Validate TenaBall & check active TenaBall answer coverage in guessPool
 if (tenaball.length < 200) {
   errors.push(`Expected at least 200 TenaBall questions, got ${tenaball.length}`);
 }
 
+const activeTenaBall = tenaball.filter((q) => !q.hidden);
+const hiddenTenaBall = tenaball.filter((q) => q.hidden === true);
+const verifiedPlayableTenaBall = activeTenaBall.filter((q) => q.verified === true);
+
 const uniqueTenaBallAnswers = new Map();
-for (const q of tenaball) {
+for (const q of activeTenaBall) {
   for (const ans of q.answers) {
     const k = normalizeText(ans);
     if (!uniqueTenaBallAnswers.has(k)) {
@@ -158,7 +162,7 @@ for (const [k, raw] of uniqueTenaBallAnswers.entries()) {
   }
 }
 if (missingTenaBallAnswers.length > 0) {
-  warnings.push(`${missingTenaBallAnswers.length} TenaBall answer(s) not found in guessPool (not invented if absent from Wikidata)`);
+  errors.push(`${missingTenaBallAnswers.length} active TenaBall answer(s) missing from guessPool`);
 }
 
 console.log('=== Dataset Validation Summary ===');
@@ -169,8 +173,9 @@ for (const lg of requiredLeagues) {
 console.log(`puzzlePool             : ${puzzlePool.length} verified players (duplicates: ${puzzleDuplicates})`);
 console.log(`guessPool              : ${guessPool.length} players (duplicates: ${guessDuplicates})`);
 console.log(`puzzlePool in guessPool: ${puzzlePool.length - missingPuzzleInGuess}/${puzzlePool.length}`);
-console.log(`TenaBall questions     : ${tenaball.length} lists (${uniqueTenaBallAnswers.size} unique answers)`);
-console.log(`Missing TenaBall names : ${missingTenaBallAnswers.length}`);
+console.log(`TenaBall lists         : ${tenaball.length} total (${activeTenaBall.length} active, ${hiddenTenaBall.length} hidden, ${verifiedPlayableTenaBall.length} verified playable)`);
+console.log(`Active unique answers  : ${uniqueTenaBallAnswers.size}`);
+console.log(`Missing active answers : ${missingTenaBallAnswers.length}`);
 
 if (missingTenaBallAnswers.length > 0) {
   console.log('  Missing list:');
