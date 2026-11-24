@@ -18,8 +18,12 @@ import { RemoteSyncStatus, TenaBallErrorReport, ThemePreference } from '../src/t
 import {
   clearTenaBallErrorReports,
   getAllowUnverifiedTenaBall,
+  getTenaBallAnimationsEnabled,
   getTenaBallErrorReports,
+  getTenaBallSoundsEnabled,
   setAllowUnverifiedTenaBall,
+  setTenaBallAnimationsEnabled,
+  setTenaBallSoundsEnabled,
 } from '../src/utils/storage';
 import { shareResultText } from '../src/utils/share';
 
@@ -42,6 +46,8 @@ export default function SettingsScreen() {
   const [syncing, setSyncing] = useState(false);
 
   const [allowUnverified, setAllowUnverified] = useState(false);
+  const [tenaBallAnimations, setTenaBallAnimations] = useState(true);
+  const [tenaBallSounds, setTenaBallSounds] = useState(true);
   const [errorReports, setErrorReports] = useState<TenaBallErrorReport[]>([]);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
 
@@ -49,13 +55,17 @@ export default function SettingsScreen() {
     useCallback(() => {
       let active = true;
       (async () => {
-        const [allow, reports] = await Promise.all([
+        const [allow, reports, animOn, soundOn] = await Promise.all([
           getAllowUnverifiedTenaBall(),
           getTenaBallErrorReports(),
+          getTenaBallAnimationsEnabled(),
+          getTenaBallSoundsEnabled(),
         ]);
         if (!active) return;
         setAllowUnverified(allow);
         setErrorReports(reports);
+        setTenaBallAnimations(animOn);
+        setTenaBallSounds(soundOn);
       })();
       return () => {
         active = false;
@@ -71,6 +81,16 @@ export default function SettingsScreen() {
   const handleToggleUnverified = async (next: boolean) => {
     setAllowUnverified(next);
     await setAllowUnverifiedTenaBall(next);
+  };
+
+  const handleToggleAnimations = async (next: boolean) => {
+    setTenaBallAnimations(next);
+    await setTenaBallAnimationsEnabled(next);
+  };
+
+  const handleToggleSounds = async (next: boolean) => {
+    setTenaBallSounds(next);
+    await setTenaBallSoundsEnabled(next);
   };
 
   const handleShareErrorReports = async () => {
@@ -248,9 +268,48 @@ export default function SettingsScreen() {
           )}
         </View>
 
-        {/* TenaBall Settings & Unverified Switch */}
+        {/* TenaBall Settings & Switches */}
         <Text style={[styles.sectionTitle, { color: tokens.text }]}>TenaBall Ayarları</Text>
         <View style={[styles.card, { backgroundColor: tokens.surface, borderColor: tokens.border }]}>
+          <View style={styles.switchRow}>
+            <View style={styles.switchTextWrap}>
+              <Text style={[styles.switchTitle, { color: tokens.text }]}>
+                TenaBall animasyonları
+              </Text>
+              <Text style={[styles.switchDesc, { color: tokens.textMuted }]}>
+                Doğru cevapta 10&apos;dan hedef sıraya geri sayım vurgusu ve açılma animasyonu
+                gösterir. Kapalıyken tık sesi de çalmaz.
+              </Text>
+            </View>
+            <Switch
+              value={tenaBallAnimations}
+              onValueChange={handleToggleAnimations}
+              trackColor={{ false: tokens.border, true: tokens.accent }}
+              thumbColor="#FFFFFF"
+            />
+          </View>
+
+          <View style={[styles.switchDivider, { backgroundColor: tokens.border }]} />
+
+          <View style={[styles.switchRow, { opacity: tenaBallAnimations ? 1 : 0.55 }]}>
+            <View style={styles.switchTextWrap}>
+              <Text style={[styles.switchTitle, { color: tokens.text }]}>TenaBall sesleri</Text>
+              <Text style={[styles.switchDesc, { color: tokens.textMuted }]}>
+                Geri sayım adımlarında hafif tık sesi çalar (iOS sessiz modda çalmaz, arka plan
+                müziğini kesmez).
+              </Text>
+            </View>
+            <Switch
+              value={tenaBallAnimations && tenaBallSounds}
+              disabled={!tenaBallAnimations}
+              onValueChange={handleToggleSounds}
+              trackColor={{ false: tokens.border, true: tokens.accent }}
+              thumbColor="#FFFFFF"
+            />
+          </View>
+
+          <View style={[styles.switchDivider, { backgroundColor: tokens.border }]} />
+
           <View style={styles.switchRow}>
             <View style={styles.switchTextWrap}>
               <Text style={[styles.switchTitle, { color: tokens.text }]}>
@@ -503,6 +562,10 @@ const styles = StyleSheet.create({
   switchDesc: {
     fontSize: 12.5,
     lineHeight: 17,
+  },
+  switchDivider: {
+    height: 1,
+    marginVertical: 12,
   },
   reportsWrap: {
     gap: 8,
