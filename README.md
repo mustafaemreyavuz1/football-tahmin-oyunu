@@ -138,7 +138,13 @@ football-tahmin-oyunu/
     ```
 - **Futbolcu Fotoğrafları**: `puzzlePool.json` içindeki tüm görseller **Wikimedia Commons** (`Special:FilePath`) üzerinden **Creative Commons (CC BY / CC BY-SA)**, **GFDL** veya **Public Domain** lisanslarıyla doğrulanmıştır. Her görselin lisans ve sanatçı/kaynak atıfı Who Are Ya ekranında doğrudan fotoğrafın altında gösterilir.
 - **Kulüp Verileri**: `src/data/teams.json` dosyasında hiçbir kulüp logosu veya arması yer almaz; yalnızca kulüp renkleri (`primaryColor`, `secondaryColor`) kullanılır.
-- **TenaBall Listeleri**: Tüm sorular `verified: false` ve `sourceUrl` + `asOf` alanlarıyla gelir. Bir insan tarafından ilgili kaynak URL'si üzerinden doğrulanan listeler `verified: true` olarak güncellenmelidir. `npm run check:tenaball-coverage` ile tüm cevapların `guessPool` kapsamı kontrol edilir.
+- **TenaBall Listeleri & Doğrulanmamış İçerik**:
+  - Tüm sorular `verified: false` ve `sourceUrl` + `asOf` alanlarıyla gelir. Uygulama varsayılan olarak **yalnızca `verified: true` ve gizli olmayan (`!hidden`)** listeleri gösterir.
+  - Ayarlar ekranındaki **"Doğrulanmamış listeleri oyna"** anahtarı (varsayılan kapalı) açıldığında henüz doğrulanmamış aktif listeler de oynanabilir ve oyun ekranında belirgin bir **`Doğrulanmamış liste`** etiketi görünür (`hidden: true` listeler her durumda gizli kalır).
+  - Oyun sonunda **"Bu listede hata var"** butonu ile hatalı görülen listeler cihazda kaydedilip Ayarlar'dan paylaşılabilir.
+  - `npm run check:tenaball-coverage` ile aktif listelerin `guessPool` kapsamı kontrol edilir.
+- **Kulüp Logoları / Armaları**: Uygulamada **hiçbir kulüp logosu veya arması kullanılmaz**; takım temaları yalnızca kulüp renkleriyle (`primaryColor`, `secondaryColor`) oluşturulur.
+- **Who Are Ya Görsel Atıfları**: Oyun sırasında ipucu vermemek için atıf ve dosya/URL bilgisi gizlenir; oyun bitiminde sonuç ekranında ve **Ayarlar → Görsel Atıfları** sayfasında tüm 240 oyuncunun yazar/kaynak ve lisans bilgisi aranabilir olarak sunulur.
 
 ---
 
@@ -181,16 +187,16 @@ npm run generate:queue
 ```
 Bu komut `docs/tenaball-verification-queue.md` ve `docs/tenaball-verification-queue.csv` dosyalarını oluşturur.
 
-### Uzak Soru Güncelleme URL'si Nasıl Değiştirilir?
-Uygulama açılışında güncel `tenaball.json` dosyasını uzaktan çekmeyi dener (çevrimdışıysa veya şema geçersizse yerel kopyaya düşer). Varsayılan URL şu anda placeholder olarak bırakılmıştır:
+### Uzak Soru Güncelleme URL'si
+Uygulama açılışında güncel `tenaball.json` dosyasını uzaktan çekmeyi dener (çevrimdışıysa veya şema geçersizse yerel kopyaya düşer):
 
 - **Dosya**: `src/data/remoteSync.ts`
 - **Sabit**: `REMOTE_TENABALL_URL`
 ```ts
 export const REMOTE_TENABALL_URL =
-  'https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/football-tahmin-oyunu/main/src/data/tenaball.json';
+  'https://raw.githubusercontent.com/mustafaemreyavuz1/football-tahmin-oyunu/main/src/data/tenaball.json';
 ```
-GitHub deponuzu oluşturduktan sonra `YOUR_GITHUB_USERNAME` kısmını kendi GitHub kullanıcı adınızla (ve gerekirse repo/dal adıyla) değiştirmeniz yeterlidir.
+Farklı bir fork veya dal kullanıyorsanız bu sabiti kendi raw GitHub URL'nizle değiştirebilirsiniz.
 
 ---
 

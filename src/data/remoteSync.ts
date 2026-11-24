@@ -6,7 +6,7 @@ import { getCachedRemoteTenaBall, saveCachedRemoteTenaBall } from '../utils/stor
  * Update `<OWNER>/<REPO>` once you publish your repository on GitHub.
  */
 export const REMOTE_TENABALL_URL =
-  'https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/football-tahmin-oyunu/main/src/data/tenaball.json';
+  'https://raw.githubusercontent.com/mustafaemreyavuz1/football-tahmin-oyunu/main/src/data/tenaball.json';
 
 const VALID_DIFFICULTIES = new Set(['kolay', 'orta', 'zor']);
 
