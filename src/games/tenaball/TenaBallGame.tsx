@@ -1,5 +1,14 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  AccessibilityInfo,
+  Animated,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { AppContainer } from '../../components/AppContainer';
@@ -22,7 +31,9 @@ import {
   getAllowUnverifiedTenaBall,
   getDailyCompletion,
   getGameStats,
+  getTenaBallAnimationsEnabled,
   getTenaBallErrorReports,
+  getTenaBallSoundsEnabled,
   recordGameResult,
   saveDailyCompletion,
 } from '../../utils/storage';
@@ -33,7 +44,11 @@ import {
   TENABALL_MAX_LIVES,
   TenaBallState,
 } from './tenaballLogic';
+import { buildRevealSchedule } from './countdownAnimation';
+import { playTickSound, preloadTickSound, stopTickSound, unloadTickSound } from './tickSound';
 import { SlotRow } from './SlotRow';
+
+const USE_NATIVE_DRIVER = Platform.OS !== 'web';
 
 const DIFFICULTY_LABEL: Record<TenaBallQuestion['difficulty'], string> = {
   kolay: 'Kolay',
@@ -48,6 +63,10 @@ export function TenaBallGame() {
 
   const [mode, setMode] = useState<GameMode>('daily');
   const [allowUnverified, setAllowUnverified] = useState(false);
+  const [animationsEnabled, setAnimationsEnabled] = useState(true);
+  const [soundsEnabled, setSoundsEnabled] = useState(true);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
   const [question, setQuestion] = useState<TenaBallQuestion | null>(() =>
     getDailyTenaBallQuestion(new Date(), false)
   );
@@ -56,26 +75,64 @@ export function TenaBallGame() {
   const [feedback, setFeedback] = useState<{ text: string; tone: 'success' | 'warn' | 'error' } | null>(null);
   const [reportedIds, setReportedIds] = useState<Set<string>>(new Set());
 
+  // Visual-only animation overlay state (game state is always updated & persisted immediately)
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
+  const [pendingRevealIndex, setPendingRevealIndex] = useState<number | null>(null);
+
   const [dailyRecord, setDailyRecord] = useState<DailyCompletionRecord | null>(null);
   const [stats, setStats] = useState<GameStats>(createEmptyStats);
   const [showStats, setShowStats] = useState(false);
   const [showResult, setShowResult] = useState(false);
 
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const pendingShowResultRef = useRef(false);
+  const pendingFeedbackRef = useRef<{ text: string; tone: 'success' | 'warn' | 'error' } | null>(null);
+  const shakeAnim = useRef(new Animated.Value(0)).current;
+
+  const clearAnimationTimers = useCallback(() => {
+    for (const t of timersRef.current) {
+      clearTimeout(t);
+    }
+    timersRef.current = [];
+  }, []);
+
+  // Preload sound & listen for OS Reduce Motion preference
+  useEffect(() => {
+    preloadTickSound().catch(() => {});
+    AccessibilityInfo.isReduceMotionEnabled()
+      .then((enabled) => setReduceMotion(Boolean(enabled)))
+      .catch(() => {});
+    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', (enabled) => {
+      setReduceMotion(Boolean(enabled));
+    });
+    return () => {
+      sub.remove();
+      clearAnimationTimers();
+      stopTickSound().catch(() => {});
+      unloadTickSound().catch(() => {});
+    };
+  }, [clearAnimationTimers]);
+
   useFocusEffect(
     useCallback(() => {
       let active = true;
       (async () => {
-        const [s, d, allow, reports] = await Promise.all([
+        const [s, d, allow, reports, animOn, soundOn] = await Promise.all([
           getGameStats('tenaball'),
           getDailyCompletion('tenaball', dateKey),
           getAllowUnverifiedTenaBall(),
           getTenaBallErrorReports(),
+          getTenaBallAnimationsEnabled(),
+          getTenaBallSoundsEnabled(),
         ]);
         if (!active) return;
         setStats(s);
         setDailyRecord(d);
         setAllowUnverified(allow);
         setReportedIds(new Set(reports.map((r) => r.id)));
+        setAnimationsEnabled(animOn);
+        setSoundsEnabled(soundOn);
         setQuestion((prev) => {
           if (mode === 'daily') {
             return getDailyTenaBallQuestion(new Date(), allow);
@@ -92,8 +149,94 @@ export function TenaBallGame() {
     }, [dateKey, mode])
   );
 
+  const skipRevealAnimation = useCallback(() => {
+    if (!isAnimating) return;
+    clearAnimationTimers();
+    stopTickSound().catch(() => {});
+    setHighlightedIndex(null);
+    setPendingRevealIndex(null);
+    setIsAnimating(false);
+    if (pendingFeedbackRef.current) {
+      setFeedback(pendingFeedbackRef.current);
+      pendingFeedbackRef.current = null;
+    }
+    if (pendingShowResultRef.current) {
+      pendingShowResultRef.current = false;
+      setShowResult(true);
+    }
+  }, [isAnimating, clearAnimationTimers]);
+
+  const triggerWrongShake = useCallback(() => {
+    if (!animationsEnabled || reduceMotion) return;
+    shakeAnim.setValue(0);
+    Animated.sequence([
+      Animated.timing(shakeAnim, { toValue: -8, duration: 50, useNativeDriver: USE_NATIVE_DRIVER }),
+      Animated.timing(shakeAnim, { toValue: 8, duration: 50, useNativeDriver: USE_NATIVE_DRIVER }),
+      Animated.timing(shakeAnim, { toValue: -6, duration: 45, useNativeDriver: USE_NATIVE_DRIVER }),
+      Animated.timing(shakeAnim, { toValue: 6, duration: 45, useNativeDriver: USE_NATIVE_DRIVER }),
+      Animated.timing(shakeAnim, { toValue: 0, duration: 45, useNativeDriver: USE_NATIVE_DRIVER }),
+    ]).start();
+  }, [animationsEnabled, reduceMotion, shakeAnim]);
+
+  const startCountdownReveal = useCallback(
+    (
+      slotIndex: number,
+      feedbackPayload: { text: string; tone: 'success' | 'warn' | 'error' },
+      shouldOpenResultAfter: boolean
+    ) => {
+      clearAnimationTimers();
+      const schedule = buildRevealSchedule(slotIndex + 1);
+      const shouldPlayTick = soundsEnabled;
+
+      setIsAnimating(true);
+      setPendingRevealIndex(slotIndex);
+      pendingFeedbackRef.current = feedbackPayload;
+      pendingShowResultRef.current = shouldOpenResultAfter;
+
+      let elapsed = 0;
+      schedule.stepIndices.forEach((idx, stepPos) => {
+        const t = setTimeout(() => {
+          setHighlightedIndex(idx);
+          if (shouldPlayTick) {
+            playTickSound().catch(() => {});
+          }
+        }, elapsed);
+        timersRef.current.push(t);
+        elapsed += schedule.stepDurationsMs[stepPos];
+      });
+
+      const finishTimer = setTimeout(() => {
+        setHighlightedIndex(null);
+        setPendingRevealIndex(null);
+        setIsAnimating(false);
+        if (pendingFeedbackRef.current) {
+          setFeedback(pendingFeedbackRef.current);
+          pendingFeedbackRef.current = null;
+        }
+        if (pendingShowResultRef.current) {
+          pendingShowResultRef.current = false;
+          const modalTimer = setTimeout(() => setShowResult(true), 280);
+          timersRef.current.push(modalTimer);
+        }
+      }, elapsed);
+      timersRef.current.push(finishTimer);
+    },
+    [clearAnimationTimers, soundsEnabled]
+  );
+
+  const resetVisualAnimation = useCallback(() => {
+    clearAnimationTimers();
+    stopTickSound().catch(() => {});
+    setHighlightedIndex(null);
+    setPendingRevealIndex(null);
+    setIsAnimating(false);
+    pendingShowResultRef.current = false;
+    pendingFeedbackRef.current = null;
+  }, [clearAnimationTimers]);
+
   const startUnlimitedRound = useCallback(
     (excludeId?: string) => {
+      resetVisualAnimation();
       setMode('unlimited');
       setQuestion(getRandomTenaBallQuestion(excludeId, allowUnverified));
       setGameState(createInitialTenaBallState());
@@ -101,11 +244,12 @@ export function TenaBallGame() {
       setFeedback(null);
       setShowResult(false);
     },
-    [allowUnverified]
+    [allowUnverified, resetVisualAnimation]
   );
 
   const handleModeChange = (nextMode: GameMode) => {
     if (nextMode === mode) return;
+    resetVisualAnimation();
     setMode(nextMode);
     setInputValue('');
     setFeedback(null);
@@ -147,16 +291,16 @@ export function TenaBallGame() {
   }, [isDailyLocked, dailyRecord, mode, dateKey, question, solvedFlags, gameState.livesLeft]);
 
   const suggestions: SearchSuggestion[] = useMemo(() => {
-    if (!inputValue.trim() || isFinished) return [];
+    if (!inputValue.trim() || isFinished || isAnimating) return [];
     return searchGuessPool(inputValue, 6).map((p) => ({
       id: p.id,
       label: p.name,
       sublabel: `${p.nationality} • ${p.position}`,
     }));
-  }, [inputValue, isFinished]);
+  }, [inputValue, isFinished, isAnimating]);
 
   const handleGuessSubmit = async (overrideGuess?: string) => {
-    if (isFinished || !question) return;
+    if (isFinished || isAnimating || !question) return;
     const rawGuess = overrideGuess ?? inputValue;
     const outcome = submitTenaBallGuess(gameState, rawGuess, question.answers);
     setInputValue('');
@@ -167,21 +311,11 @@ export function TenaBallGame() {
       return;
     }
 
+    // 1. Update authoritative game state & persist IMMEDIATELY (independent of animation/sound)
     setGameState(outcome.nextState);
+    const gameEnded = outcome.nextState.status !== 'playing';
 
-    if (outcome.type === 'correct') {
-      setFeedback({
-        text: `Doğru! ${outcome.slotIndex + 1}. sıra: ${outcome.answer}`,
-        tone: 'success',
-      });
-    } else {
-      setFeedback({
-        text: `Listede yok! Kalan can: ${outcome.nextState.livesLeft}`,
-        tone: 'error',
-      });
-    }
-
-    if (outcome.nextState.status !== 'playing') {
+    if (gameEnded) {
       const won = outcome.nextState.status === 'won';
       const foundCount = outcome.nextState.solvedIndices.length;
       const nextStats = await recordGameResult(
@@ -215,8 +349,32 @@ export function TenaBallGame() {
         await saveDailyCompletion('tenaball', rec);
         setDailyRecord(rec);
       }
+    }
 
-      setTimeout(() => setShowResult(true), 450);
+    // 2. Visual & audio presentation layer
+    if (outcome.type === 'correct') {
+      const successFeedback = {
+        text: `Doğru! ${outcome.slotIndex + 1}. sıra: ${outcome.answer}`,
+        tone: 'success' as const,
+      };
+      if (animationsEnabled && !reduceMotion) {
+        startCountdownReveal(outcome.slotIndex, successFeedback, gameEnded);
+      } else {
+        setFeedback(successFeedback);
+        if (gameEnded) {
+          setTimeout(() => setShowResult(true), 300);
+        }
+      }
+    } else {
+      // Wrong answer: instant life drop, brief shake, NO tick sound
+      setFeedback({
+        text: `Listede yok! Kalan can: ${outcome.nextState.livesLeft}`,
+        tone: 'error',
+      });
+      triggerWrongShake();
+      if (gameEnded) {
+        setTimeout(() => setShowResult(true), 350);
+      }
     }
   };
 
@@ -316,167 +474,195 @@ export function TenaBallGame() {
         }
       />
 
-      <ScrollView
-        contentContainerStyle={styles.scroll}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
-        <ModeToggle
-          mode={mode}
-          onChangeMode={handleModeChange}
-          dailyCompleted={Boolean(dailyRecord)}
-        />
+      <View style={styles.gameBody}>
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <ModeToggle
+            mode={mode}
+            onChangeMode={handleModeChange}
+            dailyCompleted={Boolean(dailyRecord)}
+          />
 
-        {/* Question Card */}
-        <View style={[styles.questionCard, { backgroundColor: tokens.surface, borderColor: tokens.border }]}>
-          <View style={styles.badgesRow}>
-            <View style={[styles.badge, { backgroundColor: tokens.accentSoft }]}>
-              <Text style={[styles.badgeText, { color: tokens.accent }]}>{question.category}</Text>
+          {/* Question Card (shakes briefly on wrong answer) */}
+          <Animated.View
+            style={[
+              styles.questionCard,
+              {
+                backgroundColor: tokens.surface,
+                borderColor: tokens.border,
+                transform: [{ translateX: shakeAnim }],
+              },
+            ]}
+          >
+            <View style={styles.badgesRow}>
+              <View style={[styles.badge, { backgroundColor: tokens.accentSoft }]}>
+                <Text style={[styles.badgeText, { color: tokens.accent }]}>{question.category}</Text>
+              </View>
+              <View style={[styles.badge, { backgroundColor: tokens.surfaceElevated }]}>
+                <Text style={[styles.badgeText, { color: tokens.textMuted }]}>
+                  {DIFFICULTY_LABEL[question.difficulty]}
+                </Text>
+              </View>
+              {!question.verified && (
+                <View style={[styles.unverifiedBadge, { backgroundColor: tokens.warning }]}>
+                  <Ionicons name="warning-outline" size={13} color="#FFFFFF" />
+                  <Text style={styles.unverifiedBadgeText}>Doğrulanmamış liste</Text>
+                </View>
+              )}
             </View>
-            <View style={[styles.badge, { backgroundColor: tokens.surfaceElevated }]}>
-              <Text style={[styles.badgeText, { color: tokens.textMuted }]}>
-                {DIFFICULTY_LABEL[question.difficulty]}
+
+            <Text style={[styles.questionTitle, { color: tokens.text }]}>{question.title}</Text>
+
+            <View style={styles.statusRow}>
+              <View style={styles.livesRow}>
+                {Array.from({ length: TENABALL_MAX_LIVES }).map((_, idx) => (
+                  <Ionicons
+                    key={idx}
+                    name={idx < gameState.livesLeft ? 'heart' : 'heart-outline'}
+                    size={20}
+                    color={idx < gameState.livesLeft ? tokens.danger : tokens.textMuted}
+                  />
+                ))}
+              </View>
+              <Text style={[styles.progressText, { color: tokens.accent }]}>
+                {gameState.solvedIndices.length - (pendingRevealIndex !== null ? 1 : 0)} / 10
               </Text>
             </View>
-            {!question.verified && (
-              <View style={[styles.unverifiedBadge, { backgroundColor: tokens.warning }]}>
-                <Ionicons name="warning-outline" size={13} color="#FFFFFF" />
-                <Text style={styles.unverifiedBadgeText}>Doğrulanmamış liste</Text>
-              </View>
-            )}
-          </View>
+          </Animated.View>
 
-          <Text style={[styles.questionTitle, { color: tokens.text }]}>{question.title}</Text>
-
-          <View style={styles.statusRow}>
-            <View style={styles.livesRow}>
-              {Array.from({ length: TENABALL_MAX_LIVES }).map((_, idx) => (
-                <Ionicons
-                  key={idx}
-                  name={idx < gameState.livesLeft ? 'heart' : 'heart-outline'}
-                  size={20}
-                  color={idx < gameState.livesLeft ? tokens.danger : tokens.textMuted}
-                />
-              ))}
+          {/* Input */}
+          {!isDailyLocked ? (
+            <View style={styles.inputSection}>
+              <SearchInput
+                value={inputValue}
+                onChangeText={setInputValue}
+                placeholder="Futbolcu adı veya soyadı yaz..."
+                suggestions={suggestions}
+                onSelectSuggestion={(item) => handleGuessSubmit(item.label)}
+                onSubmit={() => handleGuessSubmit()}
+                submitLabel="Tahmin"
+                disabled={isFinished || isAnimating}
+              />
+              {feedback ? (
+                <Text
+                  style={[
+                    styles.feedbackText,
+                    {
+                      color:
+                        feedback.tone === 'success'
+                          ? tokens.success
+                          : feedback.tone === 'warn'
+                            ? tokens.warning
+                            : tokens.danger,
+                    },
+                  ]}
+                >
+                  {feedback.text}
+                </Text>
+              ) : null}
             </View>
-            <Text style={[styles.progressText, { color: tokens.accent }]}>
-              {gameState.solvedIndices.length} / 10
-            </Text>
-          </View>
-        </View>
+          ) : (
+            <View style={styles.lockedActions}>
+              <Pressable
+                onPress={() => setShowResult(true)}
+                style={[styles.actionBtn, { backgroundColor: tokens.accent }]}
+              >
+                <Ionicons name="share-social" size={16} color={tokens.accentText} />
+                <Text style={[styles.actionBtnText, { color: tokens.accentText }]}>
+                  Günün Sonucunu Gör
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => startUnlimitedRound(question.id)}
+                style={[styles.actionBtn, { backgroundColor: tokens.footballGreen }]}
+              >
+                <Ionicons name="infinite" size={16} color={tokens.footballGreenText} />
+                <Text style={[styles.actionBtnText, { color: tokens.footballGreenText }]}>
+                  Sınırsız Modda Oyna
+                </Text>
+              </Pressable>
+            </View>
+          )}
 
-        {/* Input */}
-        {!isDailyLocked ? (
-          <View style={styles.inputSection}>
-            <SearchInput
-              value={inputValue}
-              onChangeText={setInputValue}
-              placeholder="Futbolcu adı veya soyadı yaz..."
-              suggestions={suggestions}
-              onSelectSuggestion={(item) => handleGuessSubmit(item.label)}
-              onSubmit={() => handleGuessSubmit()}
-              submitLabel="Tahmin"
-              disabled={isFinished}
-            />
-            {feedback ? (
-              <Text
+          {/* 10 Numbered Slots */}
+          <View style={styles.slotsList}>
+            {question.answers.map((ans, idx) => {
+              const visuallySolved =
+                gameState.solvedIndices.includes(idx) && pendingRevealIndex !== idx;
+              const visuallyRevealedAtEnd =
+                isFinished && !isAnimating && !gameState.solvedIndices.includes(idx);
+              return (
+                <SlotRow
+                  key={`${question.id}-${idx}`}
+                  rank={idx + 1}
+                  answer={ans}
+                  solved={visuallySolved}
+                  revealedAtEnd={visuallyRevealedAtEnd}
+                  highlighted={highlightedIndex === idx}
+                  reduceMotion={reduceMotion || !animationsEnabled}
+                />
+              );
+            })}
+          </View>
+
+          {isFinished && !isAnimating && (
+            <View style={styles.endActions}>
+              <Pressable
+                onPress={handleReportError}
+                disabled={reportedIds.has(question.id)}
                 style={[
-                  styles.feedbackText,
+                  styles.reportInlineBtn,
                   {
-                    color:
-                      feedback.tone === 'success'
-                        ? tokens.success
-                        : feedback.tone === 'warn'
-                          ? tokens.warning
-                          : tokens.danger,
+                    backgroundColor: tokens.surface,
+                    borderColor: reportedIds.has(question.id) ? tokens.success : tokens.border,
+                    opacity: reportedIds.has(question.id) ? 0.8 : 1,
                   },
                 ]}
               >
-                {feedback.text}
-              </Text>
-            ) : null}
-          </View>
-        ) : (
-          <View style={styles.lockedActions}>
-            <Pressable
-              onPress={() => setShowResult(true)}
-              style={[styles.actionBtn, { backgroundColor: tokens.accent }]}
-            >
-              <Ionicons name="share-social" size={16} color={tokens.accentText} />
-              <Text style={[styles.actionBtnText, { color: tokens.accentText }]}>
-                Günün Sonucunu Gör
-              </Text>
-            </Pressable>
-            <Pressable
-              onPress={() => startUnlimitedRound(question.id)}
-              style={[styles.actionBtn, { backgroundColor: tokens.footballGreen }]}
-            >
-              <Ionicons name="infinite" size={16} color={tokens.footballGreenText} />
-              <Text style={[styles.actionBtnText, { color: tokens.footballGreenText }]}>
-                Sınırsız Modda Oyna
-              </Text>
-            </Pressable>
-          </View>
-        )}
-
-        {/* 10 Numbered Slots */}
-        <View style={styles.slotsList}>
-          {question.answers.map((ans, idx) => (
-            <SlotRow
-              key={`${question.id}-${idx}`}
-              rank={idx + 1}
-              answer={ans}
-              solved={gameState.solvedIndices.includes(idx)}
-              revealedAtEnd={isFinished && !gameState.solvedIndices.includes(idx)}
-            />
-          ))}
-        </View>
-
-        {isFinished && (
-          <View style={styles.endActions}>
-            <Pressable
-              onPress={handleReportError}
-              disabled={reportedIds.has(question.id)}
-              style={[
-                styles.reportInlineBtn,
-                {
-                  backgroundColor: tokens.surface,
-                  borderColor: reportedIds.has(question.id) ? tokens.success : tokens.border,
-                  opacity: reportedIds.has(question.id) ? 0.8 : 1,
-                },
-              ]}
-            >
-              <Ionicons
-                name={reportedIds.has(question.id) ? 'checkmark-circle-outline' : 'flag-outline'}
-                size={16}
-                color={reportedIds.has(question.id) ? tokens.success : tokens.danger}
-              />
-              <Text
-                style={[
-                  styles.reportInlineText,
-                  { color: reportedIds.has(question.id) ? tokens.success : tokens.text },
-                ]}
-              >
-                {reportedIds.has(question.id)
-                  ? `Hata Bildirildi (${question.id})`
-                  : 'Bu listede hata var'}
-              </Text>
-            </Pressable>
-
-            {mode === 'unlimited' && (
-              <Pressable
-                onPress={() => startUnlimitedRound(question.id)}
-                style={[styles.nextBtn, { backgroundColor: tokens.footballGreen }]}
-              >
-                <Ionicons name="refresh" size={18} color={tokens.footballGreenText} />
-                <Text style={[styles.nextBtnText, { color: tokens.footballGreenText }]}>
-                  Yeni TenaBall Sorusu
+                <Ionicons
+                  name={reportedIds.has(question.id) ? 'checkmark-circle-outline' : 'flag-outline'}
+                  size={16}
+                  color={reportedIds.has(question.id) ? tokens.success : tokens.danger}
+                />
+                <Text
+                  style={[
+                    styles.reportInlineText,
+                    { color: reportedIds.has(question.id) ? tokens.success : tokens.text },
+                  ]}
+                >
+                  {reportedIds.has(question.id)
+                    ? `Hata Bildirildi (${question.id})`
+                    : 'Bu listede hata var'}
                 </Text>
               </Pressable>
-            )}
-          </View>
+
+              {mode === 'unlimited' && (
+                <Pressable
+                  onPress={() => startUnlimitedRound(question.id)}
+                  style={[styles.nextBtn, { backgroundColor: tokens.footballGreen }]}
+                >
+                  <Ionicons name="refresh" size={18} color={tokens.footballGreenText} />
+                  <Text style={[styles.nextBtnText, { color: tokens.footballGreenText }]}>
+                    Yeni TenaBall Sorusu
+                  </Text>
+                </Pressable>
+              )}
+            </View>
+          )}
+        </ScrollView>
+
+        {/* Transparent tap-to-skip overlay active ONLY during countdown animation */}
+        {isAnimating && (
+          <Pressable
+            style={styles.skipOverlay}
+            onPressIn={skipRevealAnimation}
+            accessibilityLabel="Animasyonu atla"
+          />
         )}
-      </ScrollView>
+      </View>
 
       <StatsModal
         visible={showStats}
@@ -524,6 +710,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  gameBody: {
+    flex: 1,
+    position: 'relative',
+  },
+  skipOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 50,
+    backgroundColor: 'transparent',
+  },
   scroll: {
     padding: 16,
     paddingBottom: 36,
@@ -561,23 +756,6 @@ const styles = StyleSheet.create({
     fontSize: 11.5,
     fontWeight: '800',
     color: '#FFFFFF',
-  },
-  endActions: {
-    gap: 10,
-    marginTop: 6,
-  },
-  reportInlineBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    paddingVertical: 11,
-    borderRadius: 11,
-    borderWidth: 1,
-  },
-  reportInlineText: {
-    fontSize: 13.5,
-    fontWeight: '700',
   },
   questionTitle: {
     fontSize: 18,
@@ -625,6 +803,23 @@ const styles = StyleSheet.create({
   },
   slotsList: {
     gap: 8,
+  },
+  endActions: {
+    gap: 10,
+    marginTop: 6,
+  },
+  reportInlineBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 11,
+    borderRadius: 11,
+    borderWidth: 1,
+  },
+  reportInlineText: {
+    fontSize: 13.5,
+    fontWeight: '700',
   },
   nextBtn: {
     flexDirection: 'row',

@@ -18,6 +18,8 @@ const KEYS = {
   REMOTE_TENABALL_UPDATED_AT: '@fto/remote_tenaball_updated_at',
   ALLOW_UNVERIFIED_TENABALL: '@fto/allow_unverified_tenaball',
   TENABALL_ERROR_REPORTS: '@fto/tenaball_error_reports',
+  TENABALL_ANIMATIONS_ENABLED: '@fto/tenaball_animations_enabled',
+  TENABALL_SOUNDS_ENABLED: '@fto/tenaball_sounds_enabled',
 };
 
 export function createEmptyStats(): GameStats {
@@ -187,4 +189,24 @@ export async function addTenaBallErrorReport(entry: {
 
 export async function clearTenaBallErrorReports(): Promise<void> {
   await AsyncStorage.removeItem(KEYS.TENABALL_ERROR_REPORTS);
+}
+
+export async function getTenaBallAnimationsEnabled(): Promise<boolean> {
+  const val = await AsyncStorage.getItem(KEYS.TENABALL_ANIMATIONS_ENABLED);
+  // Default ON when not yet stored
+  return val !== 'false';
+}
+
+export async function setTenaBallAnimationsEnabled(enabled: boolean): Promise<void> {
+  await AsyncStorage.setItem(KEYS.TENABALL_ANIMATIONS_ENABLED, enabled ? 'true' : 'false');
+}
+
+export async function getTenaBallSoundsEnabled(): Promise<boolean> {
+  const val = await AsyncStorage.getItem(KEYS.TENABALL_SOUNDS_ENABLED);
+  // Default ON when not yet stored
+  return val !== 'false';
+}
+
+export async function setTenaBallSoundsEnabled(enabled: boolean): Promise<void> {
+  await AsyncStorage.setItem(KEYS.TENABALL_SOUNDS_ENABLED, enabled ? 'true' : 'false');
 }

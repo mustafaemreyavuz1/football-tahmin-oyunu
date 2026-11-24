@@ -1,45 +1,87 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { Animated, Platform, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../theme/ThemeContext';
+
+const USE_NATIVE_DRIVER = Platform.OS !== 'web';
 
 interface SlotRowProps {
   rank: number;
   answer: string;
   solved: boolean;
   revealedAtEnd: boolean;
+  highlighted?: boolean;
+  reduceMotion?: boolean;
 }
 
-export function SlotRow({ rank, answer, solved, revealedAtEnd }: SlotRowProps) {
+export function SlotRow({
+  rank,
+  answer,
+  solved,
+  revealedAtEnd,
+  highlighted = false,
+  reduceMotion = false,
+}: SlotRowProps) {
   const { tokens } = useTheme();
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const opacityAnim = useRef(new Animated.Value(1)).current;
+  const prevSolvedRef = useRef(solved);
 
   useEffect(() => {
-    if (solved) {
-      scaleAnim.setValue(0.92);
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        friction: 5,
-        tension: 120,
-        useNativeDriver: true,
-      }).start();
+    const newlySolved = solved && !prevSolvedRef.current;
+    prevSolvedRef.current = solved;
+
+    if (newlySolved && !reduceMotion) {
+      scaleAnim.setValue(0.88);
+      opacityAnim.setValue(0.35);
+      Animated.parallel([
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          friction: 5,
+          tension: 130,
+          useNativeDriver: USE_NATIVE_DRIVER,
+        }),
+        Animated.timing(opacityAnim, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: USE_NATIVE_DRIVER,
+        }),
+      ]).start();
     }
-  }, [solved, scaleAnim]);
+  }, [solved, reduceMotion, scaleAnim, opacityAnim]);
 
   const showAnswer = solved || revealedAtEnd;
+
+  const backgroundColor = highlighted
+    ? tokens.accent
+    : solved
+      ? tokens.accentSoft
+      : revealedAtEnd
+        ? tokens.surfaceElevated
+        : tokens.surface;
+
+  const borderColor = highlighted
+    ? tokens.accentSecondary
+    : solved
+      ? tokens.accent
+      : tokens.border;
+
+  const textColor = highlighted
+    ? tokens.accentText
+    : solved
+      ? tokens.text
+      : tokens.textMuted;
 
   return (
     <Animated.View
       style={[
         styles.row,
         {
-          transform: [{ scale: scaleAnim }],
-          backgroundColor: solved
-            ? tokens.accentSoft
-            : revealedAtEnd
-              ? tokens.surfaceElevated
-              : tokens.surface,
-          borderColor: solved ? tokens.accent : tokens.border,
+          transform: [{ scale: highlighted && !reduceMotion ? 1.02 : scaleAnim }],
+          opacity: opacityAnim,
+          backgroundColor,
+          borderColor,
+          borderWidth: highlighted ? 2 : 1.2,
         },
       ]}
     >
@@ -47,11 +89,13 @@ export function SlotRow({ rank, answer, solved, revealedAtEnd }: SlotRowProps) {
         style={[
           styles.rankBadge,
           {
-            backgroundColor: solved
-              ? tokens.accent
-              : revealedAtEnd
-                ? tokens.neutralTile
-                : tokens.surfaceElevated,
+            backgroundColor: highlighted
+              ? tokens.accentSecondary
+              : solved
+                ? tokens.accent
+                : revealedAtEnd
+                  ? tokens.neutralTile
+                  : tokens.surfaceElevated,
           },
         ]}
       >
@@ -59,11 +103,13 @@ export function SlotRow({ rank, answer, solved, revealedAtEnd }: SlotRowProps) {
           style={[
             styles.rankText,
             {
-              color: solved
-                ? tokens.accentText
-                : revealedAtEnd
-                  ? tokens.neutralTileText
-                  : tokens.textMuted,
+              color: highlighted
+                ? tokens.accentSecondaryText
+                : solved
+                  ? tokens.accentText
+                  : revealedAtEnd
+                    ? tokens.neutralTileText
+                    : tokens.textMuted,
             },
           ]}
         >
@@ -75,12 +121,8 @@ export function SlotRow({ rank, answer, solved, revealedAtEnd }: SlotRowProps) {
         style={[
           styles.answerText,
           {
-            color: solved
-              ? tokens.text
-              : revealedAtEnd
-                ? tokens.textMuted
-                : tokens.textMuted,
-            fontWeight: solved ? '800' : revealedAtEnd ? '600' : '500',
+            color: textColor,
+            fontWeight: solved || highlighted ? '800' : revealedAtEnd ? '600' : '500',
           },
         ]}
         numberOfLines={1}
@@ -89,7 +131,11 @@ export function SlotRow({ rank, answer, solved, revealedAtEnd }: SlotRowProps) {
       </Text>
 
       {solved ? (
-        <Ionicons name="checkmark-circle" size={20} color={tokens.success} />
+        <Ionicons
+          name="checkmark-circle"
+          size={20}
+          color={highlighted ? tokens.accentText : tokens.success}
+        />
       ) : revealedAtEnd ? (
         <Ionicons name="close-circle-outline" size={20} color={tokens.danger} />
       ) : null}
@@ -104,7 +150,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 11,
-    borderWidth: 1.2,
     gap: 12,
   },
   rankBadge: {
