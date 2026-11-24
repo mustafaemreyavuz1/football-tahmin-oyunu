@@ -3,6 +3,7 @@ import {
   DailyCompletionRecord,
   GameId,
   GameStats,
+  TenaBallErrorReport,
   TenaBallQuestion,
   ThemePreference,
 } from '../types';
@@ -15,6 +16,8 @@ const KEYS = {
   DAILY_PREFIX: '@fto/daily/',
   REMOTE_TENABALL_CACHE: '@fto/remote_tenaball_cache',
   REMOTE_TENABALL_UPDATED_AT: '@fto/remote_tenaball_updated_at',
+  ALLOW_UNVERIFIED_TENABALL: '@fto/allow_unverified_tenaball',
+  TENABALL_ERROR_REPORTS: '@fto/tenaball_error_reports',
 };
 
 export function createEmptyStats(): GameStats {
@@ -144,4 +147,44 @@ export async function saveCachedRemoteTenaBall(questions: TenaBallQuestion[]): P
   await AsyncStorage.setItem(KEYS.REMOTE_TENABALL_CACHE, JSON.stringify(questions));
   await AsyncStorage.setItem(KEYS.REMOTE_TENABALL_UPDATED_AT, now);
   return now;
+}
+
+export async function getAllowUnverifiedTenaBall(): Promise<boolean> {
+  const val = await AsyncStorage.getItem(KEYS.ALLOW_UNVERIFIED_TENABALL);
+  return val === 'true';
+}
+
+export async function setAllowUnverifiedTenaBall(allow: boolean): Promise<void> {
+  await AsyncStorage.setItem(KEYS.ALLOW_UNVERIFIED_TENABALL, allow ? 'true' : 'false');
+}
+
+export async function getTenaBallErrorReports(): Promise<TenaBallErrorReport[]> {
+  const raw = await AsyncStorage.getItem(KEYS.TENABALL_ERROR_REPORTS);
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as TenaBallErrorReport[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function addTenaBallErrorReport(entry: {
+  id: string;
+  title: string;
+}): Promise<TenaBallErrorReport[]> {
+  const current = await getTenaBallErrorReports();
+  if (current.some((item) => item.id === entry.id)) {
+    return current;
+  }
+  const next: TenaBallErrorReport[] = [
+    { id: entry.id, title: entry.title, reportedAt: new Date().toISOString() },
+    ...current,
+  ];
+  await AsyncStorage.setItem(KEYS.TENABALL_ERROR_REPORTS, JSON.stringify(next));
+  return next;
+}
+
+export async function clearTenaBallErrorReports(): Promise<void> {
+  await AsyncStorage.removeItem(KEYS.TENABALL_ERROR_REPORTS);
 }

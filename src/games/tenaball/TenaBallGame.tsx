@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { AppContainer } from '../../components/AppContainer';
 import { Header } from '../../components/Header';
 import { ModeToggle } from '../../components/ModeToggle';
@@ -17,9 +17,12 @@ import {
 import { searchGuessPool } from '../../data/playerRepository';
 import { getLocalDateKey } from '../../utils/daily';
 import {
+  addTenaBallErrorReport,
   createEmptyStats,
+  getAllowUnverifiedTenaBall,
   getDailyCompletion,
   getGameStats,
+  getTenaBallErrorReports,
   recordGameResult,
   saveDailyCompletion,
 } from '../../utils/storage';
@@ -44,35 +47,62 @@ export function TenaBallGame() {
   const dateKey = getLocalDateKey();
 
   const [mode, setMode] = useState<GameMode>('daily');
-  const [question, setQuestion] = useState<TenaBallQuestion | null>(() => getDailyTenaBallQuestion());
+  const [allowUnverified, setAllowUnverified] = useState(false);
+  const [question, setQuestion] = useState<TenaBallQuestion | null>(() =>
+    getDailyTenaBallQuestion(new Date(), false)
+  );
   const [gameState, setGameState] = useState<TenaBallState>(createInitialTenaBallState);
   const [inputValue, setInputValue] = useState('');
   const [feedback, setFeedback] = useState<{ text: string; tone: 'success' | 'warn' | 'error' } | null>(null);
+  const [reportedIds, setReportedIds] = useState<Set<string>>(new Set());
 
   const [dailyRecord, setDailyRecord] = useState<DailyCompletionRecord | null>(null);
   const [stats, setStats] = useState<GameStats>(createEmptyStats);
   const [showStats, setShowStats] = useState(false);
   const [showResult, setShowResult] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const [s, d] = await Promise.all([
-        getGameStats('tenaball'),
-        getDailyCompletion('tenaball', dateKey),
-      ]);
-      setStats(s);
-      setDailyRecord(d);
-    })();
-  }, [dateKey]);
+  useFocusEffect(
+    useCallback(() => {
+      let active = true;
+      (async () => {
+        const [s, d, allow, reports] = await Promise.all([
+          getGameStats('tenaball'),
+          getDailyCompletion('tenaball', dateKey),
+          getAllowUnverifiedTenaBall(),
+          getTenaBallErrorReports(),
+        ]);
+        if (!active) return;
+        setStats(s);
+        setDailyRecord(d);
+        setAllowUnverified(allow);
+        setReportedIds(new Set(reports.map((r) => r.id)));
+        setQuestion((prev) => {
+          if (mode === 'daily') {
+            return getDailyTenaBallQuestion(new Date(), allow);
+          }
+          if (!prev || (!allow && !prev.verified)) {
+            return getRandomTenaBallQuestion(undefined, allow);
+          }
+          return prev;
+        });
+      })();
+      return () => {
+        active = false;
+      };
+    }, [dateKey, mode])
+  );
 
-  const startUnlimitedRound = useCallback((excludeId?: string) => {
-    setMode('unlimited');
-    setQuestion(getRandomTenaBallQuestion(excludeId));
-    setGameState(createInitialTenaBallState());
-    setInputValue('');
-    setFeedback(null);
-    setShowResult(false);
-  }, []);
+  const startUnlimitedRound = useCallback(
+    (excludeId?: string) => {
+      setMode('unlimited');
+      setQuestion(getRandomTenaBallQuestion(excludeId, allowUnverified));
+      setGameState(createInitialTenaBallState());
+      setInputValue('');
+      setFeedback(null);
+      setShowResult(false);
+    },
+    [allowUnverified]
+  );
 
   const handleModeChange = (nextMode: GameMode) => {
     if (nextMode === mode) return;
@@ -81,12 +111,18 @@ export function TenaBallGame() {
     setFeedback(null);
     setShowResult(false);
     if (nextMode === 'daily') {
-      setQuestion(getDailyTenaBallQuestion());
+      setQuestion(getDailyTenaBallQuestion(new Date(), allowUnverified));
       setGameState(createInitialTenaBallState());
     } else {
-      setQuestion(getRandomTenaBallQuestion(question?.id));
+      setQuestion(getRandomTenaBallQuestion(question?.id, allowUnverified));
       setGameState(createInitialTenaBallState());
     }
+  };
+
+  const handleReportError = async () => {
+    if (!question) return;
+    const next = await addTenaBallErrorReport({ id: question.id, title: question.title });
+    setReportedIds(new Set(next.map((r) => r.id)));
   };
 
   const isDailyLocked = mode === 'daily' && Boolean(dailyRecord);
@@ -220,18 +256,26 @@ export function TenaBallGame() {
             </Text>
             <View style={styles.emptyButtons}>
               <Pressable
-                onPress={() => router.replace('/games/who-are-ya')}
+                onPress={() => router.push('/settings')}
                 style={[styles.emptyBtn, { backgroundColor: tokens.accent }]}
               >
                 <Text style={[styles.emptyBtnText, { color: tokens.accentText }]}>
+                  Ayarlar&apos;dan Doğrulanmamış Listeleri Aç
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => router.replace('/games/who-are-ya')}
+                style={[styles.emptyBtn, { backgroundColor: tokens.footballGreen }]}
+              >
+                <Text style={[styles.emptyBtnText, { color: tokens.footballGreenText }]}>
                   Who Are Ya Oyna
                 </Text>
               </Pressable>
               <Pressable
                 onPress={() => router.replace('/games/wordle')}
-                style={[styles.emptyBtn, { backgroundColor: tokens.footballGreen }]}
+                style={[styles.emptyBtn, { backgroundColor: tokens.surfaceElevated }]}
               >
-                <Text style={[styles.emptyBtnText, { color: tokens.footballGreenText }]}>
+                <Text style={[styles.emptyBtnText, { color: tokens.text }]}>
                   Football Wordle Oyna
                 </Text>
               </Pressable>
@@ -295,10 +339,9 @@ export function TenaBallGame() {
               </Text>
             </View>
             {!question.verified && (
-              <View style={[styles.badge, { backgroundColor: tokens.surfaceElevated }]}>
-                <Text style={[styles.badgeText, { color: tokens.textMuted }]}>
-                  Veri: {question.asOf}
-                </Text>
+              <View style={[styles.unverifiedBadge, { backgroundColor: tokens.warning }]}>
+                <Ionicons name="warning-outline" size={13} color="#FFFFFF" />
+                <Text style={styles.unverifiedBadgeText}>Doğrulanmamış liste</Text>
               </View>
             )}
           </View>
@@ -389,16 +432,49 @@ export function TenaBallGame() {
           ))}
         </View>
 
-        {mode === 'unlimited' && isFinished && (
-          <Pressable
-            onPress={() => startUnlimitedRound(question.id)}
-            style={[styles.nextBtn, { backgroundColor: tokens.footballGreen }]}
-          >
-            <Ionicons name="refresh" size={18} color={tokens.footballGreenText} />
-            <Text style={[styles.nextBtnText, { color: tokens.footballGreenText }]}>
-              Yeni TenaBall Sorusu
-            </Text>
-          </Pressable>
+        {isFinished && (
+          <View style={styles.endActions}>
+            <Pressable
+              onPress={handleReportError}
+              disabled={reportedIds.has(question.id)}
+              style={[
+                styles.reportInlineBtn,
+                {
+                  backgroundColor: tokens.surface,
+                  borderColor: reportedIds.has(question.id) ? tokens.success : tokens.border,
+                  opacity: reportedIds.has(question.id) ? 0.8 : 1,
+                },
+              ]}
+            >
+              <Ionicons
+                name={reportedIds.has(question.id) ? 'checkmark-circle-outline' : 'flag-outline'}
+                size={16}
+                color={reportedIds.has(question.id) ? tokens.success : tokens.danger}
+              />
+              <Text
+                style={[
+                  styles.reportInlineText,
+                  { color: reportedIds.has(question.id) ? tokens.success : tokens.text },
+                ]}
+              >
+                {reportedIds.has(question.id)
+                  ? `Hata Bildirildi (${question.id})`
+                  : 'Bu listede hata var'}
+              </Text>
+            </Pressable>
+
+            {mode === 'unlimited' && (
+              <Pressable
+                onPress={() => startUnlimitedRound(question.id)}
+                style={[styles.nextBtn, { backgroundColor: tokens.footballGreen }]}
+              >
+                <Ionicons name="refresh" size={18} color={tokens.footballGreenText} />
+                <Text style={[styles.nextBtnText, { color: tokens.footballGreenText }]}>
+                  Yeni TenaBall Sorusu
+                </Text>
+              </Pressable>
+            )}
+          </View>
         )}
       </ScrollView>
 
@@ -426,6 +502,13 @@ export function TenaBallGame() {
             : `${gameState.solvedIndices.length} / 10 oyuncuyu doğru bildin.`
         }
         shareText={shareText}
+        reportAction={{
+          label: reportedIds.has(question.id)
+            ? `Hata Bildirildi (${question.id})`
+            : 'Bu listede hata var',
+          reported: reportedIds.has(question.id),
+          onPress: handleReportError,
+        }}
         onPlayUnlimited={() => startUnlimitedRound(question.id)}
         playUnlimitedLabel={mode === 'daily' ? 'Sınırsız Modda Devam Et' : 'Yeni Soru Oyna'}
       />
@@ -464,6 +547,36 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: 11.5,
+    fontWeight: '700',
+  },
+  unverifiedBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 999,
+  },
+  unverifiedBadgeText: {
+    fontSize: 11.5,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  endActions: {
+    gap: 10,
+    marginTop: 6,
+  },
+  reportInlineBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 11,
+    borderRadius: 11,
+    borderWidth: 1,
+  },
+  reportInlineText: {
+    fontSize: 13.5,
     fontWeight: '700',
   },
   questionTitle: {

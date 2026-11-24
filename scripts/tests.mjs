@@ -140,6 +140,23 @@ for (const p of puzzlePool) {
   );
 }
 
+// 5. TenaBall verified / hidden filtering rules
+const tenaball = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'tenaball.json'), 'utf8'));
+const filterPlayable = (list, includeUnverified) =>
+  list.filter((q) => !q.hidden && (includeUnverified || q.verified === true));
+
+const strictPlayable = filterPlayable(tenaball, false);
+const withUnverified = filterPlayable(tenaball, true);
+assert.ok(
+  withUnverified.every((q) => !q.hidden),
+  'hidden: true lists must NEVER appear even when includeUnverified is true'
+);
+assert.ok(
+  strictPlayable.every((q) => q.verified === true && !q.hidden),
+  'Strict mode must only return verified: true and non-hidden lists'
+);
+assert.equal(withUnverified.length, 186, 'Expected 186 non-hidden active TenaBall lists');
+
 console.log(
-  `All unit tests passed! (puzzlePool: ${puzzlePool.length}, guessPool: ${guessRows.length}, Wordle-eligible: ${validWordleCount})`
+  `All unit tests passed! (puzzlePool: ${puzzlePool.length}, guessPool: ${guessRows.length}, Wordle-eligible: ${validWordleCount}, TenaBall active: ${withUnverified.length})`
 );

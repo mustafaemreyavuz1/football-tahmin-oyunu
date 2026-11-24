@@ -16,10 +16,15 @@ export function getAllTenaBallQuestions(): TenaBallQuestion[] {
 }
 
 /**
- * Only returns TenaBall lists that are verified (verified === true) and not hidden.
+ * Returns playable TenaBall lists.
+ * - hidden: true lists are ALWAYS excluded regardless of settings.
+ * - When includeUnverified is false (default), only verified: true lists are returned.
+ * - When includeUnverified is true, both verified and unverified non-hidden lists are returned.
  */
-export function getPlayableTenaBallQuestions(): TenaBallQuestion[] {
-  return activeQuestions.filter((q) => q.verified === true && !q.hidden);
+export function getPlayableTenaBallQuestions(includeUnverified: boolean = false): TenaBallQuestion[] {
+  return activeQuestions.filter(
+    (q) => !q.hidden && (includeUnverified || q.verified === true)
+  );
 }
 
 export function getTenaBallCounts() {
@@ -45,18 +50,25 @@ export async function refreshTenaBallQuestions(): Promise<RemoteSyncStatus> {
   return syncStatus;
 }
 
-export function getDailyTenaBallQuestion(date: Date = new Date()): TenaBallQuestion | null {
-  const playable = getPlayableTenaBallQuestions();
+export function getDailyTenaBallQuestion(
+  date: Date = new Date(),
+  includeUnverified: boolean = false
+): TenaBallQuestion | null {
+  const playable = getPlayableTenaBallQuestions(includeUnverified);
   if (playable.length === 0) return null;
   const idx = getDailyPuzzleIndex('tenaball', playable.length, date);
   return playable[idx];
 }
 
-export function getRandomTenaBallQuestion(excludeId?: string): TenaBallQuestion | null {
-  const playable = getPlayableTenaBallQuestions();
+export function getRandomTenaBallQuestion(
+  excludeId?: string,
+  includeUnverified: boolean = false
+): TenaBallQuestion | null {
+  const playable = getPlayableTenaBallQuestions(includeUnverified);
   if (playable.length === 0) return null;
-  const pool = excludeId && playable.length > 1
-    ? playable.filter((q) => q.id !== excludeId)
-    : playable;
+  const pool =
+    excludeId && playable.length > 1
+      ? playable.filter((q) => q.id !== excludeId)
+      : playable;
   return pool[Math.floor(Math.random() * pool.length)];
 }

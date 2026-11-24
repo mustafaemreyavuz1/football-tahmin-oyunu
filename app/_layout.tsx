@@ -50,6 +50,7 @@ function RootNavigator() {
         <Stack.Screen name="index" />
         <Stack.Screen name="onboarding" />
         <Stack.Screen name="settings" />
+        <Stack.Screen name="attributions" />
         <Stack.Screen name="games/tenaball" />
         <Stack.Screen name="games/who-are-ya" />
         <Stack.Screen name="games/wordle" />

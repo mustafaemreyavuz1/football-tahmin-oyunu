@@ -95,9 +95,11 @@ export function BlurredPlayerPhoto({
         )}
       </Animated.View>
 
-      <Text style={[styles.attribution, { color: tokens.textMuted }]} numberOfLines={2}>
-        Görsel: {player.imageAttribution} ({player.imageLicense})
-      </Text>
+      {revealed ? (
+        <Text style={[styles.attribution, { color: tokens.textMuted }]} numberOfLines={2}>
+          Görsel: {player.imageAttribution} ({player.imageLicense})
+        </Text>
+      ) : null}
     </View>
   );
 }

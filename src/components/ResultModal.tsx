@@ -11,6 +11,12 @@ interface ResultModalProps {
   title: string;
   subtitle: string;
   shareText: string;
+  attributionText?: string;
+  reportAction?: {
+    label: string;
+    reported: boolean;
+    onPress: () => void;
+  };
   onPlayUnlimited?: () => void;
   playUnlimitedLabel?: string;
 }
@@ -22,6 +28,8 @@ export function ResultModal({
   title,
   subtitle,
   shareText,
+  attributionText,
+  reportAction,
   onPlayUnlimited,
   playUnlimitedLabel = 'Yeni Bulmaca Oyna',
 }: ResultModalProps) {
@@ -62,6 +70,12 @@ export function ResultModal({
             <Text style={[styles.previewText, { color: tokens.text }]}>{shareText}</Text>
           </View>
 
+          {attributionText ? (
+            <Text style={[styles.attributionText, { color: tokens.textMuted }]}>
+              {attributionText}
+            </Text>
+          ) : null}
+
           {shareFeedback ? (
             <Text style={[styles.feedback, { color: tokens.success }]}>{shareFeedback}</Text>
           ) : null}
@@ -94,6 +108,35 @@ export function ResultModal({
                 <Ionicons name="refresh" size={18} color={tokens.footballGreenText} />
                 <Text style={[styles.secondaryBtnText, { color: tokens.footballGreenText }]}>
                   {playUnlimitedLabel}
+                </Text>
+              </Pressable>
+            ) : null}
+
+            {reportAction ? (
+              <Pressable
+                onPress={reportAction.onPress}
+                disabled={reportAction.reported}
+                style={({ pressed }) => [
+                  styles.reportBtn,
+                  {
+                    backgroundColor: tokens.surfaceElevated,
+                    borderColor: reportAction.reported ? tokens.success : tokens.border,
+                    opacity: reportAction.reported ? 0.8 : pressed ? 0.75 : 1,
+                  },
+                ]}
+              >
+                <Ionicons
+                  name={reportAction.reported ? 'checkmark-circle-outline' : 'flag-outline'}
+                  size={16}
+                  color={reportAction.reported ? tokens.success : tokens.danger}
+                />
+                <Text
+                  style={[
+                    styles.reportBtnText,
+                    { color: reportAction.reported ? tokens.success : tokens.text },
+                  ]}
+                >
+                  {reportAction.label}
                 </Text>
               </Pressable>
             ) : null}
@@ -195,5 +238,24 @@ const styles = StyleSheet.create({
   closeBtnText: {
     fontSize: 14,
     fontWeight: '600',
+  },
+  attributionText: {
+    fontSize: 11.5,
+    lineHeight: 16,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  reportBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 10,
+    borderRadius: 11,
+    borderWidth: 1,
+  },
+  reportBtnText: {
+    fontSize: 13,
+    fontWeight: '700',
   },
 });

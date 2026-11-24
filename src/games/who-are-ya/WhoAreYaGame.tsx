@@ -351,6 +351,7 @@ export function WhoAreYaGame() {
         }
         subtitle={`Futbolcu: ${target.name} (${target.nationality} • ${target.position})`}
         shareText={shareText}
+        attributionText={`Görsel Atıfı: ${target.imageAttribution} (${target.imageLicense})`}
         onPlayUnlimited={() => startUnlimited(target.id)}
         playUnlimitedLabel={mode === 'daily' ? 'Sınırsız Modda Devam Et' : 'Yeni Futbolcu Oyna'}
       />

@@ -73,6 +73,12 @@ export interface DailyCompletionRecord {
   completedAt: string;
 }
 
+export interface TenaBallErrorReport {
+  id: string;
+  title: string;
+  reportedAt: string;
+}
+
 export interface RemoteSyncStatus {
   source: 'remote' | 'cache' | 'bundled';
   questionCount: number;
