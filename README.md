@@ -213,4 +213,4 @@ GitHub deponuzu oluşturduktan sonra `YOUR_GITHUB_USERNAME` kısmını kendi Git
 
 ## Lisans
 
-Bu proje [LICENSE](./LICENSE) dosyasında belirtilen MIT Lisansı (yer tutucu) kapsamındadır.
+Kod MIT lisanslıdır ([LICENSE](./LICENSE)). Oyuncu verisi Wikidata'dan (CC0), görseller Wikimedia Commons'tan kendi lisanslarıyla alınmıştır; atıflar uygulamada gösterilir.
