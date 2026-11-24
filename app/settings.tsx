@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect, useRouter } from 'expo-router';
+import { Href, useFocusEffect, useRouter } from 'expo-router';
 import { AppContainer } from '../src/components/AppContainer';
 import { Header } from '../src/components/Header';
 import { SearchInput } from '../src/components/SearchInput';
@@ -373,7 +373,7 @@ export default function SettingsScreen() {
             aşağıdaki Görsel Atıfları sayfasında eksiksiz olarak gösterilir.
           </Text>
           <Pressable
-            onPress={() => router.push('/attributions')}
+            onPress={() => router.push('/attributions' as Href)}
             style={[styles.attributionsBtn, { backgroundColor: tokens.accent }]}
           >
             <Ionicons name="images-outline" size={16} color={tokens.accentText} />
