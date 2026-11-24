@@ -45,11 +45,13 @@ npm run android
 
 ### Doğrulama ve Test Scriptleri
 ```bash
-npm run typecheck         # TypeScript tip kontrolü
-npm run validate:data     # teams.json, players.json ve tenaball.json şema kontrolü
-npm run verify:tenaball   # Kaç TenaBall listesinin henüz doğrulanmadığını raporlar
-npm test                  # Birim testleri (normalizasyon, Wordle, günlük döngü)
-npm run export:web        # Üretim Web derlemesi (dist/)
+npm run typecheck                 # TypeScript tip kontrolü
+npm run validate:data             # teams.json, puzzlePool.json, guessPool.json ve tenaball.json doğrulaması
+npm run check:tenaball-coverage   # tenaball.json cevaplarının guessPool kapsamını raporlar
+npm run verify:tenaball           # Kaç TenaBall listesinin henüz doğrulanmadığını raporlar
+npm run fetch:wikidata            # Wikidata SPARQL & Wikimedia Commons'tan havuzları yeniler
+npm test                          # Birim testleri (normalizasyon, Wordle, günlük döngü, havuz bütünlüğü)
+npm run export:web                # Üretim Web derlemesi (dist/)
 ```
 
 ---
@@ -71,10 +73,11 @@ football-tahmin-oyunu/
 │   ├── components/              # AppContainer, Header, SearchInput, ModeToggle, StatsModal, ResultModal, TeamColorDot
 │   ├── data/
 │   │   ├── teams.json           # 6 ligden 115 kulüp (yalnızca renk verisi)
-│   │   ├── players.json         # 225 futbolcu (Who Are Ya & Wordle ortak havuzu)
+│   │   ├── puzzlePool.json      # Fotoğrafı, lisansı ve atıfı doğrulanmış 200-300 futbolcu (Who Are Ya & Wordle cevapları)
+│   │   ├── guessPool.json       # Wikidata CC0 kaynaklı 2000+ futbolcu (hafif tuple formatı, arama/doğrulama havuzu)
 │   │   ├── tenaball.json        # 200 TenaBall Top 10 sorusu
 │   │   ├── teamRepository.ts
-│   │   ├── playerRepository.ts
+│   │   ├── playerRepository.ts  # İki havuzlu katman + tembel (lazy) 2-harf önek arama indeksi + O(1) Wordle Set
 │   │   ├── tenaballRepository.ts
 │   │   └── remoteSync.ts        # Uzak GitHub JSON indirme & şema doğrulama
 │   ├── games/
@@ -94,11 +97,48 @@ football-tahmin-oyunu/
 
 ---
 
-## Veri Kaynakları ve Görsel Atıfları
+## Veri Kaynakları, Wikidata Sorgusu ve Görsel Atıfları
 
-- **Futbolcu Fotoğrafları**: `src/data/players.json` içindeki tüm görsel referansları **Wikimedia Commons** (`Special:FilePath`) üzerinden **Creative Commons (CC BY / CC BY-SA)** veya **Public Domain** lisanslarıyla tanımlıdır. Her görselin lisans ve kaynak bilgisi hem `players.json` içinde saklanır hem de Who Are Ya ekranında doğrudan fotoğrafın altında gösterilir.
-- **Kulüp Verileri**: `src/data/teams.json` dosyasında hiçbir kulüp logosu veya arması yer almaz; yalnızca resmi forma/kulüp renkleri (`primaryColor`, `secondaryColor`) kullanılır.
-- **TenaBall Listeleri**: Tüm sorular `verified: false` ve `sourceUrl` + `asOf` alanlarıyla gelir. Bir insan tarafından ilgili kaynak URL'si üzerinden doğrulanan listeler `verified: true` olarak güncellenmelidir.
+- **İki Havuzlu Oyuncu Veri Modeli**:
+  - **`src/data/puzzlePool.json`** (200–300 futbolcu): Fotoğrafı, lisansı ve atıfı Wikimedia Commons API (`imageinfo&iiprop=extmetadata`) ve Wikidata `P18` üzerinden doğrulanmış oyuncular. **Who Are Ya** ve **Football Wordle** cevapları yalnızca bu havuzdan seçilir.
+  - **`src/data/guessPool.json`** (2000+ futbolcu): Hafif tuple formatında (`[id, name, surname, nationality, position, clubs, birthYear]`) tutulan, aksan ve büyük/küçük harf farklarına göre tekilleştirilmiş arama ve doğrulama havuzu. `puzzlePool` oyuncularının tamamı `guessPool` içinde de yer alır. Açılışta ek maliyet oluşturmaz; ilk aramada 2 karakterli önek kovalarıyla (prefix bucket) indekslenir.
+- **Wikidata Kaynak & Lisans Bilgisi**:
+  - **Kaynak**: Wikidata SPARQL Endpoint (`https://query.wikidata.org/sparql`) & MediaWiki API (`wbsearchentities`)
+  - **Lisans**: **CC0 1.0 Universal (Public Domain Dedication)** — Wikidata yapısal verileri kamu malıdır.
+  - **Veri Çekim Tarihi**: `puzzlePool.json` ve `guessPool.json` içindeki `meta.fetchedAt` alanında saklanır (yenilemek için `npm run fetch:wikidata`).
+  - **Kullanılan Temel SPARQL Sorgusu** (Süper Lig `Q485568`, Premier League `Q9448`, La Liga `Q324867`, Serie A `Q15804`, Bundesliga `Q82595`, Ligue 1 `Q13394`, Eredivisie `Q167541`, Primeira Liga `Q182994` için):
+    ```sparql
+    SELECT ?player ?playerLabel
+           (SAMPLE(?countryLabel) AS ?countryName)
+           (SAMPLE(?posLabel) AS ?posName)
+           (SAMPLE(?clubLabel) AS ?clubName)
+           (SAMPLE(YEAR(?dob)) AS ?birthYear)
+           (SAMPLE(?img) AS ?image)
+    WHERE {
+      ?club wdt:P118 wd:<LEAGUE_QID> .
+      ?player wdt:P54 ?club ;
+              wdt:P106 wd:Q937857 ;
+              wdt:P31 wd:Q5 ;
+              wikibase:sitelinks ?sl .
+      FILTER(?sl >= 15)
+      OPTIONAL { ?player wdt:P27 ?country . }
+      OPTIONAL { ?player wdt:P413 ?pos . }
+      OPTIONAL { ?player wdt:P569 ?dob . }
+      OPTIONAL { ?player wdt:P18 ?img . }
+      SERVICE wikibase:label {
+        bd:serviceParam wikibase:language "tr,en" .
+        ?player rdfs:label ?playerLabel .
+        ?country rdfs:label ?countryLabel .
+        ?pos rdfs:label ?posLabel .
+        ?club rdfs:label ?clubLabel .
+      }
+    }
+    GROUP BY ?player ?playerLabel
+    LIMIT 650
+    ```
+- **Futbolcu Fotoğrafları**: `puzzlePool.json` içindeki tüm görseller **Wikimedia Commons** (`Special:FilePath`) üzerinden **Creative Commons (CC BY / CC BY-SA)**, **GFDL** veya **Public Domain** lisanslarıyla doğrulanmıştır. Her görselin lisans ve sanatçı/kaynak atıfı Who Are Ya ekranında doğrudan fotoğrafın altında gösterilir.
+- **Kulüp Verileri**: `src/data/teams.json` dosyasında hiçbir kulüp logosu veya arması yer almaz; yalnızca kulüp renkleri (`primaryColor`, `secondaryColor`) kullanılır.
+- **TenaBall Listeleri**: Tüm sorular `verified: false` ve `sourceUrl` + `asOf` alanlarıyla gelir. Bir insan tarafından ilgili kaynak URL'si üzerinden doğrulanan listeler `verified: true` olarak güncellenmelidir. `npm run check:tenaball-coverage` ile tüm cevapların `guessPool` kapsamı kontrol edilir.
 
 ---
 

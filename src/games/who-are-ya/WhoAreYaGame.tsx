@@ -8,12 +8,12 @@ import { SearchInput, SearchSuggestion } from '../../components/SearchInput';
 import { StatsModal } from '../../components/StatsModal';
 import { ResultModal } from '../../components/ResultModal';
 import { useTheme } from '../../theme/ThemeContext';
-import { DailyCompletionRecord, GameMode, GameStats, Player } from '../../types';
+import { DailyCompletionRecord, GameMode, GameStats, GuessPlayer, PuzzlePlayer } from '../../types';
 import {
   getDailyWhoAreYaPlayer,
-  getPlayerById,
+  getGuessPlayerById,
   getRandomWhoAreYaPlayer,
-  searchPlayers,
+  searchGuessPool,
 } from '../../data/playerRepository';
 import { getLocalDateKey } from '../../utils/daily';
 import {
@@ -37,7 +37,7 @@ export function WhoAreYaGame() {
   const dateKey = getLocalDateKey();
 
   const [mode, setMode] = useState<GameMode>('daily');
-  const [target, setTarget] = useState<Player>(() => getDailyWhoAreYaPlayer());
+  const [target, setTarget] = useState<PuzzlePlayer>(() => getDailyWhoAreYaPlayer());
   const [guesses, setGuesses] = useState<WhoAreYaGuessFeedback[]>([]);
   const [status, setStatus] = useState<'playing' | 'won' | 'lost'>('playing');
   const [query, setQuery] = useState('');
@@ -91,7 +91,7 @@ export function WhoAreYaGame() {
 
   const suggestions: SearchSuggestion[] = useMemo(() => {
     if (!query.trim()) return [];
-    return searchPlayers(query, 7)
+    return searchGuessPool(query, 8)
       .filter((p) => !guessedIds.has(p.id))
       .map((p) => ({
         id: p.id,
@@ -114,7 +114,7 @@ export function WhoAreYaGame() {
     );
   }, [isDailyLocked, dailyRecord, mode, dateKey, guesses, status]);
 
-  const submitPlayerGuess = async (player: Player) => {
+  const submitPlayerGuess = async (player: GuessPlayer) => {
     if (isFinished) return;
     if (guessedIds.has(player.id)) {
       setNotice('Bu futbolcuyu zaten denedin.');
@@ -167,7 +167,7 @@ export function WhoAreYaGame() {
   };
 
   const handleSelectSuggestion = (item: SearchSuggestion) => {
-    const player = getPlayerById(item.id);
+    const player = getGuessPlayerById(item.id);
     if (player) {
       submitPlayerGuess(player);
     }
@@ -295,13 +295,17 @@ export function WhoAreYaGame() {
                     />
                     <FeedbackChip
                       label="Doğum"
-                      value={`${g.guessedPlayer.birthYear} ${
-                        g.birthYearComparison === 'exact'
-                          ? '✓'
-                          : g.birthYearComparison === 'higher'
-                            ? '↑'
-                            : '↓'
-                      }`}
+                      value={
+                        typeof g.guessedPlayer.birthYear === 'number'
+                          ? `${g.guessedPlayer.birthYear} ${
+                              g.birthYearComparison === 'exact'
+                                ? '✓'
+                                : g.birthYearComparison === 'higher'
+                                  ? '↑'
+                                  : '↓'
+                            }`
+                          : '—'
+                      }
                       match={g.birthYearComparison === 'exact'}
                     />
                     <FeedbackChip

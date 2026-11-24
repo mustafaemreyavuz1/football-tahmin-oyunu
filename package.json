@@ -10,6 +10,9 @@
     "web": "expo start --web",
     "export:web": "expo export --platform web",
     "typecheck": "tsc --noEmit",
+    "fetch:wikidata": "node scripts/fetch-wikidata-players.mjs",
+    "enrich:tenaball": "node scripts/enrich-tenaball-from-wikidata.mjs",
+    "check:tenaball-coverage": "node scripts/check-tenaball-coverage.mjs",
     "verify:tenaball": "node scripts/verify-tenaball.mjs",
     "validate:data": "node scripts/validate-datasets.mjs",
     "test": "node scripts/tests.mjs"

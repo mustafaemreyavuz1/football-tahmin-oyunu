@@ -5,8 +5,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = path.resolve(__dirname, '../src/data');
 
-// Self-contained test harness mirroring core pure logic
 const CHAR_MAP = {
   ı: 'i', İ: 'i', I: 'i', ğ: 'g', Ğ: 'g', ş: 's', Ş: 's',
   ç: 'c', Ç: 'c', ö: 'o', Ö: 'o', ü: 'u', Ü: 'u',
@@ -104,14 +104,42 @@ for (let d = 0; d < 200; d += 1) {
 }
 assert.equal(seen.size, 200, 'Daily cycle must visit every puzzle once without repeating');
 
-// 4. Verify every Wordle player produces a valid 3..14 char target
-const players = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../src/data/players.json'), 'utf8')
+// 4. Two-pool integrity & deduplication tests
+const puzzlePoolData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'puzzlePool.json'), 'utf8'));
+const guessPoolData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'guessPool.json'), 'utf8'));
+
+const puzzlePool = puzzlePoolData.players;
+const guessRows = guessPoolData.rows;
+
+assert.ok(
+  puzzlePool.length >= 200 && puzzlePool.length <= 300,
+  `puzzlePool must be 200..300, got ${puzzlePool.length}`
 );
-const validWordleCount = players.filter((p) => {
+assert.ok(
+  guessRows.length >= 2000,
+  `guessPool must be >= 2000, got ${guessRows.length}`
+);
+
+const validWordleCount = puzzlePool.filter((p) => {
   const w = normalizeForWordle(p.surname);
   return w.length >= 3 && w.length <= 14;
 }).length;
-assert.ok(validWordleCount >= 200, `Expected >=200 Wordle players, got ${validWordleCount}`);
+assert.ok(validWordleCount >= 200, `Expected >=200 Wordle players in puzzlePool, got ${validWordleCount}`);
 
-console.log(`All unit tests passed! (${validWordleCount} Wordle-eligible players verified)`);
+const guessNormSet = new Set();
+for (const row of guessRows) {
+  const k = normalizeText(row[1]);
+  assert.ok(!guessNormSet.has(k), `Duplicate normalized player in guessPool: ${row[1]}`);
+  guessNormSet.add(k);
+}
+
+for (const p of puzzlePool) {
+  assert.ok(
+    guessNormSet.has(normalizeText(p.name)),
+    `puzzlePool player missing from guessPool: ${p.name}`
+  );
+}
+
+console.log(
+  `All unit tests passed! (puzzlePool: ${puzzlePool.length}, guessPool: ${guessRows.length}, Wordle-eligible: ${validWordleCount})`
+);

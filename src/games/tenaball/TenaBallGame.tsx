@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AppContainer } from '../../components/AppContainer';
 import { Header } from '../../components/Header';
 import { ModeToggle } from '../../components/ModeToggle';
-import { SearchInput } from '../../components/SearchInput';
+import { SearchInput, SearchSuggestion } from '../../components/SearchInput';
 import { StatsModal } from '../../components/StatsModal';
 import { ResultModal } from '../../components/ResultModal';
 import { useTheme } from '../../theme/ThemeContext';
@@ -13,6 +13,7 @@ import {
   getDailyTenaBallQuestion,
   getRandomTenaBallQuestion,
 } from '../../data/tenaballRepository';
+import { searchGuessPool } from '../../data/playerRepository';
 import { getLocalDateKey } from '../../utils/daily';
 import {
   createEmptyStats,
@@ -106,9 +107,19 @@ export function TenaBallGame() {
     );
   }, [isDailyLocked, dailyRecord, mode, dateKey, question.title, solvedFlags, gameState.livesLeft]);
 
-  const handleGuessSubmit = async () => {
+  const suggestions: SearchSuggestion[] = useMemo(() => {
+    if (!inputValue.trim() || isFinished) return [];
+    return searchGuessPool(inputValue, 6).map((p) => ({
+      id: p.id,
+      label: p.name,
+      sublabel: `${p.nationality} • ${p.position}`,
+    }));
+  }, [inputValue, isFinished]);
+
+  const handleGuessSubmit = async (overrideGuess?: string) => {
     if (isFinished) return;
-    const outcome = submitTenaBallGuess(gameState, inputValue, question.answers);
+    const rawGuess = overrideGuess ?? inputValue;
+    const outcome = submitTenaBallGuess(gameState, rawGuess, question.answers);
     setInputValue('');
 
     if (outcome.type === 'ignored') return;
@@ -243,7 +254,9 @@ export function TenaBallGame() {
               value={inputValue}
               onChangeText={setInputValue}
               placeholder="Futbolcu adı veya soyadı yaz..."
-              onSubmit={handleGuessSubmit}
+              suggestions={suggestions}
+              onSelectSuggestion={(item) => handleGuessSubmit(item.label)}
+              onSubmit={() => handleGuessSubmit()}
               submitLabel="Tahmin"
               disabled={isFinished}
             />

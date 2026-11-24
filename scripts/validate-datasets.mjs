@@ -6,11 +6,37 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = path.resolve(__dirname, '../src/data');
 
+const CHAR_MAP = {
+  ı: 'i', İ: 'i', I: 'i', ğ: 'g', Ğ: 'g', ş: 's', Ş: 's',
+  ç: 'c', Ç: 'c', ö: 'o', Ö: 'o', ü: 'u', Ü: 'u',
+  ø: 'o', Ø: 'o', đ: 'd', Đ: 'd', ł: 'l', Ł: 'l',
+  ß: 'ss', æ: 'ae', Æ: 'ae', œ: 'oe', Œ: 'oe',
+};
+
+function normalizeText(input) {
+  if (!input) return '';
+  let out = '';
+  for (const ch of input) out += CHAR_MAP[ch] ?? ch;
+  return out
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/['’`´.-]/g, ' ')
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 const teams = JSON.parse(fs.readFileSync(path.join(dataDir, 'teams.json'), 'utf8'));
-const players = JSON.parse(fs.readFileSync(path.join(dataDir, 'players.json'), 'utf8'));
+const puzzlePoolData = JSON.parse(fs.readFileSync(path.join(dataDir, 'puzzlePool.json'), 'utf8'));
+const guessPoolData = JSON.parse(fs.readFileSync(path.join(dataDir, 'guessPool.json'), 'utf8'));
 const tenaball = JSON.parse(fs.readFileSync(path.join(dataDir, 'tenaball.json'), 'utf8'));
 
+const puzzlePool = puzzlePoolData.players;
+const guessPool = guessPoolData.rows;
+
 const errors = [];
+const warnings = [];
 
 // 1. Validate teams
 const requiredLeagues = ['Süper Lig', 'Premier League', 'La Liga', 'Serie A', 'Bundesliga', 'Ligue 1'];
@@ -35,39 +61,126 @@ for (const lg of requiredLeagues) {
   }
 }
 
-// 2. Validate players
-if (players.length < 200) {
-  errors.push(`Expected at least 200 players, got ${players.length}`);
+// 2. Validate puzzlePool (200-300 verified players with images, license, attribution)
+if (puzzlePool.length < 200 || puzzlePool.length > 300) {
+  errors.push(`Expected puzzlePool size between 200 and 300, got ${puzzlePool.length}`);
 }
-const playerIds = new Set();
-for (const p of players) {
-  if (!p.id || playerIds.has(p.id)) errors.push(`Player duplicate/missing id: ${p.id}`);
-  playerIds.add(p.id);
+const puzzleIds = new Set();
+const puzzleNormNames = new Set();
+let puzzleDuplicates = 0;
+
+for (const p of puzzlePool) {
+  if (!p.id || puzzleIds.has(p.id)) errors.push(`puzzlePool duplicate/missing id: ${p.id}`);
+  puzzleIds.add(p.id);
+
+  const norm = normalizeText(p.name);
+  if (puzzleNormNames.has(norm)) {
+    puzzleDuplicates += 1;
+    errors.push(`puzzlePool duplicate normalized name: ${p.name}`);
+  }
+  puzzleNormNames.add(norm);
+
   for (const field of ['name', 'surname', 'nationality', 'position', 'imageFile', 'imageLicense', 'imageAttribution']) {
     if (typeof p[field] !== 'string' || !p[field].trim()) {
-      errors.push(`Player ${p.id} missing ${field}`);
+      errors.push(`puzzlePool ${p.id} missing ${field}`);
     }
   }
   if (!Array.isArray(p.clubs) || p.clubs.length === 0) {
-    errors.push(`Player ${p.id} missing clubs`);
+    errors.push(`puzzlePool ${p.id} missing clubs`);
   }
   if (typeof p.birthYear !== 'number' || p.birthYear < 1920 || p.birthYear > 2012) {
-    errors.push(`Player ${p.id} invalid birthYear: ${p.birthYear}`);
+    errors.push(`puzzlePool ${p.id} invalid birthYear: ${p.birthYear}`);
   }
 }
 
-// 3. Validate TenaBall
+// 3. Validate guessPool (2000+ players, lightweight tuple format, deduped, superset of puzzlePool)
+if (guessPool.length < 2000) {
+  errors.push(`Expected guessPool size >= 2000, got ${guessPool.length}`);
+}
+const guessIds = new Set();
+const guessNormNames = new Set();
+let guessDuplicates = 0;
+
+for (const row of guessPool) {
+  if (!Array.isArray(row) || row.length !== 7) {
+    errors.push(`guessPool malformed tuple: ${JSON.stringify(row)}`);
+    continue;
+  }
+  const [id, name, surname, nationality, position, clubs] = row;
+  if (!id || guessIds.has(id)) {
+    errors.push(`guessPool duplicate/missing id: ${id}`);
+  }
+  guessIds.add(id);
+
+  const norm = normalizeText(name);
+  if (guessNormNames.has(norm)) {
+    guessDuplicates += 1;
+    errors.push(`guessPool duplicate normalized name: ${name}`);
+  }
+  guessNormNames.add(norm);
+
+  if (!name?.trim() || !surname?.trim() || !nationality?.trim() || !position?.trim()) {
+    errors.push(`guessPool ${id} missing required string fields`);
+  }
+  if (!Array.isArray(clubs)) {
+    errors.push(`guessPool ${id} clubs must be an array`);
+  }
+}
+
+// Verify every puzzlePool player is also in guessPool
+let missingPuzzleInGuess = 0;
+for (const p of puzzlePool) {
+  if (!guessNormNames.has(normalizeText(p.name))) {
+    missingPuzzleInGuess += 1;
+    errors.push(`puzzlePool player missing from guessPool: ${p.name}`);
+  }
+}
+
+// 4. Validate TenaBall & check TenaBall answer coverage in guessPool
 if (tenaball.length < 200) {
   errors.push(`Expected at least 200 TenaBall questions, got ${tenaball.length}`);
 }
 
+const uniqueTenaBallAnswers = new Map();
+for (const q of tenaball) {
+  for (const ans of q.answers) {
+    const k = normalizeText(ans);
+    if (!uniqueTenaBallAnswers.has(k)) {
+      uniqueTenaBallAnswers.set(k, ans);
+    }
+  }
+}
+
+const missingTenaBallAnswers = [];
+for (const [k, raw] of uniqueTenaBallAnswers.entries()) {
+  if (!guessNormNames.has(k)) {
+    missingTenaBallAnswers.push(raw);
+  }
+}
+if (missingTenaBallAnswers.length > 0) {
+  warnings.push(`${missingTenaBallAnswers.length} TenaBall answer(s) not found in guessPool (not invented if absent from Wikidata)`);
+}
+
 console.log('=== Dataset Validation Summary ===');
-console.log(`Teams    : ${teams.length} clubs across ${Object.keys(leagueCounts).length} leagues`);
+console.log(`Teams                  : ${teams.length} clubs across ${Object.keys(leagueCounts).length} leagues`);
 for (const lg of requiredLeagues) {
   console.log(`  - ${lg}: ${leagueCounts[lg]} clubs`);
 }
-console.log(`Players  : ${players.length} players`);
-console.log(`TenaBall : ${tenaball.length} questions`);
+console.log(`puzzlePool             : ${puzzlePool.length} verified players (duplicates: ${puzzleDuplicates})`);
+console.log(`guessPool              : ${guessPool.length} players (duplicates: ${guessDuplicates})`);
+console.log(`puzzlePool in guessPool: ${puzzlePool.length - missingPuzzleInGuess}/${puzzlePool.length}`);
+console.log(`TenaBall questions     : ${tenaball.length} lists (${uniqueTenaBallAnswers.size} unique answers)`);
+console.log(`Missing TenaBall names : ${missingTenaBallAnswers.length}`);
+
+if (missingTenaBallAnswers.length > 0) {
+  console.log('  Missing list:');
+  for (const m of missingTenaBallAnswers) console.log(`    - ${m}`);
+}
+
+if (warnings.length > 0) {
+  console.warn('\nWarnings:');
+  for (const w of warnings) console.warn(`  * ${w}`);
+}
 
 if (errors.length > 0) {
   console.error('\nValidation errors:');

@@ -1,0 +1,3820 @@
+{
+  "meta": {
+    "source": "Wikidata + Wikimedia Commons",
+    "license": "CC0 1.0 (metadata) / CC BY, CC BY-SA & Public Domain (images)",
+    "fetchedAt": "2026-11-24",
+    "count": 240
+  },
+  "players": [
+    {
+      "id": "ferdi-kadioglu",
+      "name": "Ferdi Kadıoğlu",
+      "surname": "Kadıoğlu",
+      "nationality": "Türkiye",
+      "position": "Defans",
+      "clubs": [
+        "NEC Nijmegen",
+        "Fenerbahçe",
+        "Brighton"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Ferdi_Kadıoğlu_2024.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — This photo is available from Serkan Yakın and https://www.sekoloji.com/detay/. T"
+    },
+    {
+      "id": "fernando-muslera",
+      "name": "Fernando Muslera",
+      "surname": "Muslera",
+      "nationality": "Uruguay",
+      "position": "Kaleci",
+      "clubs": [
+        "Lazio",
+        "Galatasaray"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Fernando_Muslera_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "dusan-tadic",
+      "name": "Dušan Tadić",
+      "surname": "Tadić",
+      "nationality": "Sırbistan",
+      "position": "Orta Saha",
+      "clubs": [
+        "Southampton",
+        "Ajax",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Dušan_Tadić_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Екатерина Лаут"
+    },
+    {
+      "id": "lionel-messi",
+      "name": "Lionel Messi",
+      "surname": "Messi",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Barcelona",
+        "Paris Saint-Germain",
+        "Inter Miami"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Lionel-Messi-Argentina-2022-FIFA-World-Cup_(cropped).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Hossein Zohrevand"
+    },
+    {
+      "id": "cristiano-ronaldo",
+      "name": "Cristiano Ronaldo",
+      "surname": "Ronaldo",
+      "nationality": "Portekiz",
+      "position": "Forvet",
+      "clubs": [
+        "Sporting CP",
+        "Manchester United",
+        "Real Madrid",
+        "Juventus",
+        "Al-Nassr"
+      ],
+      "birthYear": 1985,
+      "imageFile": "Cristiano_Ronaldo_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "kylian-mbappe",
+      "name": "Kylian Mbappé",
+      "surname": "Mbappé",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "AS Monaco",
+        "Paris Saint-Germain",
+        "Real Madrid"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Kylian_Mbappé_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "erling-haaland",
+      "name": "Erling Haaland",
+      "surname": "Haaland",
+      "nationality": "Norveç",
+      "position": "Forvet",
+      "clubs": [
+        "Red Bull Salzburg",
+        "Borussia Dortmund",
+        "Manchester City"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Erling_Haaland_2023_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Jacek Stanislawek"
+    },
+    {
+      "id": "mohamed-salah",
+      "name": "Mohamed Salah",
+      "surname": "Salah",
+      "nationality": "Mısır",
+      "position": "Forvet",
+      "clubs": [
+        "Basel",
+        "Chelsea",
+        "Fiorentina",
+        "AS Roma",
+        "Liverpool"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Mohamed_Salah_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "harry-kane",
+      "name": "Harry Kane",
+      "surname": "Kane",
+      "nationality": "İngiltere",
+      "position": "Forvet",
+      "clubs": [
+        "Tottenham Hotspur",
+        "Bayern Münih"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Harry_Kane_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "robert-lewandowski",
+      "name": "Robert Lewandowski",
+      "surname": "Lewandowski",
+      "nationality": "Polonya",
+      "position": "Forvet",
+      "clubs": [
+        "Lech Poznań",
+        "Borussia Dortmund",
+        "Bayern Münih",
+        "Barcelona"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Robert_Lewandowski_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Екатерина Лаут"
+    },
+    {
+      "id": "karim-benzema",
+      "name": "Karim Benzema",
+      "surname": "Benzema",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "Olympique Lyonnais",
+        "Real Madrid",
+        "Al-Ittihad"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Karim_Benzema_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "neymar-da-silva",
+      "name": "Neymar da Silva",
+      "surname": "Neymar",
+      "nationality": "Brezilya",
+      "position": "Forvet",
+      "clubs": [
+        "Santos",
+        "Barcelona",
+        "Paris Saint-Germain",
+        "Al-Hilal"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Neymar_2018.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Balkan Photos"
+    },
+    {
+      "id": "antoine-griezmann",
+      "name": "Antoine Griezmann",
+      "surname": "Griezmann",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "Real Sociedad",
+        "Atlético Madrid",
+        "Barcelona"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Antoine_Griezmann_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "bernardo-silva",
+      "name": "Bernardo Silva",
+      "surname": "Silva",
+      "nationality": "Portekiz",
+      "position": "Orta Saha",
+      "clubs": [
+        "Benfica",
+        "AS Monaco",
+        "Manchester City"
+      ],
+      "birthYear": 1994,
+      "imageFile": "Bernardo_Silva_2018.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Aleksandr Veprev"
+    },
+    {
+      "id": "bruno-fernandes",
+      "name": "Bruno Fernandes",
+      "surname": "Fernandes",
+      "nationality": "Portekiz",
+      "position": "Orta Saha",
+      "clubs": [
+        "Sporting CP",
+        "Manchester United"
+      ],
+      "birthYear": 1994,
+      "imageFile": "Bruno_Fernandes_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "trent-alexander-arnold",
+      "name": "Trent Alexander-Arnold",
+      "surname": "Arnold",
+      "nationality": "İngiltere",
+      "position": "Defans",
+      "clubs": [
+        "Liverpool"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Trent_Alexander-Arnold_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "dani-olmo",
+      "name": "Dani Olmo",
+      "surname": "Olmo",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Dinamo Zagreb",
+        "RB Leipzig",
+        "Barcelona"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Dani_Olmo_2022.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — crop by M-B"
+    },
+    {
+      "id": "jan-oblak",
+      "name": "Jan Oblak",
+      "surname": "Oblak",
+      "nationality": "Slovenya",
+      "position": "Kaleci",
+      "clubs": [
+        "Benfica",
+        "Atlético Madrid"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Jan_Oblak_2019.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "angel-di-maria",
+      "name": "Ángel Di María",
+      "surname": "Di María",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Benfica",
+        "Real Madrid",
+        "Manchester United",
+        "Paris Saint-Germain",
+        "Juventus"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Ángel_Di_María_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Екатерина Лаут"
+    },
+    {
+      "id": "ousmane-dembele",
+      "name": "Ousmane Dembélé",
+      "surname": "Dembélé",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "Rennes",
+        "Borussia Dortmund",
+        "Barcelona",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Ousmane_Dembélé_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "jamal-musiala",
+      "name": "Jamal Musiala",
+      "surname": "Musiala",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bayern Münih"
+      ],
+      "birthYear": 2003,
+      "imageFile": "Jamal_Musiala_2022.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — crop by ArsenalGhanaPartey"
+    },
+    {
+      "id": "florian-wirtz",
+      "name": "Florian Wirtz",
+      "surname": "Wirtz",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bayer Leverkusen"
+      ],
+      "birthYear": 2003,
+      "imageFile": "Florian_Wirtz_2024.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Fan First Matchday"
+    },
+    {
+      "id": "granit-xhaka",
+      "name": "Granit Xhaka",
+      "surname": "Xhaka",
+      "nationality": "İsviçre",
+      "position": "Orta Saha",
+      "clubs": [
+        "Borussia Mönchengladbach",
+        "Arsenal",
+        "Bayer Leverkusen"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Granit_Xhaka_2018.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — @cfcunofficial (Chelsea Debs) London from London, UK"
+    },
+    {
+      "id": "alexis-mac-allister",
+      "name": "Alexis Mac Allister",
+      "surname": "Mac Allister",
+      "nationality": "Arjantin",
+      "position": "Orta Saha",
+      "clubs": [
+        "Brighton",
+        "Liverpool"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Alexis_Mac_Allister_2022.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — jamesboyes"
+    },
+    {
+      "id": "n-golo-kante",
+      "name": "N'Golo Kanté",
+      "surname": "Kanté",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Leicester City",
+        "Chelsea",
+        "Al-Ittihad"
+      ],
+      "birthYear": 1991,
+      "imageFile": "N'Golo_Kanté_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "paul-pogba",
+      "name": "Paul Pogba",
+      "surname": "Pogba",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manchester United",
+        "Juventus"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Paul_Pogba_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "olivier-giroud",
+      "name": "Olivier Giroud",
+      "surname": "Giroud",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "Montpellier",
+        "Arsenal",
+        "Chelsea",
+        "AC Milan"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Olivier_Giroud_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "zinedine-zidane",
+      "name": "Zinédine Zidane",
+      "surname": "Zidane",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bordeaux",
+        "Juventus",
+        "Real Madrid"
+      ],
+      "birthYear": 1972,
+      "imageFile": "Zinedine_Zidane_by_Tasnim_03.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Hadi Abyar"
+    },
+    {
+      "id": "roberto-carlos",
+      "name": "Roberto Carlos",
+      "surname": "Carlos",
+      "nationality": "Brezilya",
+      "position": "Defans",
+      "clubs": [
+        "Inter",
+        "Real Madrid",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1973,
+      "imageFile": "Roberto_Carlos_2011.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Майоров Владимир"
+    },
+    {
+      "id": "diego-maradona",
+      "name": "Diego Maradona",
+      "surname": "Maradona",
+      "nationality": "Arjantin",
+      "position": "Orta Saha",
+      "clubs": [
+        "Boca Juniors",
+        "Barcelona",
+        "Napoli",
+        "Sevilla"
+      ],
+      "birthYear": 1960,
+      "imageFile": "Maradona-Mundial_86_con_la_copa.JPG",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Unknown authorUnknown author"
+    },
+    {
+      "id": "pele-nascimento",
+      "name": "Pelé Nascimento",
+      "surname": "Pelé",
+      "nationality": "Brezilya",
+      "position": "Forvet",
+      "clubs": [
+        "Santos",
+        "New York Cosmos"
+      ],
+      "birthYear": 1940,
+      "imageFile": "Pele_con_brasil_(cropped).jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Unknown authorUnknown author"
+    },
+    {
+      "id": "johan-cruyff",
+      "name": "Johan Cruyff",
+      "surname": "Cruyff",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "Ajax",
+        "Barcelona",
+        "Feyenoord"
+      ],
+      "birthYear": 1947,
+      "imageFile": "Johan_Cruyff_1974c.jpg",
+      "imageLicense": "CC0",
+      "imageAttribution": "Wikimedia Commons — Mieremet, Rob / Anefo"
+    },
+    {
+      "id": "andres-iniesta",
+      "name": "Andrés Iniesta",
+      "surname": "Iniesta",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Barcelona",
+        "Vissel Kobe"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Andrés_Iniesta_2018.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Mahdi Zare/Fars News Agency"
+    },
+    {
+      "id": "sergio-busquets",
+      "name": "Sergio Busquets",
+      "surname": "Busquets",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Barcelona",
+        "Inter Miami"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Sergio_Busquets_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "iker-casillas",
+      "name": "Iker Casillas",
+      "surname": "Casillas",
+      "nationality": "İspanya",
+      "position": "Kaleci",
+      "clubs": [
+        "Real Madrid",
+        "Porto"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Iker_Casillas_2012.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Майоров Владимир changed work Amarhgil"
+    },
+    {
+      "id": "gerard-pique",
+      "name": "Gerard Piqué",
+      "surname": "Piqué",
+      "nationality": "İspanya",
+      "position": "Defans",
+      "clubs": [
+        "Manchester United",
+        "Barcelona"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Gerard_Piqué_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Аннаc“” Нэсси"
+    },
+    {
+      "id": "david-silva",
+      "name": "David Silva",
+      "surname": "Silva",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Valencia",
+        "Manchester City",
+        "Real Sociedad"
+      ],
+      "birthYear": 1986,
+      "imageFile": "David_Silva_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "luis-suarez",
+      "name": "Luis Suárez",
+      "surname": "Suárez",
+      "nationality": "Uruguay",
+      "position": "Forvet",
+      "clubs": [
+        "Ajax",
+        "Liverpool",
+        "Barcelona",
+        "Atlético Madrid",
+        "Inter Miami"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Luis_Suárez_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Какая то женщина"
+    },
+    {
+      "id": "edinson-cavani",
+      "name": "Edinson Cavani",
+      "surname": "Cavani",
+      "nationality": "Uruguay",
+      "position": "Forvet",
+      "clubs": [
+        "Palermo",
+        "Napoli",
+        "Paris Saint-Germain",
+        "Manchester United",
+        "Valencia"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Edinson_Cavani_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "sergio-aguero",
+      "name": "Sergio Agüero",
+      "surname": "Agüero",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Independiente",
+        "Atlético Madrid",
+        "Manchester City",
+        "Barcelona"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Sergio_Agüero_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Екатерина Лаут"
+    },
+    {
+      "id": "javier-zanetti",
+      "name": "Javier Zanetti",
+      "surname": "Zanetti",
+      "nationality": "Arjantin",
+      "position": "Defans",
+      "clubs": [
+        "Banfield",
+        "Inter"
+      ],
+      "birthYear": 1973,
+      "imageFile": "Javier_Zanetti_2014.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Aky il grande"
+    },
+    {
+      "id": "dennis-bergkamp",
+      "name": "Dennis Bergkamp",
+      "surname": "Bergkamp",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "Ajax",
+        "Inter",
+        "Arsenal"
+      ],
+      "birthYear": 1969,
+      "imageFile": "Dennis_Bergkamp_2014.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Kieran Clarke"
+    },
+    {
+      "id": "eden-hazard",
+      "name": "Eden Hazard",
+      "surname": "Hazard",
+      "nationality": "Belçika",
+      "position": "Forvet",
+      "clubs": [
+        "Lille",
+        "Chelsea",
+        "Real Madrid"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Eden_Hazard_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Светлана Бекетова"
+    },
+    {
+      "id": "miroslav-klose",
+      "name": "Miroslav Klose",
+      "surname": "Klose",
+      "nationality": "Almanya",
+      "position": "Forvet",
+      "clubs": [
+        "Kaiserslautern",
+        "Werder Bremen",
+        "Bayern Münih",
+        "Lazio"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Miroslav_Klose_2014.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Danilo Borges / copa2014.gov.br Licença Creative Commons Atribuição 3.0 Brasil"
+    },
+    {
+      "id": "alexis-sanchez",
+      "name": "Alexis Sánchez",
+      "surname": "Sánchez",
+      "nationality": "Şili",
+      "position": "Forvet",
+      "clubs": [
+        "Udinese",
+        "Barcelona",
+        "Arsenal",
+        "Manchester United",
+        "Inter"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Alexis_Sánchez_2017.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "thiago-silva",
+      "name": "Thiago Silva",
+      "surname": "Silva",
+      "nationality": "Brezilya",
+      "position": "Defans",
+      "clubs": [
+        "Fluminense",
+        "AC Milan",
+        "Paris Saint-Germain",
+        "Chelsea"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Thiago_Silva_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "pepe-ferreira",
+      "name": "Pepe Ferreira",
+      "surname": "Pepe",
+      "nationality": "Portekiz",
+      "position": "Defans",
+      "clubs": [
+        "Porto",
+        "Real Madrid",
+        "Beşiktaş"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Pepe_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Анна Нэсси"
+    },
+    {
+      "id": "dries-mertens",
+      "name": "Dries Mertens",
+      "surname": "Mertens",
+      "nationality": "Belçika",
+      "position": "Forvet",
+      "clubs": [
+        "PSV",
+        "Napoli",
+        "Galatasaray"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Dries_Mertens_(2024).png",
+      "imageLicense": "CC0",
+      "imageAttribution": "Wikimedia Commons — Joost Pauwels"
+    },
+    {
+      "id": "burak-yilmaz",
+      "name": "Burak Yılmaz",
+      "surname": "Yılmaz",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Beşiktaş",
+        "Trabzonspor",
+        "Galatasaray",
+        "Lille"
+      ],
+      "birthYear": 1985,
+      "imageFile": "Burak_Yılmaz_20231008_3_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Beşiktaş JK"
+    },
+    {
+      "id": "hamit-altintop",
+      "name": "Hamit Altıntop",
+      "surname": "Altıntop",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Schalke 04",
+        "Bayern Münih",
+        "Real Madrid",
+        "Galatasaray"
+      ],
+      "birthYear": 1982,
+      "imageFile": "Hamit_Altıntop_Fiorentina_(cropped).JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Ultraslansi"
+    },
+    {
+      "id": "nuri-sahin",
+      "name": "Nuri Şahin",
+      "surname": "Şahin",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Borussia Dortmund",
+        "Real Madrid",
+        "Liverpool",
+        "Werder Bremen"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Nuri_Şahin_at_Antalyaspor_vs_Trabzonspor_20211211_(6)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Antalyaspor A.Ş."
+    },
+    {
+      "id": "wesley-sneijder",
+      "name": "Wesley Sneijder",
+      "surname": "Sneijder",
+      "nationality": "Hollanda",
+      "position": "Orta Saha",
+      "clubs": [
+        "Ajax",
+        "Real Madrid",
+        "Inter",
+        "Galatasaray"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Wesley_Sneijder_at_Sports_Festival_2025.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Nuță Lucian"
+    },
+    {
+      "id": "toni-kroos",
+      "name": "Toni Kroos",
+      "surname": "Kroos",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bayern Münih",
+        "Bayer Leverkusen",
+        "Real Madrid"
+      ],
+      "birthYear": 1990,
+      "imageFile": "Toni_Kroos_Real_Madrid_2021.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — https://www.youtube.com/@realmadrid"
+    },
+    {
+      "id": "virgil-van-dijk",
+      "name": "Virgil van Dijk",
+      "surname": "Van Dijk",
+      "nationality": "Hollanda",
+      "position": "Defans",
+      "clubs": [
+        "Celtic",
+        "Southampton",
+        "Liverpool"
+      ],
+      "birthYear": 1991,
+      "imageFile": "20160604_AUT_NED_8876_(cropped).jpg",
+      "imageLicense": "CC BY-SA 3.0 at",
+      "imageAttribution": "Wikimedia Commons — Ailura"
+    },
+    {
+      "id": "mauro-icardi",
+      "name": "Mauro Icardi",
+      "surname": "Icardi",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Sampdoria",
+        "Inter",
+        "Paris Saint-Germain",
+        "Galatasaray"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Mauro_Icardi_en_2025.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Telefe"
+    },
+    {
+      "id": "edin-dzeko",
+      "name": "Edin Džeko",
+      "surname": "Džeko",
+      "nationality": "Bosna-Hersek",
+      "position": "Forvet",
+      "clubs": [
+        "Wolfsburg",
+        "Manchester City",
+        "AS Roma",
+        "Inter",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1986,
+      "imageFile": "20150331_2026_AUT_BIH_2177_Edin_Džeko_(cropped).jpg",
+      "imageLicense": "CC BY-SA 3.0 at",
+      "imageAttribution": "Wikimedia Commons — Ailura"
+    },
+    {
+      "id": "gheorghe-hagi",
+      "name": "Gheorghe Hagi",
+      "surname": "Hagi",
+      "nationality": "Romanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Steaua Bükreş",
+        "Real Madrid",
+        "Barcelona",
+        "Galatasaray"
+      ],
+      "birthYear": 1965,
+      "imageFile": "Lansarea_candidaturii_Gabrielei_Szabo_pentru_Camera_Deputatilor,_Voluntari_-_04.05_(48)_(14270956179)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Partidul Social Democrat from Romania"
+    },
+    {
+      "id": "hakan-sukur",
+      "name": "Hakan Şükür",
+      "surname": "Şükür",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Galatasaray",
+        "Torino",
+        "Inter",
+        "Parma",
+        "Blackburn"
+      ],
+      "birthYear": 1971,
+      "imageFile": "Hakan.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Vulkahn at German Wikipedia"
+    },
+    {
+      "id": "rustu-recber",
+      "name": "Rüştü Reçber",
+      "surname": "Reçber",
+      "nationality": "Türkiye",
+      "position": "Kaleci",
+      "clubs": [
+        "Antalyaspor",
+        "Fenerbahçe",
+        "Barcelona",
+        "Beşiktaş"
+      ],
+      "birthYear": 1973,
+      "imageFile": "Rustu_Recber_2010.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Esteban869"
+    },
+    {
+      "id": "emre-belozoglu",
+      "name": "Emre Belözoğlu",
+      "surname": "Belözoğlu",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Galatasaray",
+        "Inter",
+        "Newcastle United",
+        "Fenerbahçe",
+        "Başakşehir"
+      ],
+      "birthYear": 1980,
+      "imageFile": "Emre_Belözoğlu_Kasımpaşa_SK_20260130_(4).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Zafer"
+    },
+    {
+      "id": "volkan-demirel",
+      "name": "Volkan Demirel",
+      "surname": "Demirel",
+      "nationality": "Türkiye",
+      "position": "Kaleci",
+      "clubs": [
+        "Kartalspor",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Volkan_demirel.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Mark Freeman from Hornchurch, UK"
+    },
+    {
+      "id": "nihat-kahveci",
+      "name": "Nihat Kahveci",
+      "surname": "Kahveci",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Beşiktaş",
+        "Real Sociedad",
+        "Villarreal"
+      ],
+      "birthYear": 1979,
+      "imageFile": "AUT_vs._TUR_2016-03-29_(186).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Steindy (talk) 23:56, 10 April 2016 (UTC)"
+    },
+    {
+      "id": "tuncay-sanli",
+      "name": "Tuncay Şanlı",
+      "surname": "Şanlı",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Sakaryaspor",
+        "Fenerbahçe",
+        "Middlesbrough",
+        "Stoke City"
+      ],
+      "birthYear": 1982,
+      "imageFile": "2007-03-01_tuncay001.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Ufuk Aykut"
+    },
+    {
+      "id": "kevin-de-bruyne",
+      "name": "Kevin De Bruyne",
+      "surname": "De Bruyne",
+      "nationality": "Belçika",
+      "position": "Orta Saha",
+      "clubs": [
+        "Chelsea",
+        "Wolfsburg",
+        "Manchester City"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Kevin_De_Bruyne_USMNT_v_Belgium_Mar_28_2026-64_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "cenk-tosun",
+      "name": "Cenk Tosun",
+      "surname": "Tosun",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Gaziantepspor",
+        "Beşiktaş",
+        "Everton",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Cenk_Tosun_in_2023.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Beşiktaş"
+    },
+    {
+      "id": "ciro-immobile",
+      "name": "Ciro Immobile",
+      "surname": "Immobile",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "Torino",
+        "Borussia Dortmund",
+        "Lazio",
+        "Beşiktaş"
+      ],
+      "birthYear": 1990,
+      "imageFile": "20150616_-_Portugal_-_Italie_-_Genève_-_Ciro_Immobile_1.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Clément Bucco-Lechat"
+    },
+    {
+      "id": "luka-modric",
+      "name": "Luka Modrić",
+      "surname": "Modrić",
+      "nationality": "Hırvatistan",
+      "position": "Orta Saha",
+      "clubs": [
+        "Dinamo Zagreb",
+        "Tottenham Hotspur",
+        "Real Madrid"
+      ],
+      "birthYear": 1985,
+      "imageFile": "Luka_Modric_Croatia_v_Portugal_2_July_2026-055.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "arda-turan",
+      "name": "Arda Turan",
+      "surname": "Turan",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Galatasaray",
+        "Atlético Madrid",
+        "Barcelona",
+        "Başakşehir"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Arda_Turan,_Eyüpspor_Teknik_Direktörü,_1_Eylül_2024_Kasımpaşa_Stadyumu.jpg",
+      "imageLicense": "CC0",
+      "imageAttribution": "Wikimedia Commons — HakanIST"
+    },
+    {
+      "id": "alex-de-souza",
+      "name": "Alex de Souza",
+      "surname": "Souza",
+      "nationality": "Brezilya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Palmeiras",
+        "Cruzeiro",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1977,
+      "imageFile": "Alexsandro_de_Souza.jpg",
+      "imageLicense": "CC0",
+      "imageAttribution": "Wikimedia Commons — Serkan YAKIN - antu.com"
+    },
+    {
+      "id": "gokhan-gonul",
+      "name": "Gökhan Gönül",
+      "surname": "Gönül",
+      "nationality": "Türkiye",
+      "position": "Defans",
+      "clubs": [
+        "Gençlerbirliği",
+        "Fenerbahçe",
+        "Beşiktaş"
+      ],
+      "birthYear": 1985,
+      "imageFile": "Gökhan_Gönül_-_AUT_vs._TUR_2016-03-29_(244).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Steindy (talk) 00:04, 11 April 2016 (UTC)"
+    },
+    {
+      "id": "hakan-calhanoglu",
+      "name": "Hakan Çalhanoğlu",
+      "surname": "Çalhanoğlu",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Hamburg",
+        "Bayer Leverkusen",
+        "AC Milan",
+        "Inter"
+      ],
+      "birthYear": 1994,
+      "imageFile": "AUT_vs._TUR_2016-03-29_(342).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Steindy (talk) 10:15, 11 April 2016 (UTC)"
+    },
+    {
+      "id": "selcuk-inan",
+      "name": "Selçuk İnan",
+      "surname": "İnan",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manisaspor",
+        "Trabzonspor",
+        "Galatasaray"
+      ],
+      "birthYear": 1985,
+      "imageFile": "AUT_vs._TUR_2016-03-29_(253).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Steindy (talk) 00:05, 11 April 2016 (UTC)"
+    },
+    {
+      "id": "caner-erkin",
+      "name": "Caner Erkin",
+      "surname": "Erkin",
+      "nationality": "Türkiye",
+      "position": "Defans",
+      "clubs": [
+        "CSKA Moskova",
+        "Galatasaray",
+        "Fenerbahçe",
+        "Beşiktaş"
+      ],
+      "birthYear": 1988,
+      "imageFile": "AUT_vs._TUR_2016-03-29_(355).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Steindy (talk) 10:16, 11 April 2016 (UTC)"
+    },
+    {
+      "id": "sergen-yalcin",
+      "name": "Sergen Yalçın",
+      "surname": "Yalçın",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Beşiktaş",
+        "İstanbulspor",
+        "Fenerbahçe",
+        "Galatasaray",
+        "Trabzonspor"
+      ],
+      "birthYear": 1972,
+      "imageFile": "Sergen_Yalcin.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Klasspor TV"
+    },
+    {
+      "id": "mert-gunok",
+      "name": "Mert Günok",
+      "surname": "Günok",
+      "nationality": "Türkiye",
+      "position": "Kaleci",
+      "clubs": [
+        "Fenerbahçe",
+        "Bursaspor",
+        "Başakşehir",
+        "Beşiktaş"
+      ],
+      "birthYear": 1989,
+      "imageFile": "Mert_Günok_34_Fenerbahçe_20260805_(6)_(cropped).JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — User:Zafer"
+    },
+    {
+      "id": "martin-degaard",
+      "name": "Martin Ødegaard",
+      "surname": "Ødegaard",
+      "nationality": "Norveç",
+      "position": "Orta Saha",
+      "clubs": [
+        "Real Madrid",
+        "Real Sociedad",
+        "Arsenal"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Martin_Odegaard_Morocco_v_Norway_7_June_2026-56_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "irfan-can-kahveci",
+      "name": "İrfan Can Kahveci",
+      "surname": "Kahveci",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Gençlerbirliği",
+        "Başakşehir",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1995,
+      "imageFile": "İrfan_Can_Kahveci_17_Fenerbahçe_20260805_(3)_(cropped).JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — User:Zafer"
+    },
+    {
+      "id": "ugurcan-cakir",
+      "name": "Uğurcan Çakır",
+      "surname": "Çakır",
+      "nationality": "Türkiye",
+      "position": "Kaleci",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1996,
+      "imageFile": "Uğurcan_Çakır_at_Antalyaspor_vs_Trabzonspor_20211211_(2)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Antalyaspor A.Ş."
+    },
+    {
+      "id": "caglar-soyuncu",
+      "name": "Çağlar Söyüncü",
+      "surname": "Söyüncü",
+      "nationality": "Türkiye",
+      "position": "Defans",
+      "clubs": [
+        "Freiburg",
+        "Leicester City",
+        "Atlético Madrid",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1996,
+      "imageFile": "Çağlar_Söyüncü_4_Fenerbahçe_20260805_(1)_(cropped).JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — User:Zafer"
+    },
+    {
+      "id": "cengiz-under",
+      "name": "Cengiz Ünder",
+      "surname": "Ünder",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Başakşehir",
+        "AS Roma",
+        "Marsilya",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Cengiz_Ünder_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "victor-osimhen",
+      "name": "Victor Osimhen",
+      "surname": "Osimhen",
+      "nationality": "Nijerya",
+      "position": "Forvet",
+      "clubs": [
+        "Lille",
+        "Napoli",
+        "Galatasaray"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Victor-osimhen-nigeria-2024-3-4.jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Fédération Guinéenne Football"
+    },
+    {
+      "id": "vinicius-junior",
+      "name": "Vinícius Júnior",
+      "surname": "Júnior",
+      "nationality": "Brezilya",
+      "position": "Forvet",
+      "clubs": [
+        "Flamengo",
+        "Real Madrid"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Vinícius_Júnior_Brazil_V_Morocco_13_June_2026-207_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "declan-rice",
+      "name": "Declan Rice",
+      "surname": "Rice",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "West Ham United",
+        "Arsenal"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Declan_Rice_England_v_Ghana_23_June_2026-150_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "phil-foden",
+      "name": "Phil Foden",
+      "surname": "Foden",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manchester City"
+      ],
+      "birthYear": 2000,
+      "imageFile": "2023-10-04_Fußball,_Männer,_UEFA_Champions_League,_RB_Leipzig_-_Manchester_City_FC_1DX_2613,_Phil_Foden.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Steffen Prößdorf"
+    },
+    {
+      "id": "yunus-akgun",
+      "name": "Yunus Akgün",
+      "surname": "Akgün",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Galatasaray",
+        "Adana Demirspor",
+        "Leicester City"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Yunus_Akgün_20220225_7_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Antalyaspor A.Ş."
+    },
+    {
+      "id": "orkun-kokcu",
+      "name": "Orkun Kökçü",
+      "surname": "Kökçü",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Feyenoord",
+        "Benfica"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Orkun_Kökçü_20260121_(2)_-_cropped_version.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Original: Zafer Derivative work: FootyBystander"
+    },
+    {
+      "id": "william-saliba",
+      "name": "William Saliba",
+      "surname": "Saliba",
+      "nationality": "Fransa",
+      "position": "Defans",
+      "clubs": [
+        "Saint-Étienne",
+        "Marsilya",
+        "Arsenal"
+      ],
+      "birthYear": 2001,
+      "imageFile": "William_Saliba_France_v_Senegal_16_June_2026-336_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "altay-bayindir",
+      "name": "Altay Bayındır",
+      "surname": "Bayındır",
+      "nationality": "Türkiye",
+      "position": "Kaleci",
+      "clubs": [
+        "Ankaragücü",
+        "Fenerbahçe",
+        "Manchester United"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Altay_Bayındır_(2021-22_Süper_Lig)_-_Resim1.png",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — beIN SPORTS Türkiye"
+    },
+    {
+      "id": "bukayo-saka",
+      "name": "Bukayo Saka",
+      "surname": "Saka",
+      "nationality": "İngiltere",
+      "position": "Forvet",
+      "clubs": [
+        "Arsenal"
+      ],
+      "birthYear": 2001,
+      "imageFile": "Bukayo_Saka_England_v_Ghana_23_June_2026-057_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "jude-bellingham",
+      "name": "Jude Bellingham",
+      "surname": "Bellingham",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "Birmingham City",
+        "Borussia Dortmund",
+        "Real Madrid"
+      ],
+      "birthYear": 2003,
+      "imageFile": "Jude_Bellingham_England_v_Ghana_23_June_2026-061_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "kerem-akturkoglu",
+      "name": "Kerem Aktürkoğlu",
+      "surname": "Aktürkoğlu",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Galatasaray",
+        "Benfica"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Kerem_Aktürkoğlu_9_Fenerbahçe_20260805_(11).JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — User:Zafer"
+    },
+    {
+      "id": "cole-palmer",
+      "name": "Cole Palmer",
+      "surname": "Palmer",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manchester City",
+        "Chelsea"
+      ],
+      "birthYear": 2002,
+      "imageFile": "Cole_Palmer_2025_FIFA_Club_World_Cup_Final.jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — The White House"
+    },
+    {
+      "id": "baris-alper-yilmaz",
+      "name": "Barış Alper Yılmaz",
+      "surname": "Yılmaz",
+      "nationality": "Türkiye",
+      "position": "Forvet",
+      "clubs": [
+        "Ankara Keçiörengücü",
+        "Galatasaray"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Barış_Alper_Yılmaz_20251019.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Zafer"
+    },
+    {
+      "id": "arda-guler",
+      "name": "Arda Güler",
+      "surname": "Güler",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Fenerbahçe",
+        "Real Madrid"
+      ],
+      "birthYear": 2005,
+      "imageFile": "Arda_Güler_2025_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — LawEnthusiast"
+    },
+    {
+      "id": "lamine-yamal",
+      "name": "Lamine Yamal",
+      "surname": "Yamal",
+      "nationality": "İspanya",
+      "position": "Forvet",
+      "clubs": [
+        "Barcelona"
+      ],
+      "birthYear": 2007,
+      "imageFile": "Lamine_Yamal_Argentina_v_Spain_19_July_2026-214_(new_cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "hugo-lloris",
+      "name": "Hugo Lloris",
+      "surname": "Lloris",
+      "nationality": "Fransa",
+      "position": "Kaleci",
+      "clubs": [
+        "Olympique Lyonnais",
+        "Tottenham Hotspur",
+        "LAFC"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Hugo_Lloris_NYCFC_v_LAFC_17_October_2026-053_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "ronaldinho-gaucho",
+      "name": "Ronaldinho Gaúcho",
+      "surname": "Ronaldinho",
+      "nationality": "Brezilya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Grêmio",
+        "Paris Saint-Germain",
+        "Barcelona",
+        "AC Milan"
+      ],
+      "birthYear": 1980,
+      "imageFile": "Sports_Festival_2025_-_4_(cropped).jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Nuță Lucian"
+    },
+    {
+      "id": "thomas-muller",
+      "name": "Thomas Müller",
+      "surname": "Müller",
+      "nationality": "Almanya",
+      "position": "Forvet",
+      "clubs": [
+        "Bayern Münih"
+      ],
+      "birthYear": 1989,
+      "imageFile": "Thomas_Müller_2022_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Werner100359"
+    },
+    {
+      "id": "thierry-henry",
+      "name": "Thierry Henry",
+      "surname": "Henry",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "AS Monaco",
+        "Juventus",
+        "Arsenal",
+        "Barcelona"
+      ],
+      "birthYear": 1977,
+      "imageFile": "Thierry_Henry_(51649035951)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Web Summit"
+    },
+    {
+      "id": "thibaut-courtois",
+      "name": "Thibaut Courtois",
+      "surname": "Courtois",
+      "nationality": "Belçika",
+      "position": "Kaleci",
+      "clubs": [
+        "Genk",
+        "Atlético Madrid",
+        "Chelsea",
+        "Real Madrid"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Thibaut_Courtois_Belgium_v_USA_6_July_2026-076_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "antonio-rudiger",
+      "name": "Antonio Rüdiger",
+      "surname": "Rüdiger",
+      "nationality": "Almanya",
+      "position": "Defans",
+      "clubs": [
+        "Stuttgart",
+        "AS Roma",
+        "Chelsea",
+        "Real Madrid"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Antonio_Rudiger_Ecuador_v_Germany_25_June_2026-055_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "manuel-neuer",
+      "name": "Manuel Neuer",
+      "surname": "Neuer",
+      "nationality": "Almanya",
+      "position": "Kaleci",
+      "clubs": [
+        "Schalke 04",
+        "Bayern Münih"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Manuel_Neuer_Ecuador_v_Germany_25_June_2026-148.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "marc-andre-ter-stegen",
+      "name": "Marc-André ter Stegen",
+      "surname": "Ter Stegen",
+      "nationality": "Almanya",
+      "position": "Kaleci",
+      "clubs": [
+        "Borussia Mönchengladbach",
+        "Barcelona"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Marc-Andre_Ter_Stegen_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada_CATPRESS.jpg",
+      "imageLicense": "CC0",
+      "imageAttribution": "Wikimedia Commons — Government of Catalonia"
+    },
+    {
+      "id": "ivan-perisic",
+      "name": "Ivan Perišić",
+      "surname": "Perišić",
+      "nationality": "Hırvatistan",
+      "position": "Forvet",
+      "clubs": [
+        "Borussia Dortmund",
+        "Inter",
+        "Bayern Münih",
+        "Tottenham Hotspur"
+      ],
+      "birthYear": 1989,
+      "imageFile": "Ivan_Perisic_Croatia_v_Portugal_2_July_2026-033.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "ilkay-gundogan",
+      "name": "İlkay Gündoğan",
+      "surname": "Gündoğan",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Borussia Dortmund",
+        "Manchester City",
+        "Barcelona"
+      ],
+      "birthYear": 1990,
+      "imageFile": "20180602_FIFA_Friendly_Match_Austria_vs._Germany_İlkay_Gündoğan_850_0728.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Granada"
+    },
+    {
+      "id": "paulo-dybala",
+      "name": "Paulo Dybala",
+      "surname": "Dybala",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Palermo",
+        "Juventus",
+        "AS Roma"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Матч_«Динамо»_-_«Ювентус»_0-2._20_октября_2020_года_—_1153905_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Olga Shcherbytska"
+    },
+    {
+      "id": "sadio-mane",
+      "name": "Sadio Mané",
+      "surname": "Mané",
+      "nationality": "Senegal",
+      "position": "Forvet",
+      "clubs": [
+        "Southampton",
+        "Liverpool",
+        "Bayern Münih",
+        "Al-Nassr"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Sadio_Mane_France_v_Senegal_16_June_2026-450.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "christian-eriksen",
+      "name": "Christian Eriksen",
+      "surname": "Eriksen",
+      "nationality": "Danimarka",
+      "position": "Orta Saha",
+      "clubs": [
+        "Ajax",
+        "Tottenham Hotspur",
+        "Inter",
+        "Manchester United"
+      ],
+      "birthYear": 1992,
+      "imageFile": "20140904_-_Christian_Eriksen_(cropped).jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Chris 0023 from Lyngby, Denmark"
+    },
+    {
+      "id": "romelu-lukaku",
+      "name": "Romelu Lukaku",
+      "surname": "Lukaku",
+      "nationality": "Belçika",
+      "position": "Forvet",
+      "clubs": [
+        "Everton",
+        "Manchester United",
+        "Inter",
+        "Chelsea",
+        "Napoli"
+      ],
+      "birthYear": 1993,
+      "imageFile": "Romelu_Lukaku_Belgium_v_USA_6_July_2026-038.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "son-heung-min",
+      "name": "Son Heung-min",
+      "surname": "Heung-min",
+      "nationality": "Güney Kore",
+      "position": "Forvet",
+      "clubs": [
+        "Hamburg",
+        "Bayer Leverkusen",
+        "Tottenham Hotspur"
+      ],
+      "birthYear": 1992,
+      "imageFile": "BFA_2023_-2_Heung-Min_Son_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Ujishadow"
+    },
+    {
+      "id": "rivaldo-ferreira",
+      "name": "Rivaldo Ferreira",
+      "surname": "Rivaldo",
+      "nationality": "Brezilya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Deportivo",
+        "Barcelona",
+        "AC Milan",
+        "Olympiakos"
+      ],
+      "birthYear": 1972,
+      "imageFile": "Rivaldo_bunyodkor_2010.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — w:User:Nursultan12"
+    },
+    {
+      "id": "ronaldo-nazario",
+      "name": "Ronaldo Nazário",
+      "surname": "Nazário",
+      "nationality": "Brezilya",
+      "position": "Forvet",
+      "clubs": [
+        "PSV",
+        "Barcelona",
+        "Inter",
+        "Real Madrid",
+        "AC Milan"
+      ],
+      "birthYear": 1976,
+      "imageFile": "051119SMcC0014.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Web Summit"
+    },
+    {
+      "id": "ricardo-kaka",
+      "name": "Ricardo Kaká",
+      "surname": "Kaká",
+      "nationality": "Brezilya",
+      "position": "Orta Saha",
+      "clubs": [
+        "São Paulo",
+        "AC Milan",
+        "Real Madrid"
+      ],
+      "birthYear": 1982,
+      "imageFile": "Ricardo_Izecson_dos_Santos_Leite_(Kaká)_01.jpg",
+      "imageLicense": "CC BY 3.0 br",
+      "imageAttribution": "Wikimedia Commons — José Cruz/ABr (cropped by tales.ebner)"
+    },
+    {
+      "id": "mateo-kovacic",
+      "name": "Mateo Kovačić",
+      "surname": "Kovačić",
+      "nationality": "Hırvatistan",
+      "position": "Orta Saha",
+      "clubs": [
+        "Inter",
+        "Real Madrid",
+        "Chelsea",
+        "Manchester City"
+      ],
+      "birthYear": 1994,
+      "imageFile": "Mateo_Kovacic_Croatia_v_Portugal_2_July_2026-132.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "emiliano-martinez",
+      "name": "Emiliano Martínez",
+      "surname": "Martínez",
+      "nationality": "Arjantin",
+      "position": "Kaleci",
+      "clubs": [
+        "Arsenal",
+        "Aston Villa"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Emiliano_Martinez_Argentina_v_Spain_19_July_2026-269.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "riyad-mahrez",
+      "name": "Riyad Mahrez",
+      "surname": "Mahrez",
+      "nationality": "Cezayir",
+      "position": "Forvet",
+      "clubs": [
+        "Leicester City",
+        "Manchester City",
+        "Al-Ahli"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Mahrez_2021.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Jeanpierrekepseu"
+    },
+    {
+      "id": "joshua-kimmich",
+      "name": "Joshua Kimmich",
+      "surname": "Kimmich",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "RB Leipzig",
+        "Bayern Münih"
+      ],
+      "birthYear": 1995,
+      "imageFile": "Joshua_Kimmich_Ecuador_v_Germany_25_June_2026-149.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "leroy-sane",
+      "name": "Leroy Sané",
+      "surname": "Sané",
+      "nationality": "Almanya",
+      "position": "Forvet",
+      "clubs": [
+        "Schalke 04",
+        "Manchester City",
+        "Bayern Münih"
+      ],
+      "birthYear": 1996,
+      "imageFile": "Leroy_Sane_Ecuador_v_Germany_25_June_2026-004.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "mike-maignan",
+      "name": "Mike Maignan",
+      "surname": "Maignan",
+      "nationality": "Fransa",
+      "position": "Kaleci",
+      "clubs": [
+        "Lille",
+        "AC Milan"
+      ],
+      "birthYear": 1995,
+      "imageFile": "Mike_Maignan_France_v_Norway_26_June_26-132_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "alisson-becker",
+      "name": "Alisson Becker",
+      "surname": "Becker",
+      "nationality": "Brezilya",
+      "position": "Kaleci",
+      "clubs": [
+        "Internacional",
+        "AS Roma",
+        "Liverpool"
+      ],
+      "birthYear": 1992,
+      "imageFile": "Alisson_Becker_Brazil_V_Morocco_13_June_2026-117_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "federico-valverde",
+      "name": "Federico Valverde",
+      "surname": "Valverde",
+      "nationality": "Uruguay",
+      "position": "Orta Saha",
+      "clubs": [
+        "Peñarol",
+        "Real Madrid"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Federico_Valverde_2021_(cropped).jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Real Madrid"
+    },
+    {
+      "id": "frenkie-de-jong",
+      "name": "Frenkie de Jong",
+      "surname": "De Jong",
+      "nationality": "Hollanda",
+      "position": "Orta Saha",
+      "clubs": [
+        "Ajax",
+        "Barcelona"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Матч_«Динамо»_-_«Барселона»_0-1._2_ноября_2021_года._II_—_1289671_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Yuliia Perekopaiko"
+    },
+    {
+      "id": "nicolo-barella",
+      "name": "Nicolò Barella",
+      "surname": "Barella",
+      "nationality": "İtalya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Cagliari",
+        "Inter"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Nicolò_Barella_in_2021.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Biser Todorov"
+    },
+    {
+      "id": "gianluigi-donnarumma",
+      "name": "Gianluigi Donnarumma",
+      "surname": "Donnarumma",
+      "nationality": "İtalya",
+      "position": "Kaleci",
+      "clubs": [
+        "AC Milan",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Norway_Italy_-_June_2025_B_33_-_Gianluigi_Donnarumma_(close-up).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Original: MichaelEmilio / Derivative work: Danyele"
+    },
+    {
+      "id": "rodrigo-hernandez",
+      "name": "Rodrigo Hernández",
+      "surname": "Rodri",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Villarreal",
+        "Atlético Madrid",
+        "Manchester City"
+      ],
+      "birthYear": 1996,
+      "imageFile": "Rodri_France_v_Spain_7.24.26-096.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "lautaro-martinez",
+      "name": "Lautaro Martínez",
+      "surname": "Martínez",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Racing Club",
+        "Inter"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Lautaro_Martinez_Argentina_v_Spain_19_July_2026-049_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "marcus-rashford",
+      "name": "Marcus Rashford",
+      "surname": "Rashford",
+      "nationality": "İngiltere",
+      "position": "Forvet",
+      "clubs": [
+        "Manchester United"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Marcus_Rashford_England_v_Panama_27_June_26-047.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "alphonso-davies",
+      "name": "Alphonso Davies",
+      "surname": "Davies",
+      "nationality": "Kanada",
+      "position": "Defans",
+      "clubs": [
+        "Vancouver Whitecaps",
+        "Bayern Münih"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Alphonso_Davies_Canada_v_Qatar_18_June_2026-007_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "theo-hernandez",
+      "name": "Theo Hernández",
+      "surname": "Hernández",
+      "nationality": "Fransa",
+      "position": "Defans",
+      "clubs": [
+        "Atlético Madrid",
+        "Real Madrid",
+        "AC Milan"
+      ],
+      "birthYear": 1997,
+      "imageFile": "Theo_Hernandez_France_v_Sweden_6.30.26-245.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "alexander-isak",
+      "name": "Alexander Isak",
+      "surname": "Isak",
+      "nationality": "İsveç",
+      "position": "Forvet",
+      "clubs": [
+        "Real Sociedad",
+        "Newcastle United"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Alexander_Isak_-_Sweden_-_Greece21_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Mikael Hervestad"
+    },
+    {
+      "id": "dusan-vlahovic",
+      "name": "Dušan Vlahović",
+      "surname": "Vlahović",
+      "nationality": "Sırbistan",
+      "position": "Forvet",
+      "clubs": [
+        "Partizan",
+        "Fiorentina",
+        "Juventus"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Dušan_Vlahović_20261002_(1)_(cropped).JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — User:Zafer"
+    },
+    {
+      "id": "matthijs-de-ligt",
+      "name": "Matthijs de Ligt",
+      "surname": "De Ligt",
+      "nationality": "Hollanda",
+      "position": "Defans",
+      "clubs": [
+        "Ajax",
+        "Juventus",
+        "Bayern Münih",
+        "Manchester United"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Matthijs_de_Ligt_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — ОЛЕГ БАТРАК"
+    },
+    {
+      "id": "achraf-hakimi",
+      "name": "Achraf Hakimi",
+      "surname": "Hakimi",
+      "nationality": "Fas",
+      "position": "Defans",
+      "clubs": [
+        "Real Madrid",
+        "Borussia Dortmund",
+        "Inter",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Achraf_Hakimi_Morocco_v_Norway_7_June_2026-16.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "kai-havertz",
+      "name": "Kai Havertz",
+      "surname": "Havertz",
+      "nationality": "Almanya",
+      "position": "Forvet",
+      "clubs": [
+        "Bayer Leverkusen",
+        "Chelsea",
+        "Arsenal"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Kai_Havertz_Ecuador_v_Germany_25_June_2026-118.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "alessandro-bastoni",
+      "name": "Alessandro Bastoni",
+      "surname": "Bastoni",
+      "nationality": "İtalya",
+      "position": "Defans",
+      "clubs": [
+        "Atalanta",
+        "Parma",
+        "Inter"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Norway_Italy_-_June_2025_A_36_(cropped).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — MichaelEmilio"
+    },
+    {
+      "id": "cody-gakpo",
+      "name": "Cody Gakpo",
+      "surname": "Gakpo",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "PSV",
+        "Liverpool"
+      ],
+      "birthYear": 1999,
+      "imageFile": "Cody_Gakpo_Liverpool_FC_20261103_(1)_(cropped).JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — User:Zafer"
+    },
+    {
+      "id": "dominik-szoboszlai",
+      "name": "Dominik Szoboszlai",
+      "surname": "Szoboszlai",
+      "nationality": "Macaristan",
+      "position": "Orta Saha",
+      "clubs": [
+        "Red Bull Salzburg",
+        "RB Leipzig",
+        "Liverpool"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Dominik_Szoboszlai_04012026_(1).jpg",
+      "imageLicense": "CC0",
+      "imageAttribution": "Wikimedia Commons — Timmy96"
+    },
+    {
+      "id": "aurelien-tchouameni",
+      "name": "Aurélien Tchouaméni",
+      "surname": "Tchouaméni",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bordeaux",
+        "AS Monaco",
+        "Real Madrid"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Aurelien_Tchouameni_France_v_Senegal_16_June_2026-447_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "viktor-gyokeres",
+      "name": "Viktor Gyökeres",
+      "surname": "Gyökeres",
+      "nationality": "İsveç",
+      "position": "Forvet",
+      "clubs": [
+        "Coventry City",
+        "Sporting CP"
+      ],
+      "birthYear": 1998,
+      "imageFile": "Viktor_Gyokeres_France_v_Sweden_6.30.26-123_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "julian-alvarez",
+      "name": "Julián Álvarez",
+      "surname": "Álvarez",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "River Plate",
+        "Manchester City",
+        "Atlético Madrid"
+      ],
+      "birthYear": 2000,
+      "imageFile": "Julian_Alvarez_Argentina_v_Spain_19_July_2026-052_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "eduardo-camavinga",
+      "name": "Eduardo Camavinga",
+      "surname": "Camavinga",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Stade Rennais",
+        "Real Madrid"
+      ],
+      "birthYear": 2002,
+      "imageFile": "Ofrenda_de_la_Liga_y_la_Champions-13-L.Millán_(52109790215)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Fotografías Archimadrid.es"
+    },
+    {
+      "id": "pedri-gonzalez",
+      "name": "Pedri González",
+      "surname": "Pedri",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Las Palmas",
+        "Barcelona"
+      ],
+      "birthYear": 2002,
+      "imageFile": "Pedri_France_v_Spain_7.24.26-245.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "josko-gvardiol",
+      "name": "Joško Gvardiol",
+      "surname": "Gvardiol",
+      "nationality": "Hırvatistan",
+      "position": "Defans",
+      "clubs": [
+        "Dinamo Zagreb",
+        "RB Leipzig",
+        "Manchester City"
+      ],
+      "birthYear": 2002,
+      "imageFile": "Josko_Gvardiol_Croatia_v_Portugal_2_July_2026-262.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "enzo-fernandez",
+      "name": "Enzo Fernández",
+      "surname": "Fernández",
+      "nationality": "Arjantin",
+      "position": "Orta Saha",
+      "clubs": [
+        "River Plate",
+        "Benfica",
+        "Chelsea"
+      ],
+      "birthYear": 2001,
+      "imageFile": "Enzo_Fernandez_Argentina_v_Spain_19_July_2026-050_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "nico-williams",
+      "name": "Nico Williams",
+      "surname": "Williams",
+      "nationality": "İspanya",
+      "position": "Forvet",
+      "clubs": [
+        "Athletic Club"
+      ],
+      "birthYear": 2002,
+      "imageFile": "Nico_Williams_Argentina_v_Spain_19_July_2026-196_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Bryan Berlin"
+    },
+    {
+      "id": "alessandro-del-piero",
+      "name": "Alessandro Del Piero",
+      "surname": "Del Piero",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "Padova",
+        "Juventus",
+        "Sydney FC"
+      ],
+      "birthYear": 1974,
+      "imageFile": "Alessandro_Del_Piero,_New_York_NY_2015.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Retouched by Blackcat"
+    },
+    {
+      "id": "franck-ribery",
+      "name": "Franck Ribéry",
+      "surname": "Ribéry",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "Galatasaray",
+        "Marsilya",
+        "Bayern Münih",
+        "Fiorentina"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Franck_Ribery_2019_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Sven Mandel"
+    },
+    {
+      "id": "robin-van-persie",
+      "name": "Robin van Persie",
+      "surname": "Van Persie",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "Feyenoord",
+        "Arsenal",
+        "Manchester United",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Loco-Fener_(10).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Елена Рыбакова"
+    },
+    {
+      "id": "michel-platini",
+      "name": "Michel Platini",
+      "surname": "Platini",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Nancy",
+        "Saint-Étienne",
+        "Juventus"
+      ],
+      "birthYear": 1955,
+      "imageFile": "Michel_Platini_2010_(cropped).jpg",
+      "imageLicense": "GFDL 1.2",
+      "imageAttribution": "Wikimedia Commons — Chancellery of the President of the Republic of Poland"
+    },
+    {
+      "id": "franz-beckenbauer",
+      "name": "Franz Beckenbauer",
+      "surname": "Beckenbauer",
+      "nationality": "Almanya",
+      "position": "Defans",
+      "clubs": [
+        "Bayern Münih",
+        "New York Cosmos",
+        "Hamburg"
+      ],
+      "birthYear": 1945,
+      "imageFile": "Franz_Beckenbauer_(1975).jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Panini Group"
+    },
+    {
+      "id": "david-beckham",
+      "name": "David Beckham",
+      "surname": "Beckham",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manchester United",
+        "Real Madrid",
+        "LA Galaxy",
+        "AC Milan",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1975,
+      "imageFile": "David_Beckham_UNICEF_(cropped).jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Soccer Aid for Unicef"
+    },
+    {
+      "id": "ryan-giggs",
+      "name": "Ryan Giggs",
+      "surname": "Giggs",
+      "nationality": "Galler",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manchester United"
+      ],
+      "birthYear": 1973,
+      "imageFile": "Ryan_Giggs_in_2008.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — James Adams"
+    },
+    {
+      "id": "carles-puyol",
+      "name": "Carles Puyol",
+      "surname": "Puyol",
+      "nationality": "İspanya",
+      "position": "Defans",
+      "clubs": [
+        "Barcelona"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Premios_Goya_2020_-_Carles_Pujol.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Pedro J Pacheco"
+    },
+    {
+      "id": "cesc-fabregas",
+      "name": "Cesc Fàbregas",
+      "surname": "Fàbregas",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Arsenal",
+        "Barcelona",
+        "Chelsea",
+        "AS Monaco"
+      ],
+      "birthYear": 1987,
+      "imageFile": "2023_-_Cesc_Fabregas_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Web Summit"
+    },
+    {
+      "id": "xavi-hernandez",
+      "name": "Xavi Hernández",
+      "surname": "Hernández",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Barcelona",
+        "Al-Sadd"
+      ],
+      "birthYear": 1980,
+      "imageFile": "Xavi_13981129001173637176666027076571.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Mehdi Zare"
+    },
+    {
+      "id": "francesco-totti",
+      "name": "Francesco Totti",
+      "surname": "Totti",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "AS Roma"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Francesco_Totti_Vicario_(crop).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Photojournalist Roberto Vicario derivative work: Clarus The Dogcow (talk)"
+    },
+    {
+      "id": "frank-lampard",
+      "name": "Frank Lampard",
+      "surname": "Lampard",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "West Ham United",
+        "Chelsea",
+        "Manchester City"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Frank_Lampard_2019.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Mehdi Bolourian"
+    },
+    {
+      "id": "fernando-torres",
+      "name": "Fernando Torres",
+      "surname": "Torres",
+      "nationality": "İspanya",
+      "position": "Forvet",
+      "clubs": [
+        "Atlético Madrid",
+        "Liverpool",
+        "Chelsea",
+        "AC Milan"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Fernando_Torres_2017.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — cristina cifuentes"
+    },
+    {
+      "id": "arjen-robben",
+      "name": "Arjen Robben",
+      "surname": "Robben",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "PSV",
+        "Chelsea",
+        "Real Madrid",
+        "Bayern Münih"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Arjen_Robben_2013.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Дмитрий Садовников"
+    },
+    {
+      "id": "andrea-pirlo",
+      "name": "Andrea Pirlo",
+      "surname": "Pirlo",
+      "nationality": "İtalya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Inter",
+        "AC Milan",
+        "Juventus"
+      ],
+      "birthYear": 1979,
+      "imageFile": "20150616_-_Portugal_-_Italie_-_Genève_-_Andrea_Pirlo_(cropped).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Clément Bucco-Lechat"
+    },
+    {
+      "id": "paul-scholes",
+      "name": "Paul Scholes",
+      "surname": "Scholes",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "Manchester United"
+      ],
+      "birthYear": 1974,
+      "imageFile": "P_Scholes.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — James Adams"
+    },
+    {
+      "id": "ruud-van-nistelrooy",
+      "name": "Ruud van Nistelrooy",
+      "surname": "Van Nistelrooy",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "PSV",
+        "Manchester United",
+        "Real Madrid",
+        "Hamburg"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Ruud_van_Nistelrooy_2017.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Ardfern"
+    },
+    {
+      "id": "patrick-vieira",
+      "name": "Patrick Vieira",
+      "surname": "Vieira",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Arsenal",
+        "Juventus",
+        "Inter",
+        "Manchester City"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Patrick_Vieira_NYCFC.JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Simon Heseltine"
+    },
+    {
+      "id": "zlatan-ibrahimovic",
+      "name": "Zlatan Ibrahimović",
+      "surname": "Ibrahimović",
+      "nationality": "İsveç",
+      "position": "Forvet",
+      "clubs": [
+        "Ajax",
+        "Juventus",
+        "Inter",
+        "Barcelona",
+        "AC Milan",
+        "Paris Saint-Germain",
+        "Manchester United"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Zlatan_Ibrahimović_nyc.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Colleen Sturtevant"
+    },
+    {
+      "id": "didier-drogba",
+      "name": "Didier Drogba",
+      "surname": "Drogba",
+      "nationality": "Fildişi Sahili",
+      "position": "Forvet",
+      "clubs": [
+        "Marsilya",
+        "Chelsea",
+        "Galatasaray"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Didier_Drogba_(2019)_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Y.Leclercq©"
+    },
+    {
+      "id": "carlos-tevez",
+      "name": "Carlos Tevez",
+      "surname": "Tevez",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Boca Juniors",
+        "West Ham United",
+        "Manchester United",
+        "Manchester City",
+        "Juventus"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Carlos_Tevez_with_Argentina_November_2014_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Egghead06"
+    },
+    {
+      "id": "roberto-baggio",
+      "name": "Roberto Baggio",
+      "surname": "Baggio",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "Fiorentina",
+        "Juventus",
+        "AC Milan",
+        "Inter",
+        "Brescia"
+      ],
+      "birthYear": 1967,
+      "imageFile": "روبرتو_باجو_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — AbolfaZl0990"
+    },
+    {
+      "id": "gianluigi-buffon",
+      "name": "Gianluigi Buffon",
+      "surname": "Buffon",
+      "nationality": "İtalya",
+      "position": "Kaleci",
+      "clubs": [
+        "Parma",
+        "Juventus",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Gianluigi_Buffon_(31784615942)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Original: Doha Stadium Plus Qatar from Doha, Qatar Derivative work: Alza08 Autho"
+    },
+    {
+      "id": "david-villa",
+      "name": "David Villa",
+      "surname": "Villa",
+      "nationality": "İspanya",
+      "position": "Forvet",
+      "clubs": [
+        "Valencia",
+        "Barcelona",
+        "Atlético Madrid"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Spain-Tahiti,_Confederations_Cup_2013_(02)_(Villa_crop).jpg",
+      "imageLicense": "CC BY 3.0 br",
+      "imageAttribution": "Wikimedia Commons — Tânia Rêgo/ABr"
+    },
+    {
+      "id": "john-terry",
+      "name": "John Terry",
+      "surname": "Terry",
+      "nationality": "İngiltere",
+      "position": "Defans",
+      "clubs": [
+        "Chelsea",
+        "Aston Villa"
+      ],
+      "birthYear": 1980,
+      "imageFile": "John_Terry_at_pro-am_Wentworth_golf_course_September_2023_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — ChristopherJClarke"
+    },
+    {
+      "id": "fabio-cannavaro",
+      "name": "Fabio Cannavaro",
+      "surname": "Cannavaro",
+      "nationality": "İtalya",
+      "position": "Defans",
+      "clubs": [
+        "Napoli",
+        "Parma",
+        "Inter",
+        "Juventus",
+        "Real Madrid"
+      ],
+      "birthYear": 1973,
+      "imageFile": "Fabio_Cannavaro_-_2024_(cropped).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Original: Mech867 / Derivative work: Danyele"
+    },
+    {
+      "id": "filippo-inzaghi",
+      "name": "Filippo Inzaghi",
+      "surname": "Inzaghi",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "Atalanta",
+        "Juventus",
+        "AC Milan"
+      ],
+      "birthYear": 1973,
+      "imageFile": "Filippo_Inzaghi_2011.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Delfort"
+    },
+    {
+      "id": "michael-owen",
+      "name": "Michael Owen",
+      "surname": "Owen",
+      "nationality": "İngiltere",
+      "position": "Forvet",
+      "clubs": [
+        "Liverpool",
+        "Real Madrid",
+        "Newcastle United",
+        "Manchester United"
+      ],
+      "birthYear": 1979,
+      "imageFile": "Michael_Owen.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — David Seow"
+    },
+    {
+      "id": "ashley-cole",
+      "name": "Ashley Cole",
+      "surname": "Cole",
+      "nationality": "İngiltere",
+      "position": "Defans",
+      "clubs": [
+        "Arsenal",
+        "Chelsea",
+        "AS Roma"
+      ],
+      "birthYear": 1980,
+      "imageFile": "ACole.JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Stanislav Vedmid"
+    },
+    {
+      "id": "antonio-di-natale",
+      "name": "Antonio Di Natale",
+      "surname": "Di Natale",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "Empoli",
+        "Udinese"
+      ],
+      "birthYear": 1977,
+      "imageFile": "Antonio_di_natale.JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Roberto Vicario"
+    },
+    {
+      "id": "eric-cantona",
+      "name": "Eric Cantona",
+      "surname": "Cantona",
+      "nationality": "Fransa",
+      "position": "Forvet",
+      "clubs": [
+        "Marsilya",
+        "Leeds United",
+        "Manchester United"
+      ],
+      "birthYear": 1966,
+      "imageFile": "Eric_Cantona_Cannes_2009.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Georges Biard"
+    },
+    {
+      "id": "gabriel-batistuta",
+      "name": "Gabriel Batistuta",
+      "surname": "Batistuta",
+      "nationality": "Arjantin",
+      "position": "Forvet",
+      "clubs": [
+        "Fiorentina",
+        "AS Roma",
+        "Inter"
+      ],
+      "birthYear": 1969,
+      "imageFile": "Gabriel_batistuta.jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Wikimedia Commons"
+    },
+    {
+      "id": "yaya-toure",
+      "name": "Yaya Touré",
+      "surname": "Touré",
+      "nationality": "Fildişi Sahili",
+      "position": "Orta Saha",
+      "clubs": [
+        "AS Monaco",
+        "Barcelona",
+        "Manchester City"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Yaya_Touré_(cropped).jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Puma"
+    },
+    {
+      "id": "gareth-bale",
+      "name": "Gareth Bale",
+      "surname": "Bale",
+      "nationality": "Galler",
+      "position": "Forvet",
+      "clubs": [
+        "Southampton",
+        "Tottenham Hotspur",
+        "Real Madrid",
+        "LAFC"
+      ],
+      "birthYear": 1989,
+      "imageFile": "2022_FIFA_World_Cup_United_States_1–1_Wales_-_(32)_(cropped).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — حسین ظهروند"
+    },
+    {
+      "id": "vincent-kompany",
+      "name": "Vincent Kompany",
+      "surname": "Kompany",
+      "nationality": "Belçika",
+      "position": "Defans",
+      "clubs": [
+        "Anderlecht",
+        "Hamburg",
+        "Manchester City"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Vincent_Kompany_Bayern_Munich.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — ManuluxWiki"
+    },
+    {
+      "id": "leonardo-bonucci",
+      "name": "Leonardo Bonucci",
+      "surname": "Bonucci",
+      "nationality": "İtalya",
+      "position": "Defans",
+      "clubs": [
+        "Bari",
+        "Juventus",
+        "AC Milan",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1987,
+      "imageFile": "20150616_-_Portugal_-_Italie_-_Genève_-_Leonardo_Bonucci.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Clément Bucco-Lechat"
+    },
+    {
+      "id": "xabi-alonso",
+      "name": "Xabi Alonso",
+      "surname": "Alonso",
+      "nationality": "İspanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Real Sociedad",
+        "Liverpool",
+        "Real Madrid",
+        "Bayern Münih"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Los_Caminos_del_fútbol._Xabi_Alonso_(39666778464)_(cropped).jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — DONOSTIA KULTURA"
+    },
+    {
+      "id": "alessandro-nesta",
+      "name": "Alessandro Nesta",
+      "surname": "Nesta",
+      "nationality": "İtalya",
+      "position": "Defans",
+      "clubs": [
+        "Lazio",
+        "AC Milan"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Alessandro_Nesta_as_Miami_FC_Manager.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Joerudi"
+    },
+    {
+      "id": "diego-forlan",
+      "name": "Diego Forlán",
+      "surname": "Forlán",
+      "nationality": "Uruguay",
+      "position": "Forvet",
+      "clubs": [
+        "Manchester United",
+        "Villarreal",
+        "Atlético Madrid",
+        "Inter"
+      ],
+      "birthYear": 1979,
+      "imageFile": "U10_Diego_Forlán_7524.jpg",
+      "imageLicense": "CC BY-SA 3.0 at",
+      "imageAttribution": "Wikimedia Commons — Ailura"
+    },
+    {
+      "id": "wayne-rooney",
+      "name": "Wayne Rooney",
+      "surname": "Rooney",
+      "nationality": "İngiltere",
+      "position": "Forvet",
+      "clubs": [
+        "Everton",
+        "Manchester United",
+        "DC United"
+      ],
+      "birthYear": 1985,
+      "imageFile": "Wayne-Rooney-2015-10-21.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Дмитрий Голубович"
+    },
+    {
+      "id": "steven-gerrard",
+      "name": "Steven Gerrard",
+      "surname": "Gerrard",
+      "nationality": "İngiltere",
+      "position": "Orta Saha",
+      "clubs": [
+        "Liverpool",
+        "LA Galaxy"
+      ],
+      "birthYear": 1980,
+      "imageFile": "Steven_Gerrard_2018.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Эдгар Брещанов"
+    },
+    {
+      "id": "paolo-maldini",
+      "name": "Paolo Maldini",
+      "surname": "Maldini",
+      "nationality": "İtalya",
+      "position": "Defans",
+      "clubs": [
+        "AC Milan"
+      ],
+      "birthYear": 1968,
+      "imageFile": "Paolo_Maldini_press_conference_in_Tehran_(cropped).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Foad Ashtari"
+    },
+    {
+      "id": "sergio-ramos",
+      "name": "Sergio Ramos",
+      "surname": "Ramos",
+      "nationality": "İspanya",
+      "position": "Defans",
+      "clubs": [
+        "Sevilla",
+        "Real Madrid",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Sergio_Ramos_Interview_2021_(cropped).jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Real Madrid"
+    },
+    {
+      "id": "rio-ferdinand",
+      "name": "Rio Ferdinand",
+      "surname": "Ferdinand",
+      "nationality": "İngiltere",
+      "position": "Defans",
+      "clubs": [
+        "West Ham United",
+        "Leeds United",
+        "Manchester United"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Web_Summit_2015_-_Dublin,_Ireland_-_22183056474_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Web Summit"
+    },
+    {
+      "id": "alan-shearer",
+      "name": "Alan Shearer",
+      "surname": "Shearer",
+      "nationality": "İngiltere",
+      "position": "Forvet",
+      "clubs": [
+        "Southampton",
+        "Blackburn Rovers",
+        "Newcastle United"
+      ],
+      "birthYear": 1970,
+      "imageFile": "Alan_Shearer_2008.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Originally carltonreid; retouched by DFS454"
+    },
+    {
+      "id": "marco-van-basten",
+      "name": "Marco van Basten",
+      "surname": "Van Basten",
+      "nationality": "Hollanda",
+      "position": "Forvet",
+      "clubs": [
+        "Ajax",
+        "AC Milan"
+      ],
+      "birthYear": 1964,
+      "imageFile": "Marco_van_Basten_(ca_2006).jpg",
+      "imageLicense": "CC BY 2.5",
+      "imageAttribution": "Wikimedia Commons — Paul Blank - Postproduktie.nl"
+    },
+    {
+      "id": "clarence-seedorf",
+      "name": "Clarence Seedorf",
+      "surname": "Seedorf",
+      "nationality": "Hollanda",
+      "position": "Orta Saha",
+      "clubs": [
+        "Ajax",
+        "Real Madrid",
+        "Inter",
+        "AC Milan"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Clarence_Seedorf_2021.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "samuel-eto-o",
+      "name": "Samuel Eto'o",
+      "surname": "Eto'o",
+      "nationality": "Kamerun",
+      "position": "Forvet",
+      "clubs": [
+        "Mallorca",
+        "Barcelona",
+        "Inter",
+        "Chelsea",
+        "Antalyaspor"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Sammuel_Eto'o_Fils_02.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — BACHELOR45"
+    },
+    {
+      "id": "stephan-el-shaarawy",
+      "name": "Stephan El Shaarawy",
+      "surname": "El Shaarawy",
+      "nationality": "İtalya",
+      "position": "Forvet",
+      "clubs": [
+        "Genoa",
+        "AC Milan",
+        "AS Monaco",
+        "AS Roma"
+      ],
+      "birthYear": 1992,
+      "imageFile": "20150616_-_Portugal_-_Italie_-_Genève_-_Stephan_El_Shaarawy_(cropped).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Clément Bucco-Lechat"
+    },
+    {
+      "id": "lothar-matthaus",
+      "name": "Lothar Matthäus",
+      "surname": "Matthäus",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Borussia Mönchengladbach",
+        "Bayern Münih",
+        "Inter"
+      ],
+      "birthYear": 1961,
+      "imageFile": "2019_Lothar_Matthäus.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Steffen Prößdorf"
+    },
+    {
+      "id": "marcelo-vieira",
+      "name": "Marcelo Vieira",
+      "surname": "Marcelo",
+      "nationality": "Brezilya",
+      "position": "Defans",
+      "clubs": [
+        "Fluminense",
+        "Real Madrid",
+        "Olympiakos"
+      ],
+      "birthYear": 1988,
+      "imageFile": "20180610_FIFA_Friendly_Match_Austria_vs._Brazil_Marcelo_850_1622.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Granada"
+    },
+    {
+      "id": "andriy-shevchenko",
+      "name": "Andriy Shevchenko",
+      "surname": "Shevchenko",
+      "nationality": "Ukrayna",
+      "position": "Forvet",
+      "clubs": [
+        "Dinamo Kiev",
+        "AC Milan",
+        "Chelsea"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Андрій_Шевченко_2024_(cropped).png",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Міністерство молоді та спорту України"
+    },
+    {
+      "id": "philipp-lahm",
+      "name": "Philipp Lahm",
+      "surname": "Lahm",
+      "nationality": "Almanya",
+      "position": "Defans",
+      "clubs": [
+        "Stuttgart",
+        "Bayern Münih"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Philipp_Lahm_auf_der_Berlinale_2024,_Ausschnitt.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Elena Ternovaja"
+    },
+    {
+      "id": "gerd-muller",
+      "name": "Gerd Müller",
+      "surname": "Müller",
+      "nationality": "Almanya",
+      "position": "Forvet",
+      "clubs": [
+        "Bayern Münih"
+      ],
+      "birthYear": 1945,
+      "imageFile": "Gerd_Müller_c1973_(cropped).jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Unknown authorUnknown author"
+    },
+    {
+      "id": "bastian-schweinsteiger",
+      "name": "Bastian Schweinsteiger",
+      "surname": "Schweinsteiger",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bayern Münih",
+        "Manchester United"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Re-publica_23_-_Tag_3_(52957826298)_(cropped).jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Anne Barth / re:publica"
+    },
+    {
+      "id": "mesut-ozil",
+      "name": "Mesut Özil",
+      "surname": "Özil",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Schalke 04",
+        "Werder Bremen",
+        "Real Madrid",
+        "Arsenal",
+        "Fenerbahçe"
+      ],
+      "birthYear": 1988,
+      "imageFile": "Mesut_Özil_at_Baku_before_2019_UEFA_Europe_League_Final.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Amir Hosseini"
+    },
+    {
+      "id": "oliver-kahn",
+      "name": "Oliver Kahn",
+      "surname": "Kahn",
+      "nationality": "Almanya",
+      "position": "Kaleci",
+      "clubs": [
+        "Karlsruhe",
+        "Bayern Münih"
+      ],
+      "birthYear": 1969,
+      "imageFile": "2022-07-30_Fußball,_Männer,_DFL-Supercup,_RB_Leipzig_-_FC_Bayern_München_1DX_3179_by_Stepro.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Steffen Prößdorf"
+    },
+    {
+      "id": "radamel-falcao",
+      "name": "Radamel Falcao",
+      "surname": "Falcao",
+      "nationality": "Kolombiya",
+      "position": "Forvet",
+      "clubs": [
+        "Porto",
+        "Atlético Madrid",
+        "AS Monaco",
+        "Galatasaray"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Radamel_Falcao_García_(cropped).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Gilzetbase"
+    },
+    {
+      "id": "marco-reus",
+      "name": "Marco Reus",
+      "surname": "Reus",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Borussia Mönchengladbach",
+        "Borussia Dortmund",
+        "LA Galaxy"
+      ],
+      "birthYear": 1989,
+      "imageFile": "2023-08-12_TSV_Schott_Mainz_gegen_Borussia_Dortmund_(DFB-Pokal_2023-24)_by_Sandro_Halank–126.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Sandro Halank, Wikimedia Commons"
+    },
+    {
+      "id": "eusebio-ferreira",
+      "name": "Eusébio Ferreira",
+      "surname": "Eusébio",
+      "nationality": "Portekiz",
+      "position": "Forvet",
+      "clubs": [
+        "Benfica"
+      ],
+      "birthYear": 1942,
+      "imageFile": "Eusebio_en_1973.jpg",
+      "imageLicense": "Public domain",
+      "imageAttribution": "Wikimedia Commons — Panini"
+    },
+    {
+      "id": "pavel-nedved",
+      "name": "Pavel Nedvěd",
+      "surname": "Nedvěd",
+      "nationality": "Çekya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Sparta Prag",
+        "Lazio",
+        "Juventus"
+      ],
+      "birthYear": 1972,
+      "imageFile": "Pavel_Nedvěd.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Pavel Lebeda"
+    },
+    {
+      "id": "dani-alves",
+      "name": "Dani Alves",
+      "surname": "Alves",
+      "nationality": "Brezilya",
+      "position": "Defans",
+      "clubs": [
+        "Sevilla",
+        "Barcelona",
+        "Juventus",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1983,
+      "imageFile": "07_07_2019_Final_da_Copa_América_2019_(48226649586)_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Palácio do Planalto from Brasilia, Brasil"
+    },
+    {
+      "id": "peter-schmeichel",
+      "name": "Peter Schmeichel",
+      "surname": "Schmeichel",
+      "nationality": "Danimarka",
+      "position": "Kaleci",
+      "clubs": [
+        "Brøndby",
+        "Manchester United",
+        "Sporting CP",
+        "Manchester City"
+      ],
+      "birthYear": 1963,
+      "imageFile": "Peter_Schmeichel_2012-01-25_001.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Carlsberg"
+    },
+    {
+      "id": "ricardo-quaresma",
+      "name": "Ricardo Quaresma",
+      "surname": "Quaresma",
+      "nationality": "Portekiz",
+      "position": "Forvet",
+      "clubs": [
+        "Sporting CP",
+        "Barcelona",
+        "Porto",
+        "Inter",
+        "Beşiktaş"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Ricardo_Quaresma_2017.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "arturo-vidal",
+      "name": "Arturo Vidal",
+      "surname": "Vidal",
+      "nationality": "Şili",
+      "position": "Orta Saha",
+      "clubs": [
+        "Bayer Leverkusen",
+        "Juventus",
+        "Bayern Münih",
+        "Barcelona",
+        "Inter"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Chile_VS._Australia_(13)_2017-6-25_Arturo_Vidal.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Дмитрий Садовников"
+    },
+    {
+      "id": "marek-hamsik",
+      "name": "Marek Hamšík",
+      "surname": "Hamšík",
+      "nationality": "Slovakya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Brescia",
+        "Napoli",
+        "Trabzonspor"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Hamsik_2016.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Илья Хохлов"
+    },
+    {
+      "id": "james-rodriguez",
+      "name": "James Rodríguez",
+      "surname": "Rodríguez",
+      "nationality": "Kolombiya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Porto",
+        "AS Monaco",
+        "Real Madrid",
+        "Bayern Münih",
+        "Everton"
+      ],
+      "birthYear": 1991,
+      "imageFile": "James_al_natural_-_Series,_02.jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Canal 10 Gold"
+    },
+    {
+      "id": "petr-cech",
+      "name": "Petr Čech",
+      "surname": "Čech",
+      "nationality": "Çekya",
+      "position": "Kaleci",
+      "clubs": [
+        "Rennes",
+        "Chelsea",
+        "Arsenal"
+      ],
+      "birthYear": 1982,
+      "imageFile": "Petr_Čech_Chelsea_2013.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Warrenfish"
+    },
+    {
+      "id": "luis-figo",
+      "name": "Luís Figo",
+      "surname": "Figo",
+      "nationality": "Portekiz",
+      "position": "Orta Saha",
+      "clubs": [
+        "Sporting CP",
+        "Barcelona",
+        "Real Madrid",
+        "Inter"
+      ],
+      "birthYear": 1972,
+      "imageFile": "L._Figo_2017_(cropped).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Biser Todorov"
+    },
+    {
+      "id": "keylor-navas",
+      "name": "Keylor Navas",
+      "surname": "Navas",
+      "nationality": "Kosta Rika",
+      "position": "Kaleci",
+      "clubs": [
+        "Levante",
+        "Real Madrid",
+        "Paris Saint-Germain"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Keylor_Navas_2018_(cropped).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Антон Зайцев"
+    },
+    {
+      "id": "gael-clichy",
+      "name": "Gaël Clichy",
+      "surname": "Clichy",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "İstanbul Başakşehir FK"
+      ],
+      "birthYear": 1985,
+      "imageFile": "Gael_Clichy,_Premier_League_parade_11-12_(cropped).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Stuart Grout from Manchester, UK"
+    },
+    {
+      "id": "sambou-yatabare",
+      "name": "Sambou Yatabaré",
+      "surname": "Yatabaré",
+      "nationality": "Fransa",
+      "position": "Orta Saha",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1989,
+      "imageFile": "20150331_Mali_vs_Ghana_171.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Pierre-Yves Beaudouin"
+    },
+    {
+      "id": "ahmed-hasan",
+      "name": "Ahmed Hasan",
+      "surname": "Hasan",
+      "nationality": "Mısır",
+      "position": "Orta Saha",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1975,
+      "imageFile": "أحمد_حسن_لاعب_المنتخب_المصري_(cropped).png",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — FilGoal"
+    },
+    {
+      "id": "iasmin-latovlevici",
+      "name": "Iasmin Latovlevici",
+      "surname": "Latovlevici",
+      "nationality": "Romanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1986,
+      "imageFile": "Kiev-St_(3).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Илья Хохлов"
+    },
+    {
+      "id": "robinho",
+      "name": "Robinho",
+      "surname": "Robinho",
+      "nationality": "Brezilya",
+      "position": "Orta Saha",
+      "clubs": [
+        "İstanbul Başakşehir FK"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Robinho061115-2_(cropped_2).jpg",
+      "imageLicense": "CC BY-SA 2.0 de",
+      "imageAttribution": "Wikimedia Commons — Reto Stauffer, www.hopp-schwiiz.ch"
+    },
+    {
+      "id": "serdar-tasci",
+      "name": "Serdar Taşçı",
+      "surname": "Taşçı",
+      "nationality": "Türkiye",
+      "position": "Defans",
+      "clubs": [
+        "İstanbul Başakşehir FK"
+      ],
+      "birthYear": 1987,
+      "imageFile": "2016-05-15_Serdar_Tasci_0999.JPG",
+      "imageLicense": "CC BY-SA 3.0 de",
+      "imageAttribution": "Wikimedia Commons — Michael Lucan"
+    },
+    {
+      "id": "bekim-balaj",
+      "name": "Bekim Balaj",
+      "surname": "Balaj",
+      "nationality": "Arnavutluk",
+      "position": "Forvet",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Bekim_Balaj_2016.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Елена Рыбакова"
+    },
+    {
+      "id": "marko-marin",
+      "name": "Marko Marin",
+      "surname": "Marin",
+      "nationality": "Almanya",
+      "position": "Orta Saha",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1989,
+      "imageFile": "Marko_Marin_-_SV_Werder_Bremen_(1).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Steindy (talk) 15:05, 21 July 2009 (UTC)"
+    },
+    {
+      "id": "esteban-alvarado",
+      "name": "Esteban Alvarado",
+      "surname": "Alvarado",
+      "nationality": "Kosta Rika",
+      "position": "Kaleci",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1989,
+      "imageFile": "Esteban_Alvarado.JPG",
+      "imageLicense": "CC BY-SA 1.0",
+      "imageAttribution": "Wikimedia Commons — Denis Rudenko"
+    },
+    {
+      "id": "jean-marie-pfaff",
+      "name": "Jean-Marie Pfaff",
+      "surname": "Pfaff",
+      "nationality": "Belçika",
+      "position": "Kaleci",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1953,
+      "imageFile": "Jean-Marie_Pfaff_at_Runa_Ralley_2007_cropped.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageAttribution": "Wikimedia Commons — Jean-Marie_Pfaff_at_Runa_Ralley_2007.jpg: Tim Dobbelaere from Ieper, Belgium der"
+    },
+    {
+      "id": "halil-altintop",
+      "name": "Halil Altıntop",
+      "surname": "Altıntop",
+      "nationality": "Türkiye",
+      "position": "Orta Saha",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1982,
+      "imageFile": "Halil_Altintop_-_FC_Augsburg_(cropped).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Maerwa"
+    },
+    {
+      "id": "aliaksandr-hleb",
+      "name": "Aliaksandr Hleb",
+      "surname": "Hleb",
+      "nationality": "Belarus",
+      "position": "Orta Saha",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Alexander_Hleb_press.jpeg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — SuperPhotographer"
+    },
+    {
+      "id": "rafael-pereira-da-silva",
+      "name": "Rafael Pereira da Silva",
+      "surname": "da Silva",
+      "nationality": "Brezilya",
+      "position": "Orta Saha",
+      "clubs": [
+        "İstanbul Başakşehir FK"
+      ],
+      "birthYear": 1990,
+      "imageFile": "Rafael_Man_Utd_2011.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Andrea Sartorati"
+    },
+    {
+      "id": "joao-pereira",
+      "name": "João Pereira",
+      "surname": "Pereira",
+      "nationality": "Portekiz",
+      "position": "Orta Saha",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1984,
+      "imageFile": "JoaoPereiraSporting.png",
+      "imageLicense": "CC BY 4.0",
+      "imageAttribution": "Wikimedia Commons — Agência Lusa."
+    },
+    {
+      "id": "martin-skrtel",
+      "name": "Martin Škrtel",
+      "surname": "Škrtel",
+      "nationality": "Slovakya",
+      "position": "Defans",
+      "clubs": [
+        "İstanbul Başakşehir FK"
+      ],
+      "birthYear": 1984,
+      "imageFile": "Martin_Škrtel_2019.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Кирилл Венедиктов"
+    },
+    {
+      "id": "eljero-elia",
+      "name": "Eljero Elia",
+      "surname": "Elia",
+      "nationality": "Hollanda Krallığı",
+      "position": "Orta Saha",
+      "clubs": [
+        "İstanbul Başakşehir FK"
+      ],
+      "birthYear": 1987,
+      "imageFile": "HSV_ELJERO_ELIA.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Sorodorin"
+    },
+    {
+      "id": "geremi-njitap",
+      "name": "Geremi Njitap",
+      "surname": "Njitap",
+      "nationality": "Kamerun",
+      "position": "Orta Saha",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1978,
+      "imageFile": "Geremi_Njitap_Hull_City_v._Newcastle_United_1_(cropped).png",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Mattythewhite"
+    },
+    {
+      "id": "didier-zokora",
+      "name": "Didier Zokora",
+      "surname": "Zokora",
+      "nationality": "Fildişi Sahili",
+      "position": "Orta Saha",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1980,
+      "imageFile": "Zokora_Trabzonspor.JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Ultraslansi"
+    },
+    {
+      "id": "robert-vittek",
+      "name": "Róbert Vittek",
+      "surname": "Vittek",
+      "nationality": "Slovakya",
+      "position": "Forvet",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1982,
+      "imageFile": "Robert_Vittek_2008.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — User:Jarlhelm"
+    },
+    {
+      "id": "gervinho",
+      "name": "Gervinho",
+      "surname": "Gervinho",
+      "nationality": "Fildişi Sahili",
+      "position": "Orta Saha",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1987,
+      "imageFile": "Colombia_and_Ivory_Coast_match_at_the_FIFA_World_Cup_2014-06-19_(15).jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — Danilo Borges/copa2014.gov.br Licença Creative Commons Atribuição 3.0 Brasil"
+    },
+    {
+      "id": "suk-hyun-jun",
+      "name": "Suk Hyun-jun",
+      "surname": "Hyun-jun",
+      "nationality": "Güney Kore",
+      "position": "Forvet",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1991,
+      "imageFile": "Suk_Hyun-jun_(2020).jpg",
+      "imageLicense": "CC BY 3.0",
+      "imageAttribution": "Wikimedia Commons — ESTAC Troyes"
+    },
+    {
+      "id": "jose-bosingwa",
+      "name": "José Bosingwa",
+      "surname": "Bosingwa",
+      "nationality": "Portekiz",
+      "position": "Orta Saha",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1982,
+      "imageFile": "José_Bosingwa'13_(cropped).JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageAttribution": "Wikimedia Commons — Ultraslansi"
+    },
+    {
+      "id": "oscar-cardozo",
+      "name": "Óscar Cardozo",
+      "surname": "Cardozo",
+      "nationality": "Paraguay",
+      "position": "Forvet",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1983,
+      "imageFile": "Óscar_Cardozo_-_Trabzonspor.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — TrabzonsporGazetesi"
+    },
+    {
+      "id": "shane-smeltz",
+      "name": "Shane Smeltz",
+      "surname": "Smeltz",
+      "nationality": "Yeni Zelanda",
+      "position": "Forvet",
+      "clubs": [
+        "Gençlerbirliği SK"
+      ],
+      "birthYear": 1981,
+      "imageFile": "Shane_Smeltz_in_action_with_Borneo_FC.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageAttribution": "Wikimedia Commons — Realarul"
+    },
+    {
+      "id": "rigobert-song",
+      "name": "Rigobert Song",
+      "surname": "Song",
+      "nationality": "Fransa",
+      "position": "Defans",
+      "clubs": [
+        "Trabzonspor"
+      ],
+      "birthYear": 1976,
+      "imageFile": "Rigobert_Song_2008.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageAttribution": "Wikimedia Commons — Jake Brown"
+    }
+  ]
+}

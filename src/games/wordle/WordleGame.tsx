@@ -7,8 +7,12 @@ import { ModeToggle } from '../../components/ModeToggle';
 import { StatsModal } from '../../components/StatsModal';
 import { ResultModal } from '../../components/ResultModal';
 import { useTheme } from '../../theme/ThemeContext';
-import { DailyCompletionRecord, GameMode, GameStats, Player } from '../../types';
-import { getDailyWordlePlayer, getRandomWordlePlayer } from '../../data/playerRepository';
+import { DailyCompletionRecord, GameMode, GameStats, PuzzlePlayer } from '../../types';
+import {
+  getDailyWordlePlayer,
+  getRandomWordlePlayer,
+  isValidWordleSurname,
+} from '../../data/playerRepository';
 import { normalizeForWordle } from '../../utils/normalization';
 import { getLocalDateKey } from '../../utils/daily';
 import {
@@ -32,7 +36,7 @@ export function WordleGame() {
   const dateKey = getLocalDateKey();
 
   const [mode, setMode] = useState<GameMode>('daily');
-  const [player, setPlayer] = useState<Player>(() => getDailyWordlePlayer());
+  const [player, setPlayer] = useState<PuzzlePlayer>(() => getDailyWordlePlayer());
   const [guesses, setGuesses] = useState<string[]>([]);
   const [evaluations, setEvaluations] = useState<WordleCellStatus[][]>([]);
   const [currentGuess, setCurrentGuess] = useState('');
@@ -120,6 +124,10 @@ export function WordleGame() {
       if (key === 'ENTER') {
         if (currentGuess.length < targetWord.length) {
           setMessage(`Lütfen ${targetWord.length} harf gir.`);
+          return;
+        }
+        if (currentGuess !== targetWord && !isValidWordleSurname(currentGuess)) {
+          setMessage('Bu soyad oyuncu havuzunda bulunamadı.');
           return;
         }
         const evalRow = evaluateWordleGuess(currentGuess, targetWord);

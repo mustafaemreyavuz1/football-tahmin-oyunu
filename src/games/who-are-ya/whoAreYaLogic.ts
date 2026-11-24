@@ -1,4 +1,4 @@
-import { Player } from '../../types';
+import { GuessPlayer, PuzzlePlayer } from '../../types';
 
 export const WHO_ARE_YA_MAX_ATTEMPTS = 6;
 
@@ -9,12 +9,12 @@ export const WHO_ARE_YA_MAX_ATTEMPTS = 6;
 export const BLUR_LEVELS = [26, 20, 14, 9, 5, 2, 0] as const;
 
 export interface WhoAreYaGuessFeedback {
-  guessedPlayer: Player;
+  guessedPlayer: GuessPlayer;
   isCorrect: boolean;
   nationalityMatch: boolean;
   positionMatch: boolean;
   sharedClub: string | null;
-  birthYearComparison: 'exact' | 'higher' | 'lower';
+  birthYearComparison: 'exact' | 'higher' | 'lower' | 'unknown';
 }
 
 export function getBlurAmount(wrongGuesses: number, revealed: boolean): number {
@@ -24,8 +24,8 @@ export function getBlurAmount(wrongGuesses: number, revealed: boolean): number {
 }
 
 export function evaluateWhoAreYaGuess(
-  guessed: Player,
-  target: Player
+  guessed: GuessPlayer,
+  target: PuzzlePlayer
 ): WhoAreYaGuessFeedback {
   const isCorrect = guessed.id === target.id;
   const nationalityMatch = guessed.nationality === target.nationality;
@@ -35,11 +35,15 @@ export function evaluateWhoAreYaGuess(
   const sharedClub =
     guessed.clubs.find((c) => targetClubs.has(c.toLowerCase())) ?? null;
 
-  let birthYearComparison: 'exact' | 'higher' | 'lower' = 'exact';
-  if (target.birthYear > guessed.birthYear) {
-    birthYearComparison = 'higher';
-  } else if (target.birthYear < guessed.birthYear) {
-    birthYearComparison = 'lower';
+  let birthYearComparison: 'exact' | 'higher' | 'lower' | 'unknown' = 'unknown';
+  if (typeof guessed.birthYear === 'number') {
+    if (target.birthYear > guessed.birthYear) {
+      birthYearComparison = 'higher';
+    } else if (target.birthYear < guessed.birthYear) {
+      birthYearComparison = 'lower';
+    } else {
+      birthYearComparison = 'exact';
+    }
   }
 
   return {

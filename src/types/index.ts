@@ -12,18 +12,35 @@ export interface Team {
   secondaryColor: string;
 }
 
-export interface Player {
+export interface GuessPlayer {
   id: string;
   name: string;
   surname: string;
   nationality: string;
   position: string;
   clubs: string[];
+  birthYear?: number;
+}
+
+export type GuessPoolTuple = [
+  id: string,
+  name: string,
+  surname: string,
+  nationality: string,
+  position: string,
+  clubs: string[],
+  birthYear: number | null
+];
+
+export interface PuzzlePlayer extends GuessPlayer {
   birthYear: number;
   imageFile: string;
   imageLicense: string;
   imageAttribution: string;
 }
+
+/** @deprecated Alias kept for backward compatibility; prefer PuzzlePlayer or GuessPlayer */
+export type Player = PuzzlePlayer;
 
 export interface TenaBallQuestion {
   id: string;

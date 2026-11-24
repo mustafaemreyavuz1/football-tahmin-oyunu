@@ -8,7 +8,7 @@ import { TeamColorDot } from '../src/components/TeamColorDot';
 import { useTheme } from '../src/theme/ThemeContext';
 import { getTeamsGroupedByLeague } from '../src/data/teamRepository';
 import { getTenaBallSyncStatus, refreshTenaBallQuestions } from '../src/data/tenaballRepository';
-import { getAllPlayers } from '../src/data/playerRepository';
+import { getGuessPoolCount, getPuzzlePool } from '../src/data/playerRepository';
 import { RemoteSyncStatus, ThemePreference } from '../src/types';
 
 const THEME_OPTIONS: { value: ThemePreference; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
@@ -25,7 +25,8 @@ export default function SettingsScreen() {
   const [syncing, setSyncing] = useState(false);
 
   const groupedTeams = useMemo(() => getTeamsGroupedByLeague(teamQuery), [teamQuery]);
-  const playerCount = getAllPlayers().length;
+  const puzzlePoolCount = getPuzzlePool().length;
+  const guessPoolCount = getGuessPoolCount();
 
   const handleSync = async () => {
     setSyncing(true);
@@ -199,7 +200,10 @@ export default function SettingsScreen() {
                 : 'Uygulama İçi Paketli Veri'}
           </Text>
           <Text style={[styles.metaLine, { color: tokens.textMuted }]}>
-            Oyuncu Havuzu: {playerCount} futbolcu (Who Are Ya & Wordle)
+            Bulmaca Havuzu (Who Are Ya & Wordle): {puzzlePoolCount} doğrulanmış futbolcu
+          </Text>
+          <Text style={[styles.metaLine, { color: tokens.textMuted }]}>
+            Tahmin & Arama Havuzu: {guessPoolCount} futbolcu (Wikidata CC0)
           </Text>
           <Pressable
             onPress={handleSync}
