@@ -221,4 +221,4 @@ Farklı bir fork veya dal kullanıyorsanız bu sabiti kendi raw GitHub URL'nizle
 
 ## Lisans
 
-Kod MIT lisanslıdır ([LICENSE](./LICENSE)). Oyuncu verisi Wikidata'dan (CC0), görseller Wikimedia Commons'tan kendi lisanslarıyla alınmıştır; atıflar uygulamada gösterilir.
+Kod MIT lisanslıdır ([LICENSE](./LICENSE)). Oyuncu verisi Wikidata'dan (CC0), gömülü futbolcu görselleri ise [assets/players/ATTRIBUTIONS.md](./assets/players/ATTRIBUTIONS.md) dosyasında listelenen kendi Wikimedia Commons lisanslarıyla dağıtılır; atıflar ayrıca uygulamada da gösterilir.
