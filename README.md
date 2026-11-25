@@ -146,6 +146,7 @@ football-tahmin-oyunu/
 - **Kulüp Logoları / Armaları**: Uygulamada **hiçbir kulüp logosu veya arması kullanılmaz**; takım temaları yalnızca kulüp renkleriyle (`primaryColor`, `secondaryColor`) oluşturulur.
 - **Who Are Ya Görsel Atıfları**: Oyun sırasında ipucu vermemek için atıf ve dosya/URL bilgisi gizlenir; oyun bitiminde sonuç ekranında ve **Ayarlar → Görsel Atıfları** sayfasında tüm 240 oyuncunun yazar/kaynak ve lisans bilgisi aranabilir olarak sunulur.
 - **TenaBall Ses Efekti**: `assets/sounds/tick.wav` (38 ms, 16-bit mono PCM WAV), dış kaynaktan indirilmeden proje içindeki [scripts/generate-tick-sound.mjs](scripts/generate-tick-sound.mjs) scripti ile saf Node.js koduyla üretilmiş telifsiz bir tık sesidir (üçüncü taraf atıf gerektirmez). Ayarlar'dan "TenaBall animasyonları" ve "TenaBall sesleri" ayrı ayrı kapatılabilir; cihazın "Hareketi Azalt" (Reduce Motion) tercihi açıksa animasyon ve ses otomatik olarak atlanır.
+- **Uygulama İkonu ve Açılış Ekranı**: `assets/branding/` altındaki uygulama ikonu, Android adaptive ikon, açılış (splash) ekranı ve web favicon'u bu proje için [scripts/generate-icon.mjs](scripts/generate-icon.mjs) ile üretilmiştir.
 - **`expo-doctor` Paket Notu**: `package.json` içindeki `expo.doctor.reactNativeDirectoryCheck.exclude` listesinde yalnızca `expo-av` ve `query-string` yer alır. `expo-av` Expo SDK 52 için uygundur (ileride SDK yükseltilirken `expo-audio`'ya geçilmesi önerilir); `query-string` ise `expo-router` web paketi için `7.1.3` sürümünde bilinçli olarak sabitlenmiştir.
 
 ---

@@ -4,9 +4,15 @@
     "slug": "football-tahmin-oyunu",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/branding/icon.png",
     "scheme": "football-tahmin-oyunu",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/branding/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1B6B3A"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.hobby.footballtahminoyunu"
@@ -14,12 +20,14 @@
     "android": {
       "package": "com.hobby.footballtahminoyunu",
       "adaptiveIcon": {
+        "foregroundImage": "./assets/branding/adaptive-icon.png",
         "backgroundColor": "#1B6B3A"
       }
     },
     "web": {
       "bundler": "metro",
-      "output": "single"
+      "output": "single",
+      "favicon": "./assets/branding/favicon.png"
     },
     "plugins": [
       "expo-router",
