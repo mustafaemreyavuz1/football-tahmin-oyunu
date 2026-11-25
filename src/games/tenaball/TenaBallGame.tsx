@@ -24,6 +24,7 @@ import {
   getRandomTenaBallQuestion,
 } from '../../data/tenaballRepository';
 import { searchGuessPool } from '../../data/playerRepository';
+import { useDebouncedValue } from '../../utils/useDebouncedValue';
 import { getLocalDateKey } from '../../utils/daily';
 import {
   addTenaBallErrorReport,
@@ -290,14 +291,16 @@ export function TenaBallGame() {
     );
   }, [isDailyLocked, dailyRecord, mode, dateKey, question, solvedFlags, gameState.livesLeft]);
 
+  const debouncedInput = useDebouncedValue(inputValue, 130);
+
   const suggestions: SearchSuggestion[] = useMemo(() => {
-    if (!inputValue.trim() || isFinished || isAnimating) return [];
-    return searchGuessPool(inputValue, 6).map((p) => ({
+    if (!debouncedInput.trim() || isFinished || isAnimating) return [];
+    return searchGuessPool(debouncedInput, 8).map((p) => ({
       id: p.id,
       label: p.name,
       sublabel: `${p.nationality} • ${p.position}`,
     }));
-  }, [inputValue, isFinished, isAnimating]);
+  }, [debouncedInput, isFinished, isAnimating]);
 
   const handleGuessSubmit = async (overrideGuess?: string) => {
     if (isFinished || isAnimating || !question) return;

@@ -102,7 +102,7 @@ const guessNormNames = new Set();
 let guessDuplicates = 0;
 
 for (const row of guessPool) {
-  if (!Array.isArray(row) || row.length !== 7) {
+  if (!Array.isArray(row) || (row.length !== 7 && row.length !== 8)) {
     errors.push(`guessPool malformed tuple: ${JSON.stringify(row)}`);
     continue;
   }

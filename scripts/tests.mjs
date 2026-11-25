@@ -204,6 +204,76 @@ assert.equal(wavBuf.toString('ascii', 8, 12), 'WAVE', 'tick.wav must have WAVE h
 assert.equal(wavBuf.readUInt16LE(22), 1, 'tick.wav must be mono');
 assert.equal(wavBuf.readUInt16LE(34), 16, 'tick.wav must be 16-bit PCM');
 
+// 8. Search index build & query performance + Turkish/accented matching over 4116 players
+const tIdx0 = performance.now();
+const prefixBuckets = new Map();
+const normNames = new Array(guessRows.length);
+for (let i = 0; i < guessRows.length; i += 1) {
+  const n = guessRows[i][7] ?? normalizeText(guessRows[i][1]);
+  normNames[i] = n;
+  const toks = n.split(' ');
+  for (let t = 0; t < toks.length; t += 1) {
+    const tok = toks[t];
+    if (!tok) continue;
+    for (const key of tok.length >= 2 ? [tok[0], tok.slice(0, 2)] : [tok[0]]) {
+      let list = prefixBuckets.get(key);
+      if (!list) {
+        list = [];
+        prefixBuckets.set(key, list);
+      }
+      if (list[list.length - 1] !== i) list.push(i);
+    }
+  }
+}
+const indexBuildMs = performance.now() - tIdx0;
+assert.ok(indexBuildMs < 300, `Index build took ${indexBuildMs.toFixed(1)}ms (budget < 300ms)`);
+
+function benchSearch(query, limit = 8) {
+  const t0 = performance.now();
+  const norm = normalizeText(query);
+  const qToks = norm.split(' ').filter(Boolean);
+  const first = qToks[0] ?? norm;
+  const bucketKey = first.length >= 2 ? first.slice(0, 2) : first[0];
+  const cand = prefixBuckets.get(bucketKey) ?? [];
+  const res = [];
+  for (let k = 0; k < cand.length && res.length < limit; k += 1) {
+    const i = cand[k];
+    const nName = normNames[i];
+    if (nName.startsWith(norm) || nName.includes(` ${first}`)) {
+      res.push(guessRows[i][1]);
+    }
+  }
+  return { res, ms: performance.now() - t0 };
+}
+
+const searchCases = [
+  ['m', null],
+  ['çalhanoğlu', 'Hakan Çalhanoğlu'],
+  ['calhanoglu', 'Hakan Çalhanoğlu'],
+  ['güler', 'Arda Güler'],
+  ['guler', 'Arda Güler'],
+  ['yıldız', 'Kenan Yıldız'],
+  ['şükür', 'Hakan Şükür'],
+  ['özil', 'Mesut Özil'],
+  ['mbappé', 'Kylian Mbappé'],
+  ['mbappe', 'Kylian Mbappé'],
+  ['sánchez', 'Alexis Sánchez'],
+];
+
+let maxQueryMs = 0;
+for (const [q, expected] of searchCases) {
+  const { res, ms } = benchSearch(q, 10);
+  if (ms > maxQueryMs) maxQueryMs = ms;
+  assert.ok(ms < 20, `Search "${q}" took ${ms.toFixed(2)}ms (budget < 20ms)`);
+  assert.ok(res.length > 0, `Search "${q}" returned 0 results`);
+  if (expected) {
+    assert.ok(
+      res.some((name) => normalizeText(name) === normalizeText(expected)),
+      `Search "${q}" did not include "${expected}" (got: ${res.join(', ')})`
+    );
+  }
+}
+
 console.log(
-  `All unit tests passed! (puzzlePool: ${puzzlePool.length}, guessPool: ${guessRows.length}, Wordle-eligible: ${validWordleCount}, TenaBall active: ${withUnverified.length}, countdown rank1=${schedules[1].totalDurationMs}ms rank10=${schedules[10].totalDurationMs}ms)`
+  `All unit tests passed! (puzzlePool: ${puzzlePool.length}, guessPool: ${guessRows.length}, indexBuild: ${indexBuildMs.toFixed(1)}ms, maxSearch: ${maxQueryMs.toFixed(2)}ms)`
 );

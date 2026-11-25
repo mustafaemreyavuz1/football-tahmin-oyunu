@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, InteractionManager, View } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, useTheme } from '../src/theme/ThemeContext';
 import { refreshTenaBallQuestions } from '../src/data/tenaballRepository';
+import { warmGuessIndex } from '../src/data/playerRepository';
 
 function RootNavigator() {
   const { tokens, onboardingDone, isHydrated } = useTheme();
@@ -13,6 +14,10 @@ function RootNavigator() {
 
   useEffect(() => {
     refreshTenaBallQuestions().catch(() => {});
+    const task = InteractionManager.runAfterInteractions(() => {
+      warmGuessIndex();
+    });
+    return () => task.cancel();
   }, []);
 
   useEffect(() => {

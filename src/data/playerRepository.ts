@@ -58,27 +58,26 @@ function tupleToGuessPlayer(row: GuessPoolTuple): GuessPlayer {
   };
 }
 
-// --- Lazy Search & Lookup Index (zero startup cost) ---
+// --- Lazy, Precomputed Search & Lookup Index ---
 interface GuessSearchIndex {
-  byId: Map<string, GuessPlayer>;
-  byNormName: Map<string, GuessPlayer>;
+  byId: Map<string, number>;
   puzzleIdSet: Set<string>;
   normNames: string[];
-  normSurnames: string[];
   prefixBuckets: Map<string, number[]>;
   wordleValidSurnames: Set<string>;
 }
 
 let cachedIndex: GuessSearchIndex | null = null;
+let devSearchCount = 0;
 
 function ensureGuessIndex(): GuessSearchIndex {
   if (cachedIndex) return cachedIndex;
 
-  const byId = new Map<string, GuessPlayer>();
-  const byNormName = new Map<string, GuessPlayer>();
+  const t0 = __DEV__ ? Date.now() : 0;
+
+  const byId = new Map<string, number>();
   const puzzleIdSet = new Set(PUZZLE_POOL.map((p) => p.id));
   const normNames: string[] = new Array(GUESS_ROWS.length);
-  const normSurnames: string[] = new Array(GUESS_ROWS.length);
   const prefixBuckets = new Map<string, number[]>();
   const wordleValidSurnames = new Set<string>();
 
@@ -95,45 +94,61 @@ function ensureGuessIndex(): GuessSearchIndex {
 
   for (let i = 0; i < GUESS_ROWS.length; i += 1) {
     const row = GUESS_ROWS[i];
-    const player = tupleToGuessPlayer(row);
-    const normName = normalizeText(player.name);
-    const normSurname = normalizeText(player.surname);
+    const id = row[0];
+    // Use build-time precomputed normName (row[7]) to avoid NFD/regex on Hermes
+    const normName = row[7] ?? normalizeText(row[1]);
 
-    byId.set(player.id, player);
-    byNormName.set(normName, player);
+    byId.set(id, i);
     normNames[i] = normName;
-    normSurnames[i] = normSurname;
 
-    // Register Wordle-valid surname (and last token) in O(1) lookup set
-    const wordleSurname = normalizeForWordle(player.surname);
-    if (wordleSurname.length >= 2) {
-      wordleValidSurnames.add(wordleSurname);
-    }
-    const tokens = normName.split(' ').filter(Boolean);
-    for (const tok of tokens) {
+    // Split precomputed ASCII normName by space (zero regex!)
+    const tokens = normName.split(' ');
+    for (let t = 0; t < tokens.length; t += 1) {
+      const tok = tokens[t];
+      if (!tok) continue;
+      addBucket(tok[0], i);
       if (tok.length >= 2) {
         addBucket(tok.slice(0, 2), i);
       }
-      if (tok.length === 1) {
-        addBucket(tok, i);
-      }
     }
+
     const lastTok = tokens[tokens.length - 1];
     if (lastTok && lastTok.length >= 2) {
       wordleValidSurnames.add(lastTok.toUpperCase());
+    }
+    // Also register compact multi-word surname for Wordle if surname has spaces
+    const rawSurname = row[2];
+    if (rawSurname.includes(' ') || rawSurname.includes('-') || rawSurname.includes("'")) {
+      const compact = normalizeForWordle(rawSurname);
+      if (compact.length >= 2) {
+        wordleValidSurnames.add(compact);
+      }
     }
   }
 
   cachedIndex = {
     byId,
-    byNormName,
     puzzleIdSet,
     normNames,
-    normSurnames,
     prefixBuckets,
     wordleValidSurnames,
   };
+
+  if (__DEV__) {
+    console.log(
+      `[SearchPerf] guessPool index built for ${GUESS_ROWS.length} players in ${Date.now() - t0} ms`
+    );
+  }
+
   return cachedIndex;
+}
+
+/**
+ * Warms the search index once after initial render (via InteractionManager)
+ * so the very first keystroke has zero indexing latency.
+ */
+export function warmGuessIndex(): void {
+  ensureGuessIndex();
 }
 
 // --- Pool Getters ---
@@ -161,7 +176,8 @@ export function getWordlePool(): PuzzlePlayer[] {
 }
 
 export function getGuessPlayerById(id: string): GuessPlayer | undefined {
-  return ensureGuessIndex().byId.get(id);
+  const rowIdx = ensureGuessIndex().byId.get(id);
+  return rowIdx !== undefined ? tupleToGuessPlayer(GUESS_ROWS[rowIdx]) : undefined;
 }
 
 export function getPuzzlePlayerById(id: string): PuzzlePlayer | undefined {
@@ -169,14 +185,14 @@ export function getPuzzlePlayerById(id: string): PuzzlePlayer | undefined {
 }
 
 /**
- * O(1) validation for Football Wordle guesses against the 2000+ player guessPool.
+ * O(1) validation for Football Wordle guesses against the 4000+ player guessPool.
  */
 export function isValidWordleSurname(normalizedUpperGuess: string): boolean {
   return ensureGuessIndex().wordleValidSurnames.has(normalizedUpperGuess);
 }
 
 /**
- * Builds a Wikimedia Commons thumbnail URL via Special:FilePath.
+ * Builds a Wikimedia Commons thumbnail URL via Special:FilePath (used as fallback / reference).
  */
 export function getWikimediaImageUrl(imageFile: string, width: number = 480): string {
   if (imageFile.startsWith('http://') || imageFile.startsWith('https://')) {
@@ -186,65 +202,86 @@ export function getWikimediaImageUrl(imageFile: string, width: number = 480): st
 }
 
 /**
- * Fast indexed accent-insensitive autocomplete search over the 2000+ guessPool.
- * Uses 2-char token prefix buckets to avoid full linear scans on every keystroke.
+ * Fast, non-fuzzy indexed autocomplete search over guessPool (prefix & word-start matching only).
+ * - Uses 1-char / 2-char token prefix buckets (never scans all 4000+ rows on normal queries)
+ * - Zero localeCompare('tr') calls (preserves pre-sorted rowIdx order in O(1))
+ * - Limited to at most `limit` (default 8) items
  */
 export function searchGuessPool(query: string, limit: number = 8): GuessPlayer[] {
+  const t0 = __DEV__ ? Date.now() : 0;
   const norm = normalizeText(query);
   if (norm.length < 1) return [];
 
   const idx = ensureGuessIndex();
   const queryTokens = norm.split(' ').filter(Boolean);
   const firstToken = queryTokens[0] ?? norm;
+  const bucketKey = firstToken.length >= 2 ? firstToken.slice(0, 2) : firstToken[0];
+  const candidateIndices = idx.prefixBuckets.get(bucketKey);
+  if (!candidateIndices || candidateIndices.length === 0) return [];
 
-  // Candidate row indices: use 2-char prefix bucket when possible
-  let candidateIndices: number[] | null = null;
-  if (firstToken.length >= 2) {
-    candidateIndices = idx.prefixBuckets.get(firstToken.slice(0, 2)) ?? [];
-  }
+  const cap = Math.min(limit, 10);
+  // Tiered buckets avoid sorting thousands of candidates (preserves alphabetical rowIdx order)
+  const tier0Puzzle: number[] = []; // full name startsWith(norm) & in puzzlePool
+  const tier0Other: number[] = [];  // full name startsWith(norm)
+  const tier1Puzzle: number[] = []; // word-start match & in puzzlePool
+  const tier1Other: number[] = [];  // word-start match
 
-  const scored: { rowIdx: number; rank: number; isPuzzle: boolean }[] = [];
-  const scanIndices = candidateIndices ?? Array.from({ length: GUESS_ROWS.length }, (_, i) => i);
-
-  for (let k = 0; k < scanIndices.length; k += 1) {
-    const i = scanIndices[k];
+  for (let k = 0; k < candidateIndices.length; k += 1) {
+    const i = candidateIndices[k];
     const nName = idx.normNames[i];
-    const nSurname = idx.normSurnames[i];
 
-    let rank = -1;
-    if (nName.startsWith(norm) || nSurname.startsWith(norm)) {
-      rank = 0;
-    } else if (queryTokens.every((t) => nName.includes(t))) {
-      rank = 1;
-    }
-
-    if (rank !== -1) {
-      const id = GUESS_ROWS[i][0];
-      scored.push({ rowIdx: i, rank, isPuzzle: idx.puzzleIdSet.has(id) });
-    }
-  }
-
-  // Fallback substring scan only if prefix bucket yielded fewer than limit results and query >= 3 chars
-  if (candidateIndices && scored.length < limit && norm.length >= 3) {
-    const already = new Set(scored.map((s) => s.rowIdx));
-    for (let i = 0; i < GUESS_ROWS.length; i += 1) {
-      if (already.has(i)) continue;
-      if (idx.normNames[i].includes(norm)) {
-        const id = GUESS_ROWS[i][0];
-        scored.push({ rowIdx: i, rank: 2, isPuzzle: idx.puzzleIdSet.has(id) });
-        if (scored.length >= limit * 4) break;
+    let matchedTier = -1;
+    if (nName.startsWith(norm)) {
+      matchedTier = 0;
+    } else if (queryTokens.length === 1) {
+      // Word-start match: " " + token
+      if (nName.includes(` ${firstToken}`)) {
+        matchedTier = 1;
       }
+    } else {
+      // Multi-word query: every token must match start of a word in nName
+      let allMatch = true;
+      for (let t = 0; t < queryTokens.length; t += 1) {
+        const qt = queryTokens[t];
+        if (!nName.startsWith(qt) && !nName.includes(` ${qt}`)) {
+          allMatch = false;
+          break;
+        }
+      }
+      if (allMatch) matchedTier = 1;
     }
+
+    if (matchedTier === -1) continue;
+
+    const isPuzzle = idx.puzzleIdSet.has(GUESS_ROWS[i][0]);
+    if (matchedTier === 0) {
+      if (isPuzzle) {
+        if (tier0Puzzle.length < cap) tier0Puzzle.push(i);
+      } else if (tier0Other.length < cap) {
+        tier0Other.push(i);
+      }
+    } else if (isPuzzle) {
+      if (tier1Puzzle.length < cap) tier1Puzzle.push(i);
+    } else if (tier1Other.length < cap) {
+      tier1Other.push(i);
+    }
+
+    // Early exit once highest-priority tier is already full
+    if (tier0Puzzle.length >= cap) break;
   }
 
-  scored.sort(
-    (a, b) =>
-      a.rank - b.rank ||
-      Number(b.isPuzzle) - Number(a.isPuzzle) ||
-      GUESS_ROWS[a.rowIdx][1].localeCompare(GUESS_ROWS[b.rowIdx][1], 'tr')
-  );
+  const picked = [...tier0Puzzle, ...tier0Other, ...tier1Puzzle, ...tier1Other].slice(0, cap);
+  const results = picked.map((rowIdx) => tupleToGuessPlayer(GUESS_ROWS[rowIdx]));
 
-  return scored.slice(0, limit).map((s) => tupleToGuessPlayer(GUESS_ROWS[s.rowIdx]));
+  if (__DEV__) {
+    devSearchCount += 1;
+    const label = devSearchCount === 1 ? 'first search' : `search #${devSearchCount}`;
+    console.log(
+      `[SearchPerf] ${label} ("${query}") -> ${results.length} results in ${Date.now() - t0} ms (bucket=${candidateIndices.length})`
+    );
+  }
+
+  return results;
 }
 
 // --- Daily & Unlimited Puzzle Selection (STRICTLY from puzzlePool) ---

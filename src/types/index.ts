@@ -29,7 +29,8 @@ export type GuessPoolTuple = [
   nationality: string,
   position: string,
   clubs: string[],
-  birthYear: number | null
+  birthYear: number | null,
+  normName?: string
 ];
 
 export interface PuzzlePlayer extends GuessPlayer {

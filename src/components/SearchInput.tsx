@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   FlatList,
   Pressable,
@@ -15,6 +15,49 @@ export interface SearchSuggestion {
   label: string;
   sublabel?: string;
 }
+
+interface SuggestionRowProps {
+  item: SearchSuggestion;
+  isFirst: boolean;
+  onSelect: (item: SearchSuggestion) => void;
+  textColor: string;
+  mutedColor: string;
+  borderColor: string;
+  pressedBg: string;
+}
+
+const SuggestionRow = memo(function SuggestionRow({
+  item,
+  isFirst,
+  onSelect,
+  textColor,
+  mutedColor,
+  borderColor,
+  pressedBg,
+}: SuggestionRowProps) {
+  return (
+    <Pressable
+      onPress={() => onSelect(item)}
+      style={({ pressed }) => [
+        styles.suggestionRow,
+        {
+          backgroundColor: pressed ? pressedBg : 'transparent',
+          borderTopWidth: isFirst ? 0 : 1,
+          borderTopColor: borderColor,
+        },
+      ]}
+    >
+      <Text style={[styles.suggestionLabel, { color: textColor }]} numberOfLines={1}>
+        {item.label}
+      </Text>
+      {item.sublabel ? (
+        <Text style={[styles.suggestionSub, { color: mutedColor }]} numberOfLines={1}>
+          {item.sublabel}
+        </Text>
+      ) : null}
+    </Pressable>
+  );
+});
 
 interface SearchInputProps {
   value: string;
@@ -40,6 +83,21 @@ export function SearchInput({
   autoFocus = false,
 }: SearchInputProps) {
   const { tokens } = useTheme();
+
+  const renderSuggestion = useCallback(
+    ({ item, index }: { item: SearchSuggestion; index: number }) => (
+      <SuggestionRow
+        item={item}
+        isFirst={index === 0}
+        onSelect={onSelectSuggestion!}
+        textColor={tokens.text}
+        mutedColor={tokens.textMuted}
+        borderColor={tokens.border}
+        pressedBg={tokens.accentSoft}
+      />
+    ),
+    [onSelectSuggestion, tokens.text, tokens.textMuted, tokens.border, tokens.accentSoft]
+  );
 
   return (
     <View style={styles.container}>
@@ -105,27 +163,11 @@ export function SearchInput({
             keyExtractor={(item) => item.id}
             keyboardShouldPersistTaps="handled"
             nestedScrollEnabled
+            initialNumToRender={8}
+            maxToRenderPerBatch={8}
+            windowSize={3}
             style={styles.dropdownList}
-            renderItem={({ item, index }) => (
-              <Pressable
-                onPress={() => onSelectSuggestion(item)}
-                style={({ pressed }) => [
-                  styles.suggestionRow,
-                  {
-                    backgroundColor: pressed ? tokens.accentSoft : 'transparent',
-                    borderTopWidth: index === 0 ? 0 : 1,
-                    borderTopColor: tokens.border,
-                  },
-                ]}
-              >
-                <Text style={[styles.suggestionLabel, { color: tokens.text }]}>{item.label}</Text>
-                {item.sublabel ? (
-                  <Text style={[styles.suggestionSub, { color: tokens.textMuted }]}>
-                    {item.sublabel}
-                  </Text>
-                ) : null}
-              </Pressable>
-            )}
+            renderItem={renderSuggestion}
           />
         </View>
       )}
