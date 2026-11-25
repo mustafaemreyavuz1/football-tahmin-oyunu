@@ -15,6 +15,7 @@ import {
   getRandomWhoAreYaPlayer,
   searchGuessPool,
 } from '../../data/playerRepository';
+import { useDebouncedValue } from '../../utils/useDebouncedValue';
 import { getLocalDateKey } from '../../utils/daily';
 import {
   createEmptyStats,
@@ -89,16 +90,18 @@ export function WhoAreYaGame() {
 
   const guessedIds = useMemo(() => new Set(guesses.map((g) => g.guessedPlayer.id)), [guesses]);
 
+  const debouncedQuery = useDebouncedValue(query, 130);
+
   const suggestions: SearchSuggestion[] = useMemo(() => {
-    if (!query.trim()) return [];
-    return searchGuessPool(query, 8)
+    if (!debouncedQuery.trim()) return [];
+    return searchGuessPool(debouncedQuery, 8)
       .filter((p) => !guessedIds.has(p.id))
       .map((p) => ({
         id: p.id,
         label: p.name,
         sublabel: `${p.nationality} • ${p.position}`,
       }));
-  }, [query, guessedIds]);
+  }, [debouncedQuery, guessedIds]);
 
   const wrongCount = guesses.filter((g) => !g.isCorrect).length;
   const blurAmount = getBlurAmount(wrongCount, isFinished);
@@ -213,6 +216,12 @@ export function WhoAreYaGame() {
           blurAmount={blurAmount}
           revealed={isFinished}
           attemptLabel={`Deneme ${Math.min(guesses.length + (isFinished ? 0 : 1), WHO_ARE_YA_MAX_ATTEMPTS)} / ${WHO_ARE_YA_MAX_ATTEMPTS}`}
+          onSwitchFallbackPlayer={() => {
+            setTarget(getRandomWhoAreYaPlayer(target.id));
+            setGuesses([]);
+            setStatus('playing');
+            setQuery('');
+          }}
         />
 
         {!isDailyLocked ? (
